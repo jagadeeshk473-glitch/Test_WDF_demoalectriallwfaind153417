@@ -1,5 +1,9 @@
 {
     "scope": "x_snc_wdf_advisory",
     "scopeId": "61afbcba2f2a0310809dea3fafa4e3ab",
-    "name": "WDF Advisory"
+    "name": "WDF Advisor",
+    "licensing": {
+        "enforceLicense": "none"
+    },
+    "description": "An internal advisor tool that helps ServiceNow employees and partners pick the right Workflow Data Fabric (WDF) connector for a given integration use case, see live demos of how each connector resolves a real business scenario, and (for admins) track compliance and infrastructure readiness before deploying a connector."
 }
