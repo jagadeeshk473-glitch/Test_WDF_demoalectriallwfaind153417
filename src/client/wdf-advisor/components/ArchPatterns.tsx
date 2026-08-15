@@ -2,7 +2,12 @@ import React, { useState, useEffect } from "react";
 import { fetchArchPatterns } from "../services/api";
 import { navigate } from "../app";
 
-const v = (f: any) => f?.display_value || f?.value || f || "";
+const v = (f: any) => {
+  if (f == null) return "";
+  if (typeof f === "string") return f;
+  const val = f.display_value || f.value || "";
+  return typeof val === "string" ? val : "";
+};
 
 export function ArchPatterns() {
   const [patterns, setPatterns] = useState<any[]>([]);

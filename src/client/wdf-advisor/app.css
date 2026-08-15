@@ -53,3 +53,7 @@ body {
   color: var(--wdf-muted);
   font-size: 16px;
 }
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}

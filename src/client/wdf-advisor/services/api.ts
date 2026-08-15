@@ -15,8 +15,8 @@ export async function searchConnectors(query: string) {
 }
 
 export async function searchUseCases(query: string) {
-  const encoded = `titleLIKE${query}^ORkeywordsLIKE${query}`;
-  const url = `${API_BASE}/x_snc_wdf_advisory_use_case?sysparm_query=${encodeURIComponent(encoded)}&sysparm_limit=4&sysparm_display_value=all&sysparm_fields=sys_id,title,keywords,demo_id`;
+  const encoded = `titleLIKE${query}^ORbusiness_problemLIKE${query}`;
+  const url = `${API_BASE}/x_snc_wdf_advisory_use_case?sysparm_query=${encodeURIComponent(encoded)}&sysparm_limit=4&sysparm_display_value=all&sysparm_fields=sys_id,title,industry,products`;
   const res = await fetch(url, { headers: headers() });
   const data = await res.json();
   return data.result || [];
@@ -38,14 +38,12 @@ export async function fetchConnector(sysId: string) {
 }
 
 export async function fetchScenarioDemo(identifier: string) {
-  // If it looks like a sys_id (32 hex chars), query directly by path
   if (/^[0-9a-f]{32}$/.test(identifier)) {
     const url = `${API_BASE}/x_snc_wdf_advisory_scn_demo/${identifier}?sysparm_display_value=all`;
     const res = await fetch(url, { headers: headers() });
     const data = await res.json();
     return data.result || null;
   }
-  // Otherwise query by title LIKE for short identifiers from QuickChips
   const encoded = `titleLIKE${identifier}`;
   const url = `${API_BASE}/x_snc_wdf_advisory_scn_demo?sysparm_query=${encodeURIComponent(encoded)}&sysparm_limit=1&sysparm_display_value=all`;
   const res = await fetch(url, { headers: headers() });
@@ -63,21 +61,15 @@ export async function fetchDemoSteps(scenarioId: string) {
 }
 
 export async function fetchUseCases() {
-  const url = `${API_BASE}/x_snc_wdf_advisory_use_case?sysparm_display_value=all&sysparm_query=ORDERBYtier,title`;
+  const url = `${API_BASE}/x_snc_wdf_advisory_use_case?sysparm_display_value=all&sysparm_query=ORDERBYtitle`;
   const res = await fetch(url, { headers: headers() });
   const data = await res.json();
   return data.result || [];
 }
 
 export async function fetchArchPatterns() {
-  const url = `${API_BASE}/x_snc_wdf_advisory_arch_pat?sysparm_display_value=all&sysparm_query=ORDERBYname`;
-  const res = await fetch(url, { headers: headers() });
-  const data = await res.json();
-  return data.result || [];
-}
-
-export async function fetchUseCaseIdeas() {
-  const url = `${API_BASE}/x_snc_wdf_advisory_use_case?sysparm_display_value=all&sysparm_query=ORDERBYindustry,tier,title`;
+  const fields = "sys_id,name,tagline,data_flow_steps,connectors,industry_examples,linked_demo";
+  const url = `${API_BASE}/x_snc_wdf_advisory_arch_pat?sysparm_display_value=all&sysparm_fields=${fields}&sysparm_query=ORDERBYname`;
   const res = await fetch(url, { headers: headers() });
   const data = await res.json();
   return data.result || [];
@@ -101,4 +93,59 @@ export async function getAIRecommendation(query: string): Promise<any> {
   if (!res.ok) return null;
   const data = await res.json();
   return data.result || data;
+}
+
+// --- Use Case Generator API ---
+
+export async function generateUseCases(pain: string, industry: string, systems: string[]): Promise<any[]> {
+  const url = `/api/x_snc_wdf_advisory/wdf_ai_recommend/generate-usecases`;
+  const res = await fetch(url, {
+    method: "POST",
+    headers: headers(),
+    body: JSON.stringify({ pain, industry, systems: systems.join(", ") }),
+  });
+  if (!res.ok) {
+    const errData = await res.json().catch(() => ({}));
+    throw new Error(errData.result?.error || errData.error || "Failed to generate use cases");
+  }
+  const data = await res.json();
+  const result = data.result || data;
+  return result.useCases || [];
+}
+
+export async function fetchCustomerUseCases(): Promise<any[]> {
+  const url = `${API_BASE}/x_snc_wdf_advisory_use_case?sysparm_display_value=all&sysparm_query=ORDERBYsys_created_on DESC&sysparm_fields=sys_id,title,line_of_business,industry,persona,products,external_systems,business_problem,solution,outcome,links,sys_created_by,sys_created_on`;
+  const res = await fetch(url, { headers: headers() });
+  const data = await res.json();
+  return data.result || [];
+}
+
+export async function createCustomerUseCase(data: any): Promise<any> {
+  const url = `${API_BASE}/x_snc_wdf_advisory_use_case`;
+  const res = await fetch(url, {
+    method: "POST",
+    headers: headers(),
+    body: JSON.stringify(data),
+  });
+  const result = await res.json();
+  return result.result || result;
+}
+
+export async function updateCustomerUseCase(sysId: string, data: any): Promise<any> {
+  const url = `${API_BASE}/x_snc_wdf_advisory_use_case/${sysId}`;
+  const res = await fetch(url, {
+    method: "PATCH",
+    headers: headers(),
+    body: JSON.stringify(data),
+  });
+  const result = await res.json();
+  return result.result || result;
+}
+
+export async function deleteCustomerUseCase(sysId: string): Promise<void> {
+  const url = `${API_BASE}/x_snc_wdf_advisory_use_case/${sysId}`;
+  await fetch(url, {
+    method: "DELETE",
+    headers: headers(),
+  });
 }

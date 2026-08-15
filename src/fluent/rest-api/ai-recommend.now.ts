@@ -14,5 +14,12 @@ RestApi({
             path: '/recommend',
             script: Now.include('../../server/rest/ai-recommend.js'),
         },
+        {
+            $id: Now.ID['wdf-ai-generate-usecases-route'],
+            name: 'generate-usecases',
+            method: 'POST',
+            path: '/generate-usecases',
+            script: Now.include('../../server/rest/ai-generate-usecases.js'),
+        },
     ],
 })

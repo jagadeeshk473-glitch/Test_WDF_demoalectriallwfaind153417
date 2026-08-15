@@ -2,11 +2,11 @@ import React from "react";
 import { navigate } from "../app";
 
 const CHIPS = [
-  { label: "HRSD Pay Query", demoId: "HRSD Payroll", highlight: true },
-  { label: "Fraud detection", demoId: "Fraud Detection", highlight: false },
-  { label: "Live SAP AR", demoId: "Accounts Receivable", highlight: false },
-  { label: "Inventory alert", demoId: "Event Streaming", highlight: false },
-  { label: "P1 incident", demoId: "Integration Hub", highlight: false }
+  { label: "HRSD Payroll", demoId: "HRSD Payroll" },
+  { label: "Fraud detection", demoId: "Fraud Detection" },
+  { label: "Live SAP AR", demoId: "Accounts Receivable" },
+  { label: "Inventory alert", demoId: "Event Streaming" },
+  { label: "P1 incident", demoId: "Integration Hub" }
 ];
 
 export function QuickChips() {
@@ -15,10 +15,7 @@ export function QuickChips() {
       {CHIPS.map((chip) => (
         <button
           key={chip.demoId}
-          style={{
-            ...styles.chip,
-            ...(chip.highlight ? styles.highlighted : {})
-          }}
+          style={styles.chip}
           onClick={() => navigate({ view: "demo", id: chip.demoId })}
         >
           <span>📋</span>
@@ -39,8 +36,5 @@ const styles: Record<string, React.CSSProperties> = {
     border: "1px solid #E0E5EC", background: "#fff",
     fontSize: 13, cursor: "pointer", whiteSpace: "nowrap",
     color: "#1A1A1A", fontWeight: 500
-  },
-  highlighted: {
-    background: "#E8F8F5", borderColor: "#00C6A2", color: "#0B2D4E"
   }
 };
