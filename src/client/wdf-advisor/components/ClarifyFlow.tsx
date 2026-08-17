@@ -3,7 +3,7 @@ import { Answers, Recommendation as RecType, computeRecommendation } from "../se
 import { Recommendation } from "./Recommendation";
 import { navigate } from "../app";
 
-interface Props { initialQuery: string; }
+interface Props { initialQuery: string; onResultShown?: (shown: boolean) => void; }
 
 const QUESTIONS = [
   {
@@ -59,7 +59,7 @@ function getSecondFollowUp(answers: Answers) {
   return null;
 }
 
-export function ClarifyFlow({ initialQuery }: Props) {
+export function ClarifyFlow({ initialQuery, onResultShown }: Props) {
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState<Answers>({ systemType: "", dataAction: "" });
   const [result, setResult] = useState<RecType | null>(null);
@@ -76,7 +76,11 @@ export function ClarifyFlow({ initialQuery }: Props) {
     : step === 2 && followUp ? followUp
     : secondFU ? secondFU : null;
 
-  if (result) return <Recommendation recommendation={result} />;
+  if (result) return (
+    <div>
+      <Recommendation recommendation={result} />
+    </div>
+  );
 
   const handleNext = () => {
     if (!activeQ || !current) return;
@@ -87,7 +91,11 @@ export function ClarifyFlow({ initialQuery }: Props) {
     const hasFU = getFollowUp(updated);
     const hasSecondFU = getSecondFollowUp(updated);
     const needed = QUESTIONS.length + (hasFU ? 1 : 0) + (hasSecondFU ? 1 : 0);
-    if (nextStep >= needed) { setResult(computeRecommendation(updated)); return; }
+    if (nextStep >= needed) {
+      setResult(computeRecommendation(updated));
+      onResultShown?.(true);
+      return;
+    }
     setStep(nextStep);
   };
 

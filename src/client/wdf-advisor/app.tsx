@@ -8,6 +8,7 @@ import { ConnectorDetail } from "./components/ConnectorDetail";
 import { CompareView } from "./components/CompareView";
 import { ClarifyFlow } from "./components/ClarifyFlow";
 import { ScenarioStepper } from "./components/ScenarioStepper";
+import { WebSearchPanel } from "./components/WebSearchPanel";
 
 type Persona = "business" | "builder" | "admin";
 
@@ -35,11 +36,13 @@ export function App() {
     () => (sessionStorage.getItem("wdf_persona") as Persona) || "business"
   );
   const [search, setSearch] = useState("");
+  const [resultShown, setResultShown] = useState(false);
 
   const handlePopState = useCallback(() => {
     setView(getView());
     const tab = getParam("tab");
     if (tab) setActiveTab(tab);
+    setResultShown(false);
   }, []);
 
   useEffect(() => {
@@ -58,6 +61,9 @@ export function App() {
     url.searchParams.set("tab", tab);
     history.replaceState(null, "", url.toString());
   };
+
+  // Get the active search query from URL params (used for WebSearchPanel persistence)
+  const activeQuery = getParam("q");
 
   return (
     <>
@@ -94,7 +100,23 @@ export function App() {
       )}
       {view === "clarify" && (
         <div className="page-container">
-          <ClarifyFlow initialQuery={getParam("q")} />
+          {!resultShown ? (
+            <div className="clarify-layout">
+              <div className="clarify-main">
+                <ClarifyFlow initialQuery={activeQuery} onResultShown={setResultShown} />
+              </div>
+              <div className="clarify-sidebar">
+                <WebSearchPanel query={activeQuery} />
+              </div>
+            </div>
+          ) : (
+            <div>
+              <ClarifyFlow initialQuery={activeQuery} onResultShown={setResultShown} />
+              <div style={{ marginTop: 24 }}>
+                <WebSearchPanel query={activeQuery} />
+              </div>
+            </div>
+          )}
         </div>
       )}
     </>

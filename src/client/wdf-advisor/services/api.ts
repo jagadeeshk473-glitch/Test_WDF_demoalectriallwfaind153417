@@ -149,3 +149,19 @@ export async function deleteCustomerUseCase(sysId: string): Promise<void> {
     headers: headers(),
   });
 }
+
+// --- Web Search API ---
+
+export async function webSearch(query: string): Promise<{ summary: string; findings: string[]; source_hint: string }> {
+  const url = `/api/x_snc_wdf_advisory/wdf_ai_recommend/web-search`;
+  const res = await fetch(url, {
+    method: "POST",
+    headers: headers(),
+    body: JSON.stringify({ query }),
+  });
+  if (!res.ok) {
+    throw new Error("Web search request failed");
+  }
+  const data = await res.json();
+  return data.result || data;
+}

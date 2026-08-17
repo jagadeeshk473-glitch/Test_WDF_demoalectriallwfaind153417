@@ -21,5 +21,12 @@ RestApi({
             path: '/generate-usecases',
             script: Now.include('../../server/rest/ai-generate-usecases.js'),
         },
+        {
+            $id: Now.ID['wdf-ai-web-search-route'],
+            name: 'web-search',
+            method: 'POST',
+            path: '/web-search',
+            script: Now.include('../../server/rest/web-search.js'),
+        },
     ],
 })

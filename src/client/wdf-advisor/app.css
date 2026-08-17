@@ -54,6 +54,34 @@ body {
   font-size: 16px;
 }
 
+/* Clarify view: side-by-side layout (questionnaire left, web search right) */
+.clarify-layout {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 24px;
+  align-items: start;
+}
+
+.clarify-main {
+  min-width: 0;
+}
+
+.clarify-sidebar {
+  position: sticky;
+  top: 24px;
+  padding-top: 86px;
+}
+
+/* When the Recommendation is showing (full-width), collapse to single column */
+@media (max-width: 860px) {
+  .clarify-layout {
+    grid-template-columns: 1fr;
+  }
+  .clarify-sidebar {
+    position: static;
+  }
+}
+
 @keyframes spin {
   to { transform: rotate(360deg); }
 }
