@@ -261,6 +261,7 @@ declare global {
                     ee8228052f3e4f50809dea3fafa4e372: {
                         table: 'sys_generative_ai_config'
                         id: 'ee8228052f3e4f50809dea3fafa4e372'
+                        deleted: true
                     }
                     fe1383102ffe4f10809dea3fafa4e39f: {
                         table: 'sys_scope_privilege'
@@ -3517,6 +3518,7 @@ declare global {
                     {
                         table: 'sys_generative_ai_prompt_config'
                         id: 'e28268052f3e4f50809dea3fafa4e393'
+                        deleted: true
                         key: {
                             ai_config: 'ee8228052f3e4f50809dea3fafa4e372'
                         }

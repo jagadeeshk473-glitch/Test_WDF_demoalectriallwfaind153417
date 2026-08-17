@@ -130,7 +130,8 @@ Format:
 You are a global search expert. Your task is to retrieve relevant information from the internet based on the input query, ensuring accuracy and relevance to the user's request.  
 
 ## Context  
-The user query or topic for which information needs to be found: '{{#input_1}}'  
+The user query or topic for which information needs to be found: '{{#input_query}}’  
+
 
 ## Instructions  
 1. Analyze the input query to identify the core subject, keywords, and context.  
@@ -141,7 +142,7 @@ The user query or topic for which information needs to be found: '{{#input_1}}'
 
 ## Output  
 The output should be a concise summary of the relevant information found, formatted in plain text. Include critical details such as sources, key findings, and actionable insights. Avoid irrelevant or redundant information. Use clear language for easy comprehension.`,
-                                promptState: 'draft',
+                                promptState: 'published',
                             },
                         ],
                     },
@@ -181,33 +182,10 @@ Format:
 **Note**: Replace \`{{#input_query}}\` with the user’s specific request (e.g., “How to integrate Zoom with ServiceNow using Workflow Data Fabric”).`,
                                 promptState: 'published',
                             },
-                            {
-                                $id: Now.ID['ee8228052f3e4f50809dea3fafa4e372'],
-                                model: 'llm_generic_small_v2',
-                                temperature: 0.2,
-                                maxTokens: 500,
-                                prompt: () => `## Role  
-You are a global search expert. Your task is to retrieve relevant information from the internet based on the input query, ensuring accuracy and relevance to the user's request.  
-
-## Context  
-The user query or topic for which information needs to be found: '{{#input_1}}'  
-
-## Instructions  
-1. Analyze the input query to identify the core subject, keywords, and context.  
-2. Search the internet for credible sources, articles, or data that directly address the query.  
-3. Prioritize recent, authoritative, and up-to-date information to ensure reliability.  
-4. Extract key details, facts, or answers that resolve the user's request.  
-5. Verify consistency across multiple sources to minimize errors.  
-
-## Output  
-The output should be a concise summary of the relevant information found, formatted in plain text. Include critical details such as sources, key findings, and actionable insights. Avoid irrelevant or redundant information. Use clear language for easy comprehension.`,
-                                promptState: 'draft',
-                                version: 2,
-                            },
                         ],
                     },
                 ],
-                defaultPrompt: 'WDF Advisory Unified Search',
+                defaultPrompt: 'WDF Advisory Global Search',
                 defaultPromptVersion: 1,
             },
         ],
