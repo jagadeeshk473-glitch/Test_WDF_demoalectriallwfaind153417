@@ -66,19 +66,31 @@ body {
   min-width: 0;
 }
 
-.clarify-sidebar {
+.clarify-aside {
   position: sticky;
   top: 24px;
   padding-top: 86px;
 }
 
-/* When the Recommendation is showing (full-width), collapse to single column */
+/* When recommendation is showing, switch to single column with WebSearch at bottom */
+.clarify-layout--full {
+  grid-template-columns: 1fr;
+}
+
+.clarify-layout--full .clarify-aside {
+  position: static;
+  padding-top: 0;
+  margin-top: 24px;
+}
+
+/* Responsive: collapse to single column on smaller screens */
 @media (max-width: 860px) {
   .clarify-layout {
     grid-template-columns: 1fr;
   }
-  .clarify-sidebar {
+  .clarify-aside {
     position: static;
+    padding-top: 0;
   }
 }
 

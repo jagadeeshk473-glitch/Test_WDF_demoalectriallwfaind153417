@@ -150,6 +150,22 @@ export async function deleteCustomerUseCase(sysId: string): Promise<void> {
   });
 }
 
+// --- Instance Assessment API ---
+
+export async function runInstanceAssessment(): Promise<any> {
+  const url = `/api/x_snc_wdf_advisory/wdf_ai_recommend/instance-assess`;
+  const res = await fetch(url, {
+    method: "POST",
+    headers: headers(),
+    body: JSON.stringify({}),
+  });
+  if (!res.ok) {
+    throw new Error("Instance assessment request failed");
+  }
+  const data = await res.json();
+  return data.result || data;
+}
+
 // --- Web Search API ---
 
 export async function webSearch(query: string): Promise<{ summary: string; findings: string[]; source_hint: string }> {

@@ -78,6 +78,7 @@ export function ClarifyFlow({ initialQuery, onResultShown }: Props) {
 
   if (result) return (
     <div>
+      <a onClick={() => navigate({ view: "home" })} style={{ color: "#5A6677", cursor: "pointer", fontSize: 13, display: "inline-block", marginBottom: 16 }}>← Back to search</a>
       <Recommendation recommendation={result} />
     </div>
   );

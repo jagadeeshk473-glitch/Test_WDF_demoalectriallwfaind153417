@@ -165,9 +165,9 @@ function renderDetailView(
       {/* Count tiles */}
       <div style={styles.tilesRow}>
         <Tile label="Complete" value={String(complete)} />
-        <Tile label="In progress" value={String(inProgress)} />
+        <Tile label="In Progress" value={String(inProgress)} />
         <Tile label="Blockers" value={String(blockers)} />
-        <Tile label="Not started" value={String(notStarted < 0 ? 0 : notStarted)} />
+        <Tile label="Not Started" value={String(notStarted < 0 ? 0 : notStarted)} />
       </div>
 
       {/* Sections */}

@@ -38,6 +38,18 @@ declare global {
                         table: 'sys_scope_privilege'
                         id: '8b138b102ffe4f10809dea3fafa4e328'
                     }
+                    '920c4dc12f7e8f50809dea3fafa4e371': {
+                        table: 'sys_scope_privilege'
+                        id: '920c4dc12f7e8f50809dea3fafa4e371'
+                    }
+                    '9c0534452f368f50809dea3fafa4e3f8': {
+                        table: 'sys_scope_privilege'
+                        id: '9c0534452f368f50809dea3fafa4e3f8'
+                    }
+                    a94ed1812f76cf50809dea3fafa4e3a2: {
+                        table: 'sn_diagram_builder_instance'
+                        id: 'a94ed1812f76cf50809dea3fafa4e3a2'
+                    }
                     b95417d82fb68f10809dea3fafa4e318: {
                         table: 'sys_scope_privilege'
                         id: 'b95417d82fb68f10809dea3fafa4e318'
@@ -314,6 +326,10 @@ declare global {
                     'src_server_rest_ai-recommend_js': {
                         table: 'sys_module'
                         id: '26aab053fd02424db21ca3e81d823275'
+                    }
+                    'src_server_rest_instance-assess_js': {
+                        table: 'sys_module'
+                        id: '500dac06dc6d4370987bd5813cf18930'
                     }
                     'src_server_rest_web-search_js': {
                         table: 'sys_module'
@@ -1034,6 +1050,10 @@ declare global {
                     'wdf-ai-generate-usecases-route': {
                         table: 'sys_ws_operation'
                         id: '51774440fae945bab86c7ceed45ca9fc'
+                    }
+                    'wdf-ai-instance-assess-route': {
+                        table: 'sys_ws_operation'
+                        id: 'a4f7e584a81c436d8531e0df2be4da1c'
                     }
                     'wdf-ai-recommend-api': {
                         table: 'sys_ws_definition'

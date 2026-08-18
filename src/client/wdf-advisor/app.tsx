@@ -100,23 +100,14 @@ export function App() {
       )}
       {view === "clarify" && (
         <div className="page-container">
-          {!resultShown ? (
-            <div className="clarify-layout">
-              <div className="clarify-main">
-                <ClarifyFlow initialQuery={activeQuery} onResultShown={setResultShown} />
-              </div>
-              <div className="clarify-sidebar">
-                <WebSearchPanel query={activeQuery} />
-              </div>
-            </div>
-          ) : (
-            <div>
+          <div className={`clarify-layout${resultShown ? " clarify-layout--full" : ""}`}>
+            <div className="clarify-main">
               <ClarifyFlow initialQuery={activeQuery} onResultShown={setResultShown} />
-              <div style={{ marginTop: 24 }}>
-                <WebSearchPanel query={activeQuery} />
-              </div>
             </div>
-          )}
+            <div className="clarify-aside">
+              <WebSearchPanel query={activeQuery} />
+            </div>
+          </div>
         </div>
       )}
     </>

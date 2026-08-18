@@ -3,10 +3,10 @@ import { navigate } from "../app";
 
 const CHIPS = [
   { label: "HRSD Payroll", demoId: "HRSD Payroll" },
-  { label: "Fraud detection", demoId: "Fraud Detection" },
+  { label: "Fraud Detection", demoId: "Fraud Detection" },
   { label: "Live SAP AR", demoId: "Accounts Receivable" },
-  { label: "Inventory alert", demoId: "Event Streaming" },
-  { label: "P1 incident", demoId: "Integration Hub" }
+  { label: "Inventory Alert", demoId: "Event Streaming" },
+  { label: "P1 Incident", demoId: "Integration Hub" }
 ];
 
 export function QuickChips() {

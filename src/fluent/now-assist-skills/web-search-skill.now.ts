@@ -88,32 +88,20 @@ NowAssistSkillConfig(
                                 model: 'llm_generic_small_v2',
                                 temperature: 0.2,
                                 promptState: 'draft',
-                                prompt: () => `## Role  
-You are an integration advisor with expertise in ServiceNow connectors, integration patterns, and Workflow Data Fabric. Your task is to search the web for relevant information about ServiceNow integrations, connectors, or workflow patterns based on a user’s query.  
+                                prompt: (p) => `## Role
+You are an integration advisor. Summarize the web search results below for the user's query.
 
-## Context  
-The user’s query or topic related to ServiceNow integrations or Workflow Data Fabric: ‘{{#input_query}}’  
+## Context
+User query: ${p.input['search query']}
 
-## Instructions  
-1. Analyze the user’s input query to identify keywords, connectors, or integration patterns mentioned (e.g., “Salesforce connector,” “REST API,” “data synchronization”).  
-2. Search the web for up-to-date documentation, tutorials, or community discussions related to the query.  
-3. Prioritize official ServiceNow resources (e.g., documentation, release notes) and trusted community forums.  
-4. Summarize findings, focusing on:  
-   - Relevant connectors or integration patterns.  
-   - Step-by-step guidance for implementation.  
-   - Known issues or best practices.  
-5. If no direct matches are found, suggest alternative approaches or related integrations.  
+## Web Search Results
+${p.tool.WebSearch.response}
 
-## Output  
-The output should be a plain-text summary of search results, including:  
-- Key connectors or patterns matching the query.  
-- Links to relevant documentation (if available).  
-- Brief explanations of implementation steps or best practices.  
-Format:  
-“Relevant information found: [SUMMARY]. For details, refer to [LINK] (if applicable).”  
+## Instructions
+Summarize the web search results into a clear, actionable response with key findings and steps.
 
----  
-**Note**: Replace \`{{#input_query}}\` with the user’s specific request (e.g., “How to integrate Zoom with ServiceNow using Workflow Data Fabric”).`,
+## Output
+Provide a concise summary with bullet points of key findings.`,
                                 maxTokens: 500,
                             },
                         ],
@@ -126,22 +114,28 @@ Format:
                                 model: 'llm_generic_small_v2',
                                 temperature: 0.2,
                                 maxTokens: 500,
-                                prompt: () => `## Role  
-You are a global search expert. Your task is to retrieve relevant information from the internet based on the input query, ensuring accuracy and relevance to the user's request.  
+                                prompt: (p) => `## Role
+You are a global search expert specializing in ServiceNow integrations and Workflow Data Fabric. Your task is to summarize web search results into a clear, relevant response.
 
-## Context  
-The user query or topic for which information needs to be found: '{{#input_query}}’  
+## Context
+User query: ${p.input['search query']}
 
+## Web Search Results
+${p.tool.WebSearch.response}
 
-## Instructions  
-1. Analyze the input query to identify the core subject, keywords, and context.  
-2. Search the internet for credible sources, articles, or data that directly address the query.  
-3. Prioritize recent, authoritative, and up-to-date information to ensure reliability.  
-4. Extract key details, facts, or answers that resolve the user's request.  
-5. Verify consistency across multiple sources to minimize errors.  
+## Instructions
+1. Read the web search results provided above carefully.
+2. Extract the most relevant information that directly addresses the user's query.
+3. Organize findings into a clear summary with key actionable points.
+4. Include specific product names, steps, or documentation references from the results.
+5. If results are insufficient, state what was found and suggest refining the query.
 
-## Output  
-The output should be a concise summary of the relevant information found, formatted in plain text. Include critical details such as sources, key findings, and actionable insights. Avoid irrelevant or redundant information. Use clear language for easy comprehension.`,
+## Output
+Provide a concise plain-text summary:
+- A 1-2 sentence overview answering the query
+- 3-5 bullet points with key findings from the search results
+- Any relevant links or source references mentioned
+Keep it focused, actionable, and based only on the search results above.`,
                                 promptState: 'published',
                             },
                         ],
@@ -154,32 +148,27 @@ The output should be a concise summary of the relevant information found, format
                                 model: 'llm_generic_small_v2',
                                 temperature: 0.2,
                                 maxTokens: 500,
-                                prompt: () => `## Role  
-You are an integration advisor with expertise in ServiceNow connectors, integration patterns, and Workflow Data Fabric. Your task is to search the web for relevant information about ServiceNow integrations, connectors, or workflow patterns based on a user’s query.  
+                                prompt: (p) => `## Role
+You are an integration advisor with expertise in ServiceNow connectors, integration patterns, and Workflow Data Fabric.
 
-## Context  
-The user’s query or topic related to ServiceNow integrations or Workflow Data Fabric: ‘{{#input_query}}’  
+## Context
+User query: ${p.input['search query']}
 
-## Instructions  
-1. Analyze the user’s input query to identify keywords, connectors, or integration patterns mentioned (e.g., “Salesforce connector,” “REST API,” “data synchronization”).  
-2. Search the web for up-to-date documentation, tutorials, or community discussions related to the query.  
-3. Prioritize official ServiceNow resources (e.g., documentation, release notes) and trusted community forums.  
-4. Summarize findings, focusing on:  
-   - Relevant connectors or integration patterns.  
-   - Step-by-step guidance for implementation.  
-   - Known issues or best practices.  
-5. If no direct matches are found, suggest alternative approaches or related integrations.  
+## Web Search Results
+${p.tool.WebSearch.response}
 
-## Output  
-The output should be a plain-text summary of search results, including:  
-- Key connectors or patterns matching the query.  
-- Links to relevant documentation (if available).  
-- Brief explanations of implementation steps or best practices.  
-Format:  
-“Relevant information found: [SUMMARY]. For details, refer to [LINK] (if applicable).”  
+## Instructions
+1. Analyze the web search results above for information relevant to the user's query.
+2. Focus on ServiceNow-specific connectors, integration patterns, and best practices.
+3. Summarize implementation steps and key guidance from the results.
+4. Include any relevant links or documentation references.
 
----  
-**Note**: Replace \`{{#input_query}}\` with the user’s specific request (e.g., “How to integrate Zoom with ServiceNow using Workflow Data Fabric”).`,
+## Output
+Provide a plain-text summary:
+- Key connectors or patterns matching the query
+- Implementation steps or best practices from the results
+- Links to relevant documentation (if available)
+Format: "Relevant information found: [SUMMARY]."`,
                                 promptState: 'published',
                             },
                         ],

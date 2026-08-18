@@ -11,11 +11,28 @@ interface Props {
   query: string;
 }
 
+const LOADING_MESSAGES = [
+  "Searching the web for relevant guidance...",
+  "Querying internet sources...",
+  "Analyzing search results...",
+  "Summarizing findings...",
+];
+
 export function WebSearchPanel({ query }: Props) {
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<WebSearchResult | null>(null);
   const [error, setError] = useState(false);
+  const [loadingMsg, setLoadingMsg] = useState(0);
   const lastQuery = useRef("");
+
+  // Rotate loading messages for better perceived performance
+  useEffect(() => {
+    if (!loading) return;
+    const interval = setInterval(() => {
+      setLoadingMsg((prev) => (prev + 1) % LOADING_MESSAGES.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, [loading]);
 
   useEffect(() => {
     if (!query || query === lastQuery.current) return;
@@ -23,6 +40,7 @@ export function WebSearchPanel({ query }: Props) {
     setLoading(true);
     setError(false);
     setResult(null);
+    setLoadingMsg(0);
 
     webSearch(query)
       .then((data) => {
@@ -44,6 +62,9 @@ export function WebSearchPanel({ query }: Props) {
     borderRadius: 8,
     padding: "16px 20px",
     margin: 0,
+    overflow: "hidden",
+    wordBreak: "break-word",
+    overflowWrap: "break-word",
   };
 
   const headerStyle: React.CSSProperties = {
@@ -83,21 +104,33 @@ export function WebSearchPanel({ query }: Props) {
     fontStyle: "italic",
   };
 
-  const loadingStyle: React.CSSProperties = {
-    fontSize: 12,
-    color: "#7B8794",
-    display: "flex",
-    alignItems: "center",
-    gap: 8,
-  };
-
   if (loading) {
     return (
       <div style={panelStyle}>
-        <div style={loadingStyle}>
-          <span style={{ animation: "pulse 1.5s infinite", display: "inline-block" }}>🌐</span>
-          <span>Searching the web for relevant guidance...</span>
+        <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+            <span style={{ fontSize: 16 }}>🌐</span>
+            <span style={{ fontSize: 13, fontWeight: 600, color: "#3E4C59" }}>Searching the internet</span>
+          </div>
+          {/* Progress bar */}
+          <div style={{ height: 3, background: "#E0E5EC", borderRadius: 2, overflow: "hidden" }}>
+            <div style={{
+              height: "100%",
+              background: "linear-gradient(90deg, #00C6A2, #0080FF)",
+              borderRadius: 2,
+              animation: "shimmer 2s ease-in-out infinite",
+              width: "60%",
+            }} />
+          </div>
+          <span style={{ fontSize: 12, color: "#7B8794" }}>{LOADING_MESSAGES[loadingMsg]}</span>
         </div>
+        <style>{`
+          @keyframes shimmer {
+            0% { transform: translateX(-100%); opacity: 0.7; }
+            50% { transform: translateX(30%); opacity: 1; }
+            100% { transform: translateX(100%); opacity: 0.7; }
+          }
+        `}</style>
       </div>
     );
   }
