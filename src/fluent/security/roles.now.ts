@@ -15,17 +15,23 @@ import { Role } from '@servicenow/sdk/core'
 
 export const businessUserRole = Role({
     name: 'x_snc_wdf_advisory.business_user',
-    description: 'WDF Advisor Business User — sees plain-English descriptions, outcomes, and connector recommendations without technical protocol detail.',
+    description:
+        'WDF Advisor Business User — sees plain-English descriptions, outcomes, and connector recommendations without technical protocol detail.',
+    federatedId: '85MZV8YySw90dGCwlL0kFIib6YCEQC94ehNbldzKax8=',
 })
 
 export const builderDevRole = Role({
     name: 'x_snc_wdf_advisory.builder_dev',
-    description: 'WDF Advisor Builder/Dev — sees full protocol, auth, latency, MID Server requirements, lab exercises, and Build Agent deployment steps.',
+    description:
+        'WDF Advisor Builder/Dev — sees full protocol, auth, latency, MID Server requirements, lab exercises, and Build Agent deployment steps.',
     containsRoles: [businessUserRole],
+    federatedId: 'Wa6853MoDRzRk0y0E6QBKQ7ioZhfMtbDdkeUzHJmxHI=',
 })
 
 export const adminRole = Role({
     name: 'x_snc_wdf_advisory.admin',
-    description: 'WDF Advisor Admin — sees compliance/governance framing, write-back risk assessment, and infrastructure readiness checklists. Contains both lower roles.',
+    description:
+        'WDF Advisor Admin — sees compliance/governance framing, write-back risk assessment, and infrastructure readiness checklists. Contains both lower roles.',
     containsRoles: [businessUserRole, builderDevRole],
+    federatedId: '49V7kJ/+z91/E15q46bvmenPEKV2PUwwufLdCzv7Eyw=',
 })

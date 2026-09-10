@@ -1,5 +1,6 @@
 import React from "react";
 import { navigate } from "../app";
+import { getChaptersForConnector } from "../services/outboundConcept";
 
 interface Props {
   connector: any;
@@ -26,6 +27,7 @@ export function ConnectorCard({ connector, persona }: Props) {
   const writeBack = v(connector.supports_write_back);
   const midServer = v(connector.mid_server_requirement);
 
+  const chapters = getChaptersForConnector(name);
   const goDetail = () => navigate({ view: "connector", id });
 
   return (
@@ -48,6 +50,16 @@ export function ConnectorCard({ connector, persona }: Props) {
           {protocol && <div style={styles.meta}>Protocol: {protocol}</div>}
           {latency && <div style={styles.meta}>Latency: {latency}</div>}
         </>
+      )}
+
+      {(persona === "builder" || persona === "admin") && chapters.length > 0 && (
+        <div style={styles.chapterPills}>
+          {chapters.slice(0, 3).map(ch => (
+            <span key={ch.id} style={{ ...styles.chapterPill, background: ch.color }}>
+              {ch.quadrant}
+            </span>
+          ))}
+        </div>
       )}
 
       {persona === "admin" && (
@@ -75,5 +87,7 @@ const styles: Record<string, React.CSSProperties> = {
   tagline: { color: "#5A6677", fontSize: 13, marginBottom: 10 },
   meta: { color: "#1A1A1A", fontSize: 13, marginBottom: 4 },
   midNote: { color: "#5A6677", fontSize: 12, fontStyle: "italic", marginTop: 4 },
-  link: { color: "#00C6A2", fontSize: 13, fontWeight: 500, marginTop: 6, display: "inline-block" }
+  link: { color: "#00C6A2", fontSize: 13, fontWeight: 500, marginTop: 6, display: "inline-block" },
+  chapterPills: { display: "flex", gap: 6, flexWrap: "wrap" as const, marginTop: 8 },
+  chapterPill: { color: "#fff", fontSize: 11, padding: "2px 8px", borderRadius: 10, fontWeight: 600 },
 };

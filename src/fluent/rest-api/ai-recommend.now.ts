@@ -13,6 +13,8 @@ RestApi({
             method: 'POST',
             path: '/recommend',
             script: Now.include('../../server/rest/ai-recommend.js'),
+            consumes: 'application/json',
+            produces: 'application/json,application/xml,text/xml',
         },
         {
             $id: Now.ID['wdf-ai-generate-usecases-route'],
@@ -20,6 +22,8 @@ RestApi({
             method: 'POST',
             path: '/generate-usecases',
             script: Now.include('../../server/rest/ai-generate-usecases.js'),
+            consumes: 'application/json',
+            produces: 'application/json,application/xml,text/xml',
         },
         {
             $id: Now.ID['wdf-ai-web-search-route'],
@@ -27,6 +31,8 @@ RestApi({
             method: 'POST',
             path: '/web-search',
             script: Now.include('../../server/rest/web-search.js'),
+            consumes: 'application/json',
+            produces: 'application/json,application/xml,text/xml',
         },
         {
             $id: Now.ID['wdf-ai-instance-assess-route'],
@@ -34,6 +40,17 @@ RestApi({
             method: 'POST',
             path: '/instance-assess',
             script: Now.include('../../server/rest/instance-assess.js'),
+            consumes: 'application/json',
+            produces: 'application/json,application/xml,text/xml',
+        },
+        {
+            $id: Now.ID['wdf-ai-scenario-chat-route'],
+            name: 'scenario-chat',
+            method: 'POST',
+            path: '/scenario-chat',
+            script: Now.include('../../server/rest/scenario-chat.js'),
+            consumes: 'application/json',
+            produces: 'application/json,application/xml,text/xml',
         },
     ],
 })

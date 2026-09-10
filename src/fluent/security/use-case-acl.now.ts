@@ -6,7 +6,7 @@ export const useCaseReadAcl = Acl({
     type: 'record',
     table: 'x_snc_wdf_advisory_use_case',
     operation: 'read',
-    roles: [],
+    roles: ['snc_internal'],
     description: 'Allow everyone to read customer use cases',
     adminOverrides: true,
 })
@@ -16,7 +16,7 @@ export const useCaseCreateAcl = Acl({
     type: 'record',
     table: 'x_snc_wdf_advisory_use_case',
     operation: 'create',
-    roles: [],
+    roles: ['snc_internal'],
     description: 'Allow everyone to submit customer use cases',
     adminOverrides: true,
 })
@@ -29,6 +29,7 @@ export const useCaseWriteAcl = Acl({
     script: `answer = (current.sys_created_by == gs.getUserName());`,
     description: 'Only allow the record creator to edit their own use cases',
     adminOverrides: true,
+    roles: ['snc_internal'],
 })
 
 export const useCaseDeleteAcl = Acl({
@@ -39,4 +40,5 @@ export const useCaseDeleteAcl = Acl({
     script: `answer = (current.sys_created_by == gs.getUserName());`,
     description: 'Only allow the record creator to delete their own use cases',
     adminOverrides: true,
+    roles: ['snc_internal'],
 })

@@ -11,7 +11,12 @@ export const PersonaVisibility = ScriptInclude({
     $id: Now.ID['PersonaVisibility'],
     name: 'PersonaVisibility',
     script: Now.include('../../server/script-includes/persona-visibility.js'),
-    description: 'Reusable persona visibility API for WDF Advisor. Returns content visibility rules per persona/screen. Callable via GlideAjax from any UI page.',
+    description:
+        'Reusable persona visibility API for WDF Advisor. Returns content visibility rules per persona/screen. Callable via GlideAjax from any UI page.',
     clientCallable: true,
     accessibleFrom: 'public',
+    apiName: 'x_snc_wdf_advisory.PersonaVisibility',
+    mobileCallable: false,
+    sandboxCallable: false,
+    active: true,
 })

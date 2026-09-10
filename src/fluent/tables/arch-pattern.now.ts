@@ -1,6 +1,14 @@
 import '@servicenow/sdk/global'
 import { Table, StringColumn, ListColumn, JsonColumn, ReferenceColumn, Record } from '@servicenow/sdk/core'
 import { demoZccSql, demoStream, demoIh, demoSox } from './scenario-demo.now'
+import {
+    connZcc,
+    connZccErp,
+    connIntegrationHub,
+    connStreamConnect,
+    connMcpClient,
+    connMcpServer,
+} from './connector.now'
 
 export const x_snc_wdf_advisory_arch_pat = Table({
     name: 'x_snc_wdf_advisory_arch_pat',
@@ -32,88 +40,147 @@ export const x_snc_wdf_advisory_arch_pat = Table({
             referenceTable: 'x_snc_wdf_advisory_scn_demo',
         }),
     },
+    index: [
+        {
+            name: 'index',
+            unique: false,
+            element: 'linked_demo',
+        },
+    ],
 })
 
-export const patFederatedQuery = Record({
-    $id: Now.ID['pat-federated-query'],
-    $meta: { installMethod: 'demo' },
-    table: 'x_snc_wdf_advisory_arch_pat',
-    data: {
-        name: 'Federated Query Pattern',
-        tagline: 'Query external data in-place without replication',
-        data_flow_steps: '1. User or workflow requests data\n2. ServiceNow routes query to ZCC/MID Server\n3. MID Server executes JDBC query against source DB\n4. Results returned to ServiceNow in real-time\n5. Data displayed in workspace/report (never persisted)',
-        industry_examples: JSON.stringify([
-            { industry: 'Healthcare', example: 'Query patient system status from Epic without storing PHI' },
-            { industry: 'Financial Services', example: 'Access AR aging data from SAP without replicating financial records' },
-            { industry: 'Manufacturing', example: 'Query MES production data for quality dashboards' }
-        ]),
-        linked_demo: demoZccSql,
-    },
-})
-
-export const patEventDriven = Record({
-    $id: Now.ID['pat-event-driven'],
-    $meta: { installMethod: 'demo' },
-    table: 'x_snc_wdf_advisory_arch_pat',
-    data: {
-        name: 'Event-Driven Pipeline',
-        tagline: 'Real-time event streaming for continuous data flow',
-        data_flow_steps: '1. External system publishes event to Kafka topic\n2. Stream Connect consumes event in real-time\n3. Event transformed and validated against schema\n4. ServiceNow record created/updated automatically\n5. Downstream workflows triggered by record change',
-        industry_examples: JSON.stringify([
-            { industry: 'Security', example: 'SIEM alerts streamed for automated incident creation' },
-            { industry: 'IoT/Manufacturing', example: 'Sensor telemetry streamed for predictive maintenance' },
-            { industry: 'Financial Services', example: 'Transaction anomalies streamed for fraud case management' }
-        ]),
-        linked_demo: demoStream,
-    },
-})
-
-export const patBiDirectionalSync = Record({
+export const patInsightToAction = Record({
     $id: Now.ID['pat-bi-directional'],
     $meta: { installMethod: 'demo' },
     table: 'x_snc_wdf_advisory_arch_pat',
     data: {
-        name: 'Bi-Directional Sync Pattern',
-        tagline: 'Keep records synchronized across systems with conflict resolution',
-        data_flow_steps: '1. Change detected in source system (ServiceNow or external)\n2. Integration Hub flow triggered by event/schedule\n3. Field mapping and transformation applied\n4. Conflict resolution rules evaluated\n5. Target system updated with reconciled data\n6. Sync confirmation logged for audit',
+        name: 'Insight to Action',
+        tagline: 'A signal from your data cloud triggers a ServiceNow workflow',
+        data_flow_steps:
+            '1. Signal detected in external data source (anomaly, threshold breach, new record)\n2. Zero Copy Connect or ZCC for ERP queries the source in real-time\n3. Signal evaluated against business rules in ServiceNow\n4. Workflow triggered automatically — incident, case, task, or change\n5. Assigned owner notified with full context from source system\n6. Resolution tracked end-to-end in ServiceNow',
+        connectors: [connZcc, connZccErp, connIntegrationHub],
         industry_examples: JSON.stringify([
-            { industry: 'Technology', example: 'Jira-ServiceNow incident/story sync for DevOps teams' },
-            { industry: 'Cross-Industry', example: 'Salesforce opportunity sync for customer service visibility' },
-            { industry: 'Government', example: 'Legacy case system sync for citizen portal modernization' }
+            {
+                industry: 'Financial Services',
+                example: 'Fraud signal from data warehouse triggers investigation case with full transaction context',
+            },
+            {
+                industry: 'Manufacturing',
+                example: 'Quality threshold breach in MES triggers corrective action workflow',
+            },
+            { industry: 'Healthcare', example: 'Patient readmission risk score triggers care coordination workflow' },
         ]),
         linked_demo: demoIh,
     },
 })
 
-export const patContentIndex = Record({
+export const patRealTimeDataEnrichment = Record({
     $id: Now.ID['pat-content-index'],
     $meta: { installMethod: 'demo' },
     table: 'x_snc_wdf_advisory_arch_pat',
     data: {
-        name: 'Content Indexing & Search',
-        tagline: 'Crawl, index, and unify enterprise knowledge without data movement',
-        data_flow_steps: '1. Crawler authenticates to external content source\n2. Content metadata and text extracted on schedule\n3. Search index updated (content stays in source)\n4. Users search across all sources from ServiceNow\n5. Now Assist uses indexed content for AI-powered answers',
+        name: 'Real-Time Data Enrichment',
+        tagline: 'Live context from external systems surfaces exactly when a decision is made',
+        data_flow_steps:
+            '1. Agent opens a record (incident, case, CI) in ServiceNow\n2. ServiceNow detects which external context is relevant\n3. Zero Copy or ZCC for ERP fetches live data from source\n4. External data displayed inline — no copy, no stale cache\n5. Agent makes informed decision with full context\n6. Actions taken in ServiceNow, source data stays in place',
+        connectors: [connZcc, connZccErp],
         industry_examples: JSON.stringify([
-            { industry: 'Cross-Industry', example: 'SharePoint + Confluence unified search for support agents' },
-            { industry: 'Financial Services', example: 'Audit document indexing for SOX compliance searches' },
-            { industry: 'Education', example: 'Course material and policy document unification' }
+            {
+                industry: 'Retail',
+                example: 'Store support agent sees live POS system status and inventory levels alongside the incident',
+            },
+            {
+                industry: 'Telecom',
+                example: 'Network ops sees live element health from NMS while triaging a major incident',
+            },
+            { industry: 'Technology', example: 'Cloud CI enriched with live AWS/Azure resource state when accessed' },
         ]),
         linked_demo: demoSox,
     },
 })
 
-export const patRealTimeEnrich = Record({
+export const patRealTimeEventResponse = Record({
+    $id: Now.ID['pat-event-driven'],
+    $meta: { installMethod: 'demo' },
+    table: 'x_snc_wdf_advisory_arch_pat',
+    data: {
+        name: 'Real-Time Event Response',
+        tagline: 'Something happens continuously in an external system — ServiceNow reacts immediately',
+        data_flow_steps:
+            '1. External system publishes event to Kafka/streaming platform\n2. Stream Connect ingests event in real-time (sub-second)\n3. Event validated, transformed, and enriched\n4. ServiceNow record created or updated automatically\n5. Downstream workflow triggered by the record change\n6. Integration Hub orchestrates any cross-system response',
+        connectors: [connStreamConnect, connZcc, connIntegrationHub],
+        industry_examples: JSON.stringify([
+            {
+                industry: 'Security',
+                example: 'SIEM alerts streamed to create security incidents with full threat context automatically',
+            },
+            {
+                industry: 'IoT/Manufacturing',
+                example: 'Sensor telemetry streamed for predictive maintenance — work orders created before failures',
+            },
+            {
+                industry: 'Financial Services',
+                example: 'Transaction anomalies streamed for real-time fraud case management',
+            },
+        ]),
+        linked_demo: demoStream,
+    },
+})
+
+export const patAgenticMultiConnector = Record({
+    $id: Now.ID['pat-federated-query'],
+    $meta: { installMethod: 'demo' },
+    table: 'x_snc_wdf_advisory_arch_pat',
+    data: {
+        name: 'Agentic Multi-Connector Loop',
+        tagline: 'A streaming event triggers an autonomous agent that reads, decides, and acts across 3-5 connectors',
+        data_flow_steps:
+            '1. Streaming event triggers an AI agent in ServiceNow\n2. Agent uses MCP Client to call external tools and gather context\n3. Zero Copy queries data warehouses for historical analysis\n4. Agent reasons over combined data and decides next action\n5. Agent executes resolution — update records, notify, escalate\n6. Full decision trail logged for audit and continuous learning',
+        connectors: [connStreamConnect, connMcpClient, connZcc],
+        industry_examples: JSON.stringify([
+            {
+                industry: 'Technology',
+                example:
+                    'Alert triggers agent that checks monitoring, queries CMDB, runs diagnostics, and auto-remediates',
+            },
+            {
+                industry: 'Financial Services',
+                example:
+                    'Compliance event triggers agent that gathers audit data, evaluates risk, and files regulatory report',
+            },
+            {
+                industry: 'Healthcare',
+                example: 'Patient alert triggers agent that checks EHR, reviews protocols, and coordinates care team',
+            },
+        ]),
+        linked_demo: demoZccSql,
+    },
+})
+
+export const patAutomateAcrossSystems = Record({
     $id: Now.ID['pat-realtime-enrich'],
     $meta: { installMethod: 'demo' },
     table: 'x_snc_wdf_advisory_arch_pat',
     data: {
-        name: 'Real-Time Enrichment',
-        tagline: 'On-demand data fetch when a record is accessed',
-        data_flow_steps: '1. User opens a CI or record in ServiceNow\n2. Live Connect detects the access event\n3. Real-time API call made to source (cloud provider/monitoring)\n4. Current attributes fetched and merged with CMDB record\n5. User sees live data without waiting for scheduled discovery',
+        name: 'Automate Across Systems',
+        tagline: 'A ServiceNow workflow triggers actions in external apps — no manual handoffs',
+        data_flow_steps:
+            '1. Business event occurs in ServiceNow (approval, state change, SLA breach)\n2. Integration Hub flow triggered automatically\n3. MCP Server exposes ServiceNow actions to external AI agents\n4. MCP Client calls external system APIs to execute actions\n5. Results returned and ServiceNow records updated\n6. End-to-end workflow completed without human handoff',
+        connectors: [connIntegrationHub, connMcpServer, connMcpClient],
         industry_examples: JSON.stringify([
-            { industry: 'Technology', example: 'Cloud CI enrichment with live AWS/Azure resource state' },
-            { industry: 'Telecom', example: 'Network element status enrichment from NMS tools' },
-            { industry: 'Retail', example: 'POS system status enrichment for store IT support' }
+            {
+                industry: 'Cross-Industry',
+                example: 'Approved change request automatically provisions infrastructure in AWS and updates CMDB',
+            },
+            {
+                industry: 'HR',
+                example: 'Employee onboarding triggers account creation in AD, Workday enrollment, and equipment order',
+            },
+            {
+                industry: 'IT Operations',
+                example: 'SLA breach triggers escalation, vendor notification, and executive summary — all automated',
+            },
         ]),
+        linked_demo: demoIh,
     },
 })

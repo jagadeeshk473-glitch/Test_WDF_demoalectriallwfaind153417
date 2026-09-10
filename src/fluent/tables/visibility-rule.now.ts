@@ -40,14 +40,19 @@ export const x_snc_wdf_advisory_vis_rule = Table({
             maxLength: 500,
         }),
     },
+    index: [
+        {
+            name: 'index',
+            unique: false,
+            element: 'persona',
+        },
+    ],
 })
 
 // ═══════════════════════════════════════════════════════════════════════════════
 // SEED DATA: Visibility Rules
 // 4 screens × (16+8+8+4) content areas × 3 personas = 108 records
 // ═══════════════════════════════════════════════════════════════════════════════
-
-
 
 // ═══════════════════════════════════════════════════════════════════════════════
 // SCREEN: connector_detail (16 areas × 3 personas = 48 records)
@@ -618,7 +623,12 @@ export const visAdminDashboardComplianceChecklistBusiness = Record({
 export const visAdminDashboardComplianceChecklistTechnical = Record({
     $id: Now.ID['vis-admin_dashboard-compliance_checklist-technical'],
     table: 'x_snc_wdf_advisory_vis_rule',
-    data: { persona: personaBuilderDev, screen: 'admin_dashboard', content_area: 'compliance_checklist', visible: false },
+    data: {
+        persona: personaBuilderDev,
+        screen: 'admin_dashboard',
+        content_area: 'compliance_checklist',
+        visible: false,
+    },
 })
 export const visAdminDashboardComplianceChecklistAdmin = Record({
     $id: Now.ID['vis-admin_dashboard-compliance_checklist-admin'],

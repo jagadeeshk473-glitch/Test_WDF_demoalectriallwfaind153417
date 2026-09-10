@@ -75,7 +75,7 @@ export function ScenarioStepper({ demoId, persona }: Props) {
 
   return (
     <div>
-      <a style={s.back} onClick={() => navigate({ view: "home", tab: "scenarios" })}>← Back to advisor</a>
+      <a style={s.back} onClick={() => navigate({ view: "home", tab: "scenario" })}>← Back to Advisor</a>
       <div style={s.label}>SCENARIO DEMO</div>
       <h1 style={s.title}>{v(scenario.title)}</h1>
       {tags.length > 0 && (

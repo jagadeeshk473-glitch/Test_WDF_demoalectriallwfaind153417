@@ -31,7 +31,7 @@ export function navigate(params: Record<string, string>) {
 
 export function App() {
   const [view, setView] = useState(getView);
-  const [activeTab, setActiveTab] = useState(() => getParam("tab") || "connectors");
+  const [activeTab, setActiveTab] = useState(() => getParam("tab") || "scenario");
   const [persona, setPersona] = useState<Persona>(
     () => (sessionStorage.getItem("wdf_persona") as Persona) || "business"
   );

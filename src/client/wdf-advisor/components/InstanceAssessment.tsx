@@ -47,69 +47,163 @@ const SEVERITY_ORDER: Record<string, number> = { critical: 0, high: 1, medium: 2
 
 // === MERMAID DIAGRAM COMPONENT ===
 
+function utf8ToBase64(str: string): string {
+  return btoa(
+    encodeURIComponent(str).replace(/%([0-9A-F]{2})/g, (_, p1) =>
+      String.fromCharCode(parseInt(p1, 16))
+    )
+  );
+}
+
+function getMermaidLiveUrl(code: string): string {
+  const state = JSON.stringify({
+    code: code,
+    mermaid: { theme: "default" },
+    autoSync: true,
+    updateDiagram: true,
+  });
+  return "https://mermaid.live/edit#base64:" + utf8ToBase64(state);
+}
+
+/** Remove any orphaned Mermaid error elements from document body */
+function cleanupMermaidOrphans(renderId?: string) {
+  // Remove elements Mermaid appends to body on render failure
+  const selectors = [
+    '[id*="mermaid"]',
+    'svg[aria-roledescription="error"]',
+    ".mermaid-error",
+    'div[id^="d"]',
+  ];
+  if (renderId) {
+    selectors.push('[id="d' + renderId + '"]');
+    selectors.push('[id="' + renderId + '"]');
+  }
+  try {
+    document.querySelectorAll(selectors.join(",")).forEach((el) => {
+      // Only remove if it's a direct child of body (orphaned) or contains error text
+      if (
+        el.parentNode === document.body ||
+        (el.textContent && el.textContent.includes("Syntax error"))
+      ) {
+        el.parentNode?.removeChild(el);
+      }
+    });
+  } catch (_) {
+    // Selector may be invalid in some browsers; fail silently
+  }
+}
+
+let mermaidLoadPromise: Promise<void> | null = null;
+
+function loadMermaid(): Promise<void> {
+  if (mermaidLoadPromise) return mermaidLoadPromise;
+
+  // CRITICAL: Set startOnLoad: false BEFORE the script loads
+  // This prevents Mermaid from auto-initializing and scanning the DOM
+  (window as any).mermaid = { startOnLoad: false };
+
+  mermaidLoadPromise = new Promise<void>((resolve, reject) => {
+    const script = document.createElement("script");
+    script.src = "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js";
+    script.onload = () => {
+      // Re-initialize after load to ensure startOnLoad stays off
+      const m = (window as any).mermaid;
+      if (m && m.initialize) {
+        m.initialize({ startOnLoad: false, theme: "default", securityLevel: "loose" });
+      }
+      resolve();
+    };
+    script.onerror = () => reject(new Error("Failed to load Mermaid CDN"));
+    document.head.appendChild(script);
+  });
+
+  return mermaidLoadPromise;
+}
+
 function MermaidDiagram({ code, id }: { code: string; id: string }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [svgContent, setSvgContent] = useState<string>("");
-  const [loadFailed, setLoadFailed] = useState(false);
+  const [renderFailed, setRenderFailed] = useState(false);
   const [loading, setLoading] = useState(true);
+  const renderIdRef = useRef<string>("");
 
   useEffect(() => {
-    if (!code) return;
-
+    if (!code) {
+      setLoading(false);
+      return;
+    }
     let cancelled = false;
 
     const renderDiagram = async () => {
       setLoading(true);
+      setRenderFailed(false);
+      setSvgContent("");
+
+      // Generate a unique render ID using id + timestamp to avoid collisions
+      const renderId = id.replace(/[^a-zA-Z0-9]/g, "") + "T" + Date.now();
+      renderIdRef.current = renderId;
+
       try {
-        // Check if mermaid is already loaded
-        if (!(window as any).mermaid) {
-          await new Promise<void>((resolve, reject) => {
-            const script = document.createElement("script");
-            script.src = "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js";
-            script.onload = () => resolve();
-            script.onerror = () => reject(new Error("Failed to load Mermaid"));
-            document.head.appendChild(script);
-          });
-        }
+        await loadMermaid();
 
         const mermaid = (window as any).mermaid;
+        if (!mermaid || !mermaid.render) {
+          throw new Error("Mermaid not available");
+        }
+
+        // Ensure configuration is correct before each render
         mermaid.initialize({ startOnLoad: false, theme: "default", securityLevel: "loose" });
 
-        const { svg } = await mermaid.render(id + "-svg", code);
+        const { svg } = await mermaid.render(renderId, code);
+
         if (!cancelled) {
           setSvgContent(svg);
-          setLoadFailed(false);
+          setRenderFailed(false);
         }
       } catch (e) {
         if (!cancelled) {
-          setLoadFailed(true);
+          setRenderFailed(true);
+          // Clean up orphaned error elements that Mermaid v10 appends to document.body
+          cleanupMermaidOrphans(renderId);
         }
       } finally {
-        if (!cancelled) {
-          setLoading(false);
-        }
+        if (!cancelled) setLoading(false);
       }
     };
 
     renderDiagram();
-    return () => { cancelled = true; };
+
+    return () => {
+      cancelled = true;
+      // Cleanup any orphans when effect re-runs
+      if (renderIdRef.current) {
+        cleanupMermaidOrphans(renderIdRef.current);
+      }
+    };
   }, [code, id]);
 
-  const mermaidLiveUrl = "https://mermaid.live/edit#base64=" + btoa(code || "");
+  // Clean up any orphaned Mermaid error elements on unmount
+  useEffect(() => {
+    return () => {
+      cleanupMermaidOrphans(renderIdRef.current);
+    };
+  }, []);
+
+  const liveUrl = getMermaidLiveUrl(code || "graph TD\n  A-->B");
 
   if (loading) {
     return (
       <div style={{ padding: 20, textAlign: "center", color: "#5A6677", fontSize: 13 }}>
-        Loading diagram...
+        Rendering diagram...
       </div>
     );
   }
 
-  if (loadFailed) {
+  if (renderFailed || !svgContent) {
     return (
       <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
         <pre style={styles.codeBlock}>{code}</pre>
-        <a href={mermaidLiveUrl} target="_blank" rel="noopener noreferrer" style={styles.mermaidLink}>
+        <a href={liveUrl} target="_blank" rel="noopener noreferrer" style={styles.mermaidLink}>
           Open in Mermaid Live Editor ↗
         </a>
       </div>
@@ -121,9 +215,9 @@ function MermaidDiagram({ code, id }: { code: string; id: string }) {
       <div
         ref={containerRef}
         dangerouslySetInnerHTML={{ __html: svgContent }}
-        style={{ overflow: "auto", maxHeight: 500 }}
+        style={{ overflow: "auto", maxHeight: 500, background: "#fff", borderRadius: 4 }}
       />
-      <a href={mermaidLiveUrl} target="_blank" rel="noopener noreferrer" style={styles.mermaidLink}>
+      <a href={liveUrl} target="_blank" rel="noopener noreferrer" style={styles.mermaidLink}>
         Open in Mermaid Live Editor ↗
       </a>
     </div>
@@ -164,7 +258,7 @@ export function InstanceAssessment() {
       const catLower = categoryFilter.toLowerCase();
       filtered = filtered.filter(f => {
         const fCat = f.category.replace(/_/g, " ").toLowerCase();
-        return fCat.includes(catLower.toLowerCase());
+        return fCat.includes(catLower);
       });
     }
 

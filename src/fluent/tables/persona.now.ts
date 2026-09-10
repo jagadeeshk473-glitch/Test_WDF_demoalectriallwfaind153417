@@ -78,6 +78,13 @@ export const x_snc_wdf_advisory_persona = Table({
             default: false,
         }),
     },
+    index: [
+        {
+            name: 'index',
+            unique: true,
+            element: 'key',
+        },
+    ],
 })
 
 // ─── Seed: Business User Persona ────────────────────────────────────────────
@@ -89,7 +96,8 @@ export const personaBusiness = Record({
         key: 'business',
         label: 'Business User',
         subtitle: 'Plain English - outcomes - no protocols',
-        description: 'Sees connector recommendations in plain English with business outcomes, use-case framing, and scenario demos. No protocol, auth, or infrastructure detail.',
+        description:
+            'Sees connector recommendations in plain English with business outcomes, use-case framing, and scenario demos. No protocol, auth, or infrastructure detail.',
         role_name: 'x_snc_wdf_advisory.business_user',
         icon: 'briefcase',
         sort_order: '100',
@@ -112,7 +120,8 @@ export const personaBuilderDev = Record({
         key: 'technical',
         label: 'Builder / Dev',
         subtitle: 'RFC - BAPI - OData - deployment - Build Agent',
-        description: 'Sees full protocol detail, authentication methods, latency specifications, MID Server requirements, lab exercises, build notes, and the Build Agent deployment flow.',
+        description:
+            'Sees full protocol detail, authentication methods, latency specifications, MID Server requirements, lab exercises, build notes, and the Build Agent deployment flow.',
         role_name: 'x_snc_wdf_advisory.builder_dev',
         icon: 'code',
         sort_order: '200',
@@ -135,7 +144,8 @@ export const personaAdmin = Record({
         key: 'admin',
         label: 'Admin',
         subtitle: 'Compliance - infra readiness - governance',
-        description: 'Sees compliance and governance framing, write-back risk assessment, infrastructure readiness checklists, and environment-specific readiness checks.',
+        description:
+            'Sees compliance and governance framing, write-back risk assessment, infrastructure readiness checklists, and environment-specific readiness checks.',
         role_name: 'x_snc_wdf_advisory.admin',
         icon: 'shield',
         sort_order: '300',

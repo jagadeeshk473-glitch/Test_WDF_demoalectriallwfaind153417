@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { fetchConnector } from "../services/api";
 import { navigate } from "../app";
 import { ConnectorPicker } from "./ConnectorPicker";
+import { CONTEXT_IMPLICATIONS, getChaptersForConnector } from "../services/outboundConcept";
 
 interface Props {
   connectorId: string;
@@ -128,6 +129,8 @@ export function ConnectorDetail({ connectorId, persona, onBack }: Props) {
 
   const sourceCategories = parseSourceCategories(detail);
   const hasWriteBack = writeBack === "true" || writeBack === "1";
+  const contextImplication = CONTEXT_IMPLICATIONS[name.toLowerCase()];
+  const chapters = getChaptersForConnector(name);
 
   return (
     <div style={st.container}>
@@ -156,6 +159,54 @@ export function ConnectorDetail({ connectorId, persona, onBack }: Props) {
 
         {tagline && <p style={st.tagline}>{tagline}</p>}
         {detail && <p style={st.detail}>{detail}</p>}
+
+        {/* Context Engine Implications */}
+        {contextImplication && (
+          <div style={st.contextSection}>
+            <h4 style={st.sectionHeadingUpper}>🔗 CONTEXT ENGINE IMPACT</h4>
+            <div style={st.contextCard}>
+              <div style={st.contextRow}>
+                <span style={st.contextLabel}>Feeds:</span>
+                <div style={st.pillRow}>
+                  {contextImplication.feeds.map(f => (
+                    <span key={f} style={st.feedPill}>{f}</span>
+                  ))}
+                </div>
+              </div>
+              <div style={st.contextRow}>
+                <span style={st.contextLabel}>Governance Jobs:</span>
+                <div style={st.pillRow}>
+                  {contextImplication.govJobs.map(g => (
+                    <span key={g} style={st.govPill}>{g}</span>
+                  ))}
+                </div>
+              </div>
+              {contextImplication.note && (
+                <p style={st.contextNote}>{contextImplication.note}</p>
+              )}
+            </div>
+          </div>
+        )}
+
+        {/* Integration Patterns */}
+        {chapters.length > 0 && (
+          <div style={st.chaptersSection}>
+            <h4 style={st.sectionHeadingUpper}>📖 INTEGRATION PATTERNS</h4>
+            <div style={st.chaptersList}>
+              {chapters.map(ch => (
+                <div key={ch.id} style={st.chapterCard}>
+                  <div style={st.chapterContent}>
+                    <div style={st.chapterTitleRow}>
+                      <span style={{ ...st.chapterBadge, background: ch.color }}>{ch.quadrant}</span>
+                    </div>
+                    <div style={st.chapterTitle}>{ch.title}</div>
+                    <div style={st.chapterSummary}>{ch.summary}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
 
         {/* Source Categories */}
         {Object.keys(sourceCategories).length > 0 && (
@@ -258,8 +309,12 @@ export function ConnectorDetail({ connectorId, persona, onBack }: Props) {
 
       {/* Action Buttons */}
       <div style={st.actions}>
-        <button style={st.btnPrimary} onClick={() => navigate({ view: "demo", id: name })}>
-          ▶ See {name.split(" ")[0]} demo
+        <button
+          style={st.btnDisabled}
+          disabled
+          title="Coming Soon — This feature is in progress"
+        >
+          ▶ See {name.split(" ")[0]} Demo
         </button>
         <button style={st.btnSecondary} onClick={() => setShowPicker(true)}>
           Compare with…
@@ -333,6 +388,26 @@ const st: Record<string, React.CSSProperties> = {
   roadmapLabel: { fontSize: 12, fontWeight: 700, color: "#00C6A2", marginBottom: 6 },
   roadmapText: { fontSize: 13, color: "#1A1A1A", margin: 0, lineHeight: 1.5 },
 
+  // Context Engine
+  sectionHeadingUpper: { fontSize: 12, fontWeight: 700, color: "#0B2D4E", textTransform: "uppercase" as const, letterSpacing: 0.8, margin: "0 0 12px" },
+  contextSection: { marginTop: 24 },
+  contextCard: { background: "#F8FAFC", borderRadius: 8, padding: 14 },
+  contextRow: { display: "flex", alignItems: "center", gap: 8, marginBottom: 8, flexWrap: "wrap" as const },
+  contextLabel: { fontSize: 12, fontWeight: 600, color: "#0B2D4E" },
+  feedPill: { background: "#E0F2FA", color: "#0B2D4E", fontSize: 12, padding: "3px 10px", borderRadius: 12, fontWeight: 500 },
+  govPill: { background: "#F0E8FF", color: "#6B21A8", fontSize: 12, padding: "3px 10px", borderRadius: 12, fontWeight: 500 },
+  contextNote: { fontSize: 13, color: "#5A6677", margin: "4px 0 0", fontStyle: "italic", lineHeight: 1.4 },
+
+  // Integration Patterns (chapters)
+  chaptersSection: { marginTop: 24 },
+  chaptersList: { display: "flex", flexDirection: "column" as const, gap: 10 },
+  chapterCard: { background: "#F8FAFC", borderRadius: 8, padding: 14, border: "1px solid #E0E5EC" },
+  chapterBadge: { color: "#fff", fontSize: 11, padding: "2px 8px", borderRadius: 10, fontWeight: 600 },
+  chapterContent: {},
+  chapterTitleRow: { marginBottom: 6 },
+  chapterTitle: { fontSize: 14, fontWeight: 600, color: "#0B2D4E", marginBottom: 4 },
+  chapterSummary: { fontSize: 13, color: "#5A6677", lineHeight: 1.5 },
+
   // Readiness
   readinessCard: { background: "#fff", border: "1px solid #E0E5EC", borderRadius: 12, padding: 24, marginBottom: 20 },
   readinessGrid: { display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 12 },
@@ -368,6 +443,11 @@ const st: Record<string, React.CSSProperties> = {
   btnSecondary: {
     background: "#fff", color: "#00C6A2", border: "2px solid #00C6A2", borderRadius: 8,
     padding: "12px 24px", fontWeight: 600, fontSize: 14, cursor: "pointer"
+  },
+  btnDisabled: {
+    background: "#D1D5DB", color: "#9CA3AF", border: "none", borderRadius: 8,
+    padding: "12px 24px", fontWeight: 600, fontSize: 14, cursor: "not-allowed",
+    opacity: 0.7
   },
   btnBack: {
     background: "#F4F6F9", color: "#5A6677", border: "1px solid #E0E5EC", borderRadius: 8,

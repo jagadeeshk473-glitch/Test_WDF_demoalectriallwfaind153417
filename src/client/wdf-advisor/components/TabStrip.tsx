@@ -2,9 +2,9 @@ import React from "react";
 import { ConnectorGrid } from "./ConnectorGrid";
 import { ArchPatterns } from "./ArchPatterns";
 import { UseCaseIdeas } from "./UseCaseIdeas";
+import ChatWithContext from "./ChatWithContext";
 import { AdminPanel } from "./AdminPanel";
 import { InstanceAssessment } from "./InstanceAssessment";
-
 interface Props {
   persona: string;
   activeTab: string;
@@ -12,10 +12,11 @@ interface Props {
 }
 
 const TABS = [
+  { key: "scenario", label: "Customer Scenario", badge: true },
+  { key: "insights", label: "Insights", badge: true },
   { key: "connectors", label: "Connectors", badge: false },
   { key: "patterns", label: "Arch Patterns", badge: false },
   { key: "ideas", label: "Use Cases", badge: false },
-  { key: "insights", label: "Insights", badge: true },
   { key: "admin", label: "Admin", badge: false, adminOnly: true }
 ];
 
@@ -43,6 +44,7 @@ export function TabStrip({ persona, activeTab, setActiveTab }: Props) {
         {activeTab === "connectors" && <ConnectorGrid persona={persona} />}
         {activeTab === "patterns" && <ArchPatterns />}
         {activeTab === "ideas" && <UseCaseIdeas />}
+        {activeTab === "scenario" && <ChatWithContext />}
         {activeTab === "insights" && <InstanceAssessment />}
         {activeTab === "admin" && <AdminPanel persona={persona} />}
       </div>

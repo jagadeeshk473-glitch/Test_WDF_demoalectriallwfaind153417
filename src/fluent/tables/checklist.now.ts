@@ -11,8 +11,14 @@ export const x_snc_wdf_advisory_checklist = Table({
             label: 'Checklist Type',
             mandatory: true,
             choices: {
-                compliance: 'Compliance',
-                infrastructure: 'Infrastructure',
+                compliance: {
+                    label: 'Compliance',
+                    sequence: 1,
+                },
+                infrastructure: {
+                    label: 'Infrastructure',
+                    sequence: 2,
+                },
             },
         }),
         section: StringColumn({
@@ -31,20 +37,47 @@ export const x_snc_wdf_advisory_checklist = Table({
         status: ChoiceColumn({
             label: 'Status',
             choices: {
-                done: 'Done',
-                warn: 'Warning',
-                fail: 'Fail',
+                done: {
+                    label: 'Done',
+                    sequence: 1,
+                },
+                warn: {
+                    label: 'Warning',
+                    sequence: 2,
+                },
+                fail: {
+                    label: 'Fail',
+                    sequence: 3,
+                },
             },
         }),
         tag: ChoiceColumn({
             label: 'Tag',
             choices: {
-                required: 'Required',
-                recommended: 'Recommended',
-                blocker: 'Blocker',
-                in_progress: 'In progress',
-                verified: 'Verified',
-                needs_review: 'Needs review',
+                required: {
+                    label: 'Required',
+                    sequence: 1,
+                },
+                recommended: {
+                    label: 'Recommended',
+                    sequence: 2,
+                },
+                blocker: {
+                    label: 'Blocker',
+                    sequence: 3,
+                },
+                in_progress: {
+                    label: 'In progress',
+                    sequence: 4,
+                },
+                verified: {
+                    label: 'Verified',
+                    sequence: 5,
+                },
+                needs_review: {
+                    label: 'Needs review',
+                    sequence: 6,
+                },
             },
         }),
     },
@@ -132,7 +165,8 @@ export const clMfaAdmin = Record({
         checklist_type: 'compliance',
         section: 'Access Control',
         label: 'MFA required for admin access',
-        sub_description: 'All administrative accounts accessing connector configurations require multi-factor authentication',
+        sub_description:
+            'All administrative accounts accessing connector configurations require multi-factor authentication',
         status: 'done',
         tag: 'required',
     },
@@ -234,7 +268,8 @@ export const clPciDss = Record({
         checklist_type: 'compliance',
         section: 'Regulatory Compliance',
         label: 'PCI DSS scope assessment completed',
-        sub_description: 'Cardholder data environment boundaries defined; connectors validated as out-of-scope or compliant',
+        sub_description:
+            'Cardholder data environment boundaries defined; connectors validated as out-of-scope or compliant',
         status: 'warn',
         tag: 'required',
     },
@@ -276,7 +311,8 @@ export const clPrivacyByDesign = Record({
         checklist_type: 'compliance',
         section: 'Regulatory Compliance',
         label: 'Privacy by design principles applied',
-        sub_description: 'Data minimization, purpose limitation, and storage limitation built into connector configurations',
+        sub_description:
+            'Data minimization, purpose limitation, and storage limitation built into connector configurations',
         status: 'done',
         tag: 'verified',
     },
@@ -290,7 +326,8 @@ export const clIncidentResponse = Record({
         checklist_type: 'compliance',
         section: 'Regulatory Compliance',
         label: 'Incident response plan includes connector breach',
-        sub_description: 'Breach notification procedures include scenarios where connector credentials or data paths are compromised',
+        sub_description:
+            'Breach notification procedures include scenarios where connector credentials or data paths are compromised',
         status: 'warn',
         tag: 'recommended',
     },
@@ -306,7 +343,8 @@ export const clMidServerDeployed = Record({
         checklist_type: 'infrastructure',
         section: 'Network Connectivity',
         label: 'MID Server deployed and validated',
-        sub_description: 'MID Server installed in DMZ with validated connectivity to target databases and ServiceNow instance',
+        sub_description:
+            'MID Server installed in DMZ with validated connectivity to target databases and ServiceNow instance',
         status: 'done',
         tag: 'required',
     },
@@ -320,7 +358,8 @@ export const clFirewallRules = Record({
         checklist_type: 'infrastructure',
         section: 'Network Connectivity',
         label: 'Firewall rules configured',
-        sub_description: 'Outbound HTTPS (443) to ServiceNow; inbound JDBC ports open to target databases only from MID Server',
+        sub_description:
+            'Outbound HTTPS (443) to ServiceNow; inbound JDBC ports open to target databases only from MID Server',
         status: 'done',
         tag: 'required',
     },
@@ -378,7 +417,8 @@ export const clOauthConfigured = Record({
         checklist_type: 'infrastructure',
         section: 'Authentication & Credentials',
         label: 'OAuth 2.0 configured for cloud sources',
-        sub_description: 'Cloud-based data sources use OAuth 2.0 with automatic token refresh and short-lived access tokens',
+        sub_description:
+            'Cloud-based data sources use OAuth 2.0 with automatic token refresh and short-lived access tokens',
         status: 'done',
         tag: 'required',
     },
@@ -406,7 +446,8 @@ export const clCredentialRotation = Record({
         checklist_type: 'infrastructure',
         section: 'Authentication & Credentials',
         label: 'Credential rotation schedule defined',
-        sub_description: 'Service account passwords and API keys rotated every 90 days with zero-downtime swap procedure',
+        sub_description:
+            'Service account passwords and API keys rotated every 90 days with zero-downtime swap procedure',
         status: 'fail',
         tag: 'blocker',
     },
@@ -494,7 +535,8 @@ export const clConnectionPooling = Record({
         checklist_type: 'infrastructure',
         section: 'Performance & Monitoring',
         label: 'Connection pooling configured',
-        sub_description: 'JDBC connection pools sized appropriately per data source with max connections and idle timeout',
+        sub_description:
+            'JDBC connection pools sized appropriately per data source with max connections and idle timeout',
         status: 'done',
         tag: 'required',
     },
@@ -508,7 +550,8 @@ export const clHealthDashboards = Record({
         checklist_type: 'infrastructure',
         section: 'Performance & Monitoring',
         label: 'Health check dashboards deployed',
-        sub_description: 'Real-time monitoring dashboard showing connector health, query rates, error rates, and latency',
+        sub_description:
+            'Real-time monitoring dashboard showing connector health, query rates, error rates, and latency',
         status: 'warn',
         tag: 'recommended',
     },
@@ -522,7 +565,8 @@ export const clCapacityPlanning = Record({
         checklist_type: 'infrastructure',
         section: 'Performance & Monitoring',
         label: 'Capacity planning completed',
-        sub_description: 'Growth projections for query volume documented; scaling thresholds defined for MID Server fleet',
+        sub_description:
+            'Growth projections for query volume documented; scaling thresholds defined for MID Server fleet',
         status: 'fail',
         tag: 'needs_review',
     },
@@ -536,7 +580,8 @@ export const clRateLimiting = Record({
         checklist_type: 'infrastructure',
         section: 'Performance & Monitoring',
         label: 'Rate limiting configured',
-        sub_description: 'Query rate limits set per source to prevent overwhelming external databases during peak hours',
+        sub_description:
+            'Query rate limits set per source to prevent overwhelming external databases during peak hours',
         status: 'done',
         tag: 'required',
     },

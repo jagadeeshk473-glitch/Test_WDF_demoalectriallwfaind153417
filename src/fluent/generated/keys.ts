@@ -9,6 +9,38 @@ declare global {
                         table: 'sys_cs_context_profile_skill'
                         id: '140910412f3a4f50809dea3fafa4e360'
                     }
+                    '27740bf82f76cb50809dea3fafa4e3dc': {
+                        table: 'one_api_service_plan_feature_edge'
+                        id: '27740bf82f76cb50809dea3fafa4e3dc'
+                    }
+                    '27c5a1052f3acf50809dea3fafa4e3ac': {
+                        table: 'one_api_feature_provider'
+                        id: '27c5a1052f3acf50809dea3fafa4e3ac'
+                    }
+                    '2b740bf82f76cb50809dea3fafa4e39e': {
+                        table: 'one_api_feature'
+                        id: '2b740bf82f76cb50809dea3fafa4e39e'
+                    }
+                    '2b740bf82f76cb50809dea3fafa4e3d2': {
+                        table: 'one_api_feature_provider'
+                        id: '2b740bf82f76cb50809dea3fafa4e3d2'
+                    }
+                    '2f740bf82f76cb50809dea3fafa4e39b': {
+                        table: 'one_api_feature'
+                        id: '2f740bf82f76cb50809dea3fafa4e39b'
+                    }
+                    '2fc5a1052f3acf50809dea3fafa4e38e': {
+                        table: 'one_api_feature'
+                        id: '2fc5a1052f3acf50809dea3fafa4e38e'
+                    }
+                    '32343b5c2f36cf10809dea3fafa4e316': {
+                        table: 'one_api_feature_provider'
+                        id: '32343b5c2f36cf10809dea3fafa4e316'
+                    }
+                    '3e238be82fd7cf5053b08d2fafa4e36b': {
+                        table: 'sys_scope_privilege'
+                        id: '3e238be82fd7cf5053b08d2fafa4e36b'
+                    }
                     '41a477502f76cf10809dea3fafa4e31d': {
                         table: 'sn_diagram_builder_instance'
                         id: '41a477502f76cf10809dea3fafa4e31d'
@@ -17,13 +49,109 @@ declare global {
                         table: 'sys_generative_ai_config'
                         id: '43e3648d2f3e4f50809dea3fafa4e31b'
                     }
+                    '4434bf1c2f36cf10809dea3fafa4e3d5': {
+                        table: 'one_api_feature'
+                        id: '4434bf1c2f36cf10809dea3fafa4e3d5'
+                    }
+                    '4834bf1c2f36cf10809dea3fafa4e3d2': {
+                        table: 'one_api_feature'
+                        id: '4834bf1c2f36cf10809dea3fafa4e3d2'
+                    }
                     '4b138b102ffe4f10809dea3fafa4e32c': {
                         table: 'sys_scope_privilege'
                         id: '4b138b102ffe4f10809dea3fafa4e32c'
                     }
+                    '5034bf1c2f36cf10809dea3fafa4e3da': {
+                        table: 'one_api_service_plan'
+                        id: '5034bf1c2f36cf10809dea3fafa4e3da'
+                    }
+                    '5034bf1c2f36cf10809dea3fafa4e3dc': {
+                        table: 'one_api_service_plan_feature'
+                        id: '5034bf1c2f36cf10809dea3fafa4e3dc'
+                    }
+                    '546e7d5d2fb68790809dea3fafa4e38f': {
+                        table: 'sys_scope_privilege'
+                        id: '546e7d5d2fb68790809dea3fafa4e38f'
+                    }
+                    '546e7d5d2fb68790809dea3fafa4e3a8': {
+                        table: 'sys_scope_privilege'
+                        id: '546e7d5d2fb68790809dea3fafa4e3a8'
+                    }
+                    '5c6e7d5d2fb68790809dea3fafa4e397': {
+                        table: 'sys_scope_privilege'
+                        id: '5c6e7d5d2fb68790809dea3fafa4e397'
+                    }
+                    '6bc5a1052f3acf50809dea3fafa4e3ae': {
+                        table: 'one_api_feature_provider'
+                        id: '6bc5a1052f3acf50809dea3fafa4e3ae'
+                    }
+                    '6f740bf82f76cb50809dea3fafa4e3d4': {
+                        table: 'one_api_feature_provider'
+                        id: '6f740bf82f76cb50809dea3fafa4e3d4'
+                    }
+                    '72343b5c2f36cf10809dea3fafa4e310': {
+                        table: 'one_api_feature'
+                        id: '72343b5c2f36cf10809dea3fafa4e310'
+                    }
+                    '72343b5c2f36cf10809dea3fafa4e317': {
+                        table: 'one_api_service_plan_feature'
+                        id: '72343b5c2f36cf10809dea3fafa4e317'
+                    }
+                    '72343b5c2f36cf10809dea3fafa4e364': {
+                        table: 'one_api_service_plan_feature'
+                        id: '72343b5c2f36cf10809dea3fafa4e364'
+                    }
+                    '72343b5c2f36cf10809dea3fafa4e369': {
+                        table: 'one_api_service_plan_feature_edge'
+                        id: '72343b5c2f36cf10809dea3fafa4e369'
+                    }
+                    '72343b5c2f36cf10809dea3fafa4e36b': {
+                        table: 'one_api_service_plan_feature_edge'
+                        id: '72343b5c2f36cf10809dea3fafa4e36b'
+                    }
                     '73a12c8d2ffa4f50809dea3fafa4e368': {
                         table: 'sys_generative_ai_config'
                         id: '73a12c8d2ffa4f50809dea3fafa4e368'
+                    }
+                    '76343b5c2f36cf10809dea3fafa4e311': {
+                        table: 'one_api_feature'
+                        id: '76343b5c2f36cf10809dea3fafa4e311'
+                    }
+                    '76343b5c2f36cf10809dea3fafa4e313': {
+                        table: 'one_api_feature_provider'
+                        id: '76343b5c2f36cf10809dea3fafa4e313'
+                    }
+                    '76343b5c2f36cf10809dea3fafa4e314': {
+                        table: 'one_api_feature_provider'
+                        id: '76343b5c2f36cf10809dea3fafa4e314'
+                    }
+                    '76343b5c2f36cf10809dea3fafa4e363': {
+                        table: 'one_api_service_plan_feature'
+                        id: '76343b5c2f36cf10809dea3fafa4e363'
+                    }
+                    '7a343b5c2f36cf10809dea3fafa4e312': {
+                        table: 'one_api_feature'
+                        id: '7a343b5c2f36cf10809dea3fafa4e312'
+                    }
+                    '7a343b5c2f36cf10809dea3fafa4e362': {
+                        table: 'one_api_service_plan_feature'
+                        id: '7a343b5c2f36cf10809dea3fafa4e362'
+                    }
+                    '7a343b5c2f36cf10809dea3fafa4e365': {
+                        table: 'one_api_service_plan_feature'
+                        id: '7a343b5c2f36cf10809dea3fafa4e365'
+                    }
+                    '7bc5a1052f3acf50809dea3fafa4e3b4': {
+                        table: 'one_api_service_plan_feature'
+                        id: '7bc5a1052f3acf50809dea3fafa4e3b4'
+                    }
+                    '7e343b5c2f36cf10809dea3fafa4e364': {
+                        table: 'one_api_service_plan_feature'
+                        id: '7e343b5c2f36cf10809dea3fafa4e364'
+                    }
+                    '7e343b5c2f36cf10809dea3fafa4e366': {
+                        table: 'one_api_service_plan_feature_edge'
+                        id: '7e343b5c2f36cf10809dea3fafa4e366'
                     }
                     '87138b102ffe4f10809dea3fafa4e324': {
                         table: 'sys_scope_privilege'
@@ -42,21 +170,77 @@ declare global {
                         table: 'sys_scope_privilege'
                         id: '920c4dc12f7e8f50809dea3fafa4e371'
                     }
+                    '9834bf1c2f36cf10809dea3fafa4e3d9': {
+                        table: 'one_api_feature_provider'
+                        id: '9834bf1c2f36cf10809dea3fafa4e3d9'
+                    }
+                    '986e7d5d2fb68790809dea3fafa4e393': {
+                        table: 'sys_scope_privilege'
+                        id: '986e7d5d2fb68790809dea3fafa4e393'
+                    }
+                    '986e7d5d2fb68790809dea3fafa4e3ac': {
+                        table: 'sys_scope_privilege'
+                        id: '986e7d5d2fb68790809dea3fafa4e3ac'
+                    }
+                    '9967f1a12ff20f90809dea3fafa4e36d': {
+                        table: 'sys_scope_privilege'
+                        id: '9967f1a12ff20f90809dea3fafa4e36d'
+                    }
                     '9c0534452f368f50809dea3fafa4e3f8': {
                         table: 'sys_scope_privilege'
                         id: '9c0534452f368f50809dea3fafa4e3f8'
+                    }
+                    a3c5a1052f3acf50809dea3fafa4e3af: {
+                        table: 'one_api_service_plan'
+                        id: 'a3c5a1052f3acf50809dea3fafa4e3af'
+                    }
+                    a7740bf82f76cb50809dea3fafa4e3d5: {
+                        table: 'one_api_service_plan'
+                        id: 'a7740bf82f76cb50809dea3fafa4e3d5'
+                    }
+                    a7740bf82f76cb50809dea3fafa4e3d7: {
+                        table: 'one_api_service_plan_feature'
+                        id: 'a7740bf82f76cb50809dea3fafa4e3d7'
                     }
                     a94ed1812f76cf50809dea3fafa4e3a2: {
                         table: 'sn_diagram_builder_instance'
                         id: 'a94ed1812f76cf50809dea3fafa4e3a2'
                     }
+                    abc5a1052f3acf50809dea3fafa4e3aa: {
+                        table: 'one_api_feature'
+                        id: 'abc5a1052f3acf50809dea3fafa4e3aa'
+                    }
+                    af740bf82f76cb50809dea3fafa4e3da: {
+                        table: 'one_api_service_plan_feature'
+                        id: 'af740bf82f76cb50809dea3fafa4e3da'
+                    }
+                    b3c5a1052f3acf50809dea3fafa4e3b1: {
+                        table: 'one_api_service_plan_feature'
+                        id: 'b3c5a1052f3acf50809dea3fafa4e3b1'
+                    }
+                    b6238be82fd7cf5053b08d2fafa4e363: {
+                        table: 'sys_scope_privilege'
+                        id: 'b6238be82fd7cf5053b08d2fafa4e363'
+                    }
                     b95417d82fb68f10809dea3fafa4e318: {
                         table: 'sys_scope_privilege'
                         id: 'b95417d82fb68f10809dea3fafa4e318'
                     }
+                    be343b5c2f36cf10809dea3fafa4e313: {
+                        table: 'one_api_feature_provider'
+                        id: 'be343b5c2f36cf10809dea3fafa4e313'
+                    }
+                    be343b5c2f36cf10809dea3fafa4e314: {
+                        table: 'one_api_feature_provider'
+                        id: 'be343b5c2f36cf10809dea3fafa4e314'
+                    }
                     bom_json: {
                         table: 'sys_module'
                         id: 'c16864aed60b45e4b28d81338a6659d5'
+                    }
+                    c434bf1c2f36cf10809dea3fafa4e3d7: {
+                        table: 'one_api_feature_provider'
+                        id: 'c434bf1c2f36cf10809dea3fafa4e3d7'
                     }
                     'checklist-create-acl': {
                         table: 'sys_security_acl'
@@ -210,6 +394,18 @@ declare global {
                         table: 'x_snc_wdf_advisory_checklist'
                         id: '9657587543d04506b0b934c1dc893daa'
                     }
+                    'connector-automation-engine': {
+                        table: 'x_snc_wdf_advisory_connector'
+                        id: '4386fd1c578146e9bd4c37e90c2a852f'
+                    }
+                    'connector-data-catalog': {
+                        table: 'x_snc_wdf_advisory_connector'
+                        id: '06cd53db142e45e2a097d2f64aeb75a6'
+                    }
+                    'connector-data-governance': {
+                        table: 'x_snc_wdf_advisory_connector'
+                        id: '49dd0d8d166a4a2188d4d1cca336c2e4'
+                    }
                     'connector-external-content': {
                         table: 'x_snc_wdf_advisory_connector'
                         id: '79427602f8994705a59ed1b913f31201'
@@ -230,6 +426,10 @@ declare global {
                         table: 'x_snc_wdf_advisory_connector'
                         id: 'a926eb3b2cf94b009fba9f1bf0690ac5'
                     }
+                    'connector-raptordb-pro': {
+                        table: 'x_snc_wdf_advisory_connector'
+                        id: '9022d5ba99a543c5bc6b24a718ceed0f'
+                    }
                     'connector-stream-connect': {
                         table: 'x_snc_wdf_advisory_connector'
                         id: 'd667a9792ad8451181a2f48f5b81e63d'
@@ -241,6 +441,18 @@ declare global {
                     'connector-zcc-erp': {
                         table: 'x_snc_wdf_advisory_connector'
                         id: 'ce0fba12aade4d86bb3104ffefbc21d3'
+                    }
+                    d034ff1c2f36cf10809dea3fafa4e32a: {
+                        table: 'one_api_service_plan_feature'
+                        id: 'd034ff1c2f36cf10809dea3fafa4e32a'
+                    }
+                    d46e351d2fb68790809dea3fafa4e3a7: {
+                        table: 'sys_scope_privilege'
+                        id: 'd46e351d2fb68790809dea3fafa4e3a7'
+                    }
+                    d834ff1c2f36cf10809dea3fafa4e32b: {
+                        table: 'one_api_service_plan_feature_edge'
+                        id: 'd834ff1c2f36cf10809dea3fafa4e32b'
                     }
                     'demo-ar': {
                         table: 'x_snc_wdf_advisory_scn_demo'
@@ -275,9 +487,45 @@ declare global {
                         id: 'ee8228052f3e4f50809dea3fafa4e372'
                         deleted: true
                     }
+                    f6343b5c2f36cf10809dea3fafa4e30f: {
+                        table: 'one_api_feature'
+                        id: 'f6343b5c2f36cf10809dea3fafa4e30f'
+                    }
+                    f6343b5c2f36cf10809dea3fafa4e315: {
+                        table: 'one_api_feature_provider'
+                        id: 'f6343b5c2f36cf10809dea3fafa4e315'
+                    }
+                    f6343b5c2f36cf10809dea3fafa4e316: {
+                        table: 'one_api_service_plan'
+                        id: 'f6343b5c2f36cf10809dea3fafa4e316'
+                    }
+                    f6343b5c2f36cf10809dea3fafa4e367: {
+                        table: 'one_api_service_plan_feature_edge'
+                        id: 'f6343b5c2f36cf10809dea3fafa4e367'
+                    }
+                    f6343b5c2f36cf10809dea3fafa4e368: {
+                        table: 'one_api_service_plan_feature_edge'
+                        id: 'f6343b5c2f36cf10809dea3fafa4e368'
+                    }
+                    fa343b5c2f36cf10809dea3fafa4e310: {
+                        table: 'one_api_feature'
+                        id: 'fa343b5c2f36cf10809dea3fafa4e310'
+                    }
                     fe1383102ffe4f10809dea3fafa4e39f: {
                         table: 'sys_scope_privilege'
                         id: 'fe1383102ffe4f10809dea3fafa4e39f'
+                    }
+                    fe343b5c2f36cf10809dea3fafa4e311: {
+                        table: 'one_api_feature'
+                        id: 'fe343b5c2f36cf10809dea3fafa4e311'
+                    }
+                    fe343b5c2f36cf10809dea3fafa4e369: {
+                        table: 'one_api_service_plan_feature_edge'
+                        id: 'fe343b5c2f36cf10809dea3fafa4e369'
+                    }
+                    ffc5a1052f3acf50809dea3fafa4e3b5: {
+                        table: 'one_api_service_plan_feature_edge'
+                        id: 'ffc5a1052f3acf50809dea3fafa4e3b5'
                     }
                     package_json: {
                         table: 'sys_module'
@@ -330,6 +578,10 @@ declare global {
                     'src_server_rest_instance-assess_js': {
                         table: 'sys_module'
                         id: '500dac06dc6d4370987bd5813cf18930'
+                    }
+                    'src_server_rest_scenario-chat_js': {
+                        table: 'sys_module'
+                        id: 'cbd5cb30414742feaa338bc379f8002c'
                     }
                     'src_server_rest_web-search_js': {
                         table: 'sys_module'
@@ -525,6 +777,250 @@ declare global {
                     'uc-sales-order-mgmt': {
                         table: 'x_snc_wdf_advisory_use_case'
                         id: '62034f4f48c1460e955efce04a7117b1'
+                    }
+                    'uc-scenario-02': {
+                        table: 'x_snc_wdf_advisory_use_case'
+                        id: '1fc5b482854f420aa0ac6979089f1c5f'
+                    }
+                    'uc-scenario-09': {
+                        table: 'x_snc_wdf_advisory_use_case'
+                        id: '539fb8386eb247758c62e7c6e4a3c488'
+                    }
+                    'uc-scenario-10': {
+                        table: 'x_snc_wdf_advisory_use_case'
+                        id: '780f6ee94c86486a981e7cc23396bb72'
+                    }
+                    'uc-scenario-11': {
+                        table: 'x_snc_wdf_advisory_use_case'
+                        id: '41f7862f51804e5c992b928a4d46e6ce'
+                    }
+                    'uc-scenario-12': {
+                        table: 'x_snc_wdf_advisory_use_case'
+                        id: '0ec1779d80b241109623eb102e85929b'
+                    }
+                    'uc-scenario-13': {
+                        table: 'x_snc_wdf_advisory_use_case'
+                        id: '2da00982cd6347499534284617a09a08'
+                    }
+                    'uc-scenario-14': {
+                        table: 'x_snc_wdf_advisory_use_case'
+                        id: '619e15fe6a404ce5b0493afc7d7b8cdd'
+                    }
+                    'uc-scenario-15': {
+                        table: 'x_snc_wdf_advisory_use_case'
+                        id: 'a0f0834b19ef48cab9daad83646fd8d0'
+                    }
+                    'uc-scenario-16': {
+                        table: 'x_snc_wdf_advisory_use_case'
+                        id: 'f3573069799d44aa9392d64f5fa12606'
+                    }
+                    'uc-scenario-17': {
+                        table: 'x_snc_wdf_advisory_use_case'
+                        id: 'fe89ef40d02a4360a6d98be7f8d316d4'
+                    }
+                    'uc-scenario-18': {
+                        table: 'x_snc_wdf_advisory_use_case'
+                        id: '45378591dfda4a8dbb86cd98b696f0ac'
+                    }
+                    'uc-scenario-19': {
+                        table: 'x_snc_wdf_advisory_use_case'
+                        id: 'b7ad96d4ac2e43859fdf846021e6bd39'
+                    }
+                    'uc-scenario-20': {
+                        table: 'x_snc_wdf_advisory_use_case'
+                        id: 'e32e3859ae4b48da8f2018834627b3a9'
+                    }
+                    'uc-scenario-21': {
+                        table: 'x_snc_wdf_advisory_use_case'
+                        id: '7e7f3bac1c7743df9a91acbc071f6d12'
+                    }
+                    'uc-scenario-22': {
+                        table: 'x_snc_wdf_advisory_use_case'
+                        id: '2c2b9a9c82324b81984e11bbe94f848f'
+                    }
+                    'uc-scenario-23': {
+                        table: 'x_snc_wdf_advisory_use_case'
+                        id: '626b739ab52b4468bdff12c963f069d3'
+                    }
+                    'uc-scenario-24': {
+                        table: 'x_snc_wdf_advisory_use_case'
+                        id: 'b5b8c5a4292446c2bbfa13ed8fa4dd00'
+                    }
+                    'uc-scenario-25': {
+                        table: 'x_snc_wdf_advisory_use_case'
+                        id: 'f64288c40cd54555ae2564e13ec2bee1'
+                    }
+                    'uc-scenario-26': {
+                        table: 'x_snc_wdf_advisory_use_case'
+                        id: '1e1dcad11d02465bb6adf9fbff3b25e6'
+                    }
+                    'uc-scenario-27': {
+                        table: 'x_snc_wdf_advisory_use_case'
+                        id: '732349169e4942bca343a1708d532b2e'
+                    }
+                    'uc-scenario-28': {
+                        table: 'x_snc_wdf_advisory_use_case'
+                        id: 'f4961e9382e84eeaa60b947b3d09187c'
+                    }
+                    'uc-scenario-29': {
+                        table: 'x_snc_wdf_advisory_use_case'
+                        id: '3d250e1d107a4daab43beb2cbcfc2a9d'
+                    }
+                    'uc-scenario-30': {
+                        table: 'x_snc_wdf_advisory_use_case'
+                        id: 'ec66f0e977bb433c812610bde5fbe671'
+                    }
+                    'uc-scenario-31': {
+                        table: 'x_snc_wdf_advisory_use_case'
+                        id: '8c4b04ac1c50431b97ce06969f15aee4'
+                    }
+                    'uc-scenario-32': {
+                        table: 'x_snc_wdf_advisory_use_case'
+                        id: '9501db740823479db86aab4e8606c41b'
+                    }
+                    'uc-scenario-33': {
+                        table: 'x_snc_wdf_advisory_use_case'
+                        id: '5f84979b8f52407a9ad786fe7f4ab572'
+                    }
+                    'uc-scenario-34': {
+                        table: 'x_snc_wdf_advisory_use_case'
+                        id: 'a065e33409ce4d76a79dc658a5970fd7'
+                    }
+                    'uc-scenario-35': {
+                        table: 'x_snc_wdf_advisory_use_case'
+                        id: '111e6e60713e480aa068e371da57571a'
+                    }
+                    'uc-scenario-36': {
+                        table: 'x_snc_wdf_advisory_use_case'
+                        id: '70a3e4a6e8314de8a7ee5c2ba37bb6cd'
+                    }
+                    'uc-scenario-37': {
+                        table: 'x_snc_wdf_advisory_use_case'
+                        id: 'b3df44c8d5f148c1af341b2d7a793015'
+                    }
+                    'uc-scenario-38': {
+                        table: 'x_snc_wdf_advisory_use_case'
+                        id: 'bd8bf236dbd64af58910753c2fab93bb'
+                    }
+                    'uc-scenario-39': {
+                        table: 'x_snc_wdf_advisory_use_case'
+                        id: '9ecb6f6176f04421ab4719869a0687dc'
+                    }
+                    'uc-scenario-40': {
+                        table: 'x_snc_wdf_advisory_use_case'
+                        id: '87db199b4456469a92399792d2c7ff0f'
+                    }
+                    'uc-scenario-41': {
+                        table: 'x_snc_wdf_advisory_use_case'
+                        id: '3bc13f4f48a243ec93be5f578f2a4d01'
+                    }
+                    'uc-scenario-42': {
+                        table: 'x_snc_wdf_advisory_use_case'
+                        id: '6a54a35a218847b587b0b5e6543647f2'
+                    }
+                    'uc-scenario-43': {
+                        table: 'x_snc_wdf_advisory_use_case'
+                        id: 'b136303dde90495ea82f52a9a4a7f5db'
+                    }
+                    'uc-scenario-44': {
+                        table: 'x_snc_wdf_advisory_use_case'
+                        id: '37fa49319b8948b0a8ddd7f1b6b6c2c3'
+                    }
+                    'uc-scenario-45': {
+                        table: 'x_snc_wdf_advisory_use_case'
+                        id: '9b24de07c5e349bca9b74f6b9639b6ba'
+                    }
+                    'uc-scenario-46': {
+                        table: 'x_snc_wdf_advisory_use_case'
+                        id: '504fbef6519e4e24b2b3704727dd2d9b'
+                    }
+                    'uc-scenario-47': {
+                        table: 'x_snc_wdf_advisory_use_case'
+                        id: '08721d019b9145d2b499052987feb9f9'
+                    }
+                    'uc-scenario-48': {
+                        table: 'x_snc_wdf_advisory_use_case'
+                        id: '6e8e7896f63749e6a4361eebd60f515a'
+                    }
+                    'uc-scenario-49': {
+                        table: 'x_snc_wdf_advisory_use_case'
+                        id: '5875c357976a4d549e6c5a1e7a783703'
+                    }
+                    'uc-scenario-50': {
+                        table: 'x_snc_wdf_advisory_use_case'
+                        id: '3ab60d5214b84c9a85a5069ef30966b3'
+                    }
+                    'uc-scenario-51': {
+                        table: 'x_snc_wdf_advisory_use_case'
+                        id: 'aec1fc119ca84ac494baf7b6c32bca46'
+                    }
+                    'uc-scenario-52': {
+                        table: 'x_snc_wdf_advisory_use_case'
+                        id: '2a3b475cab5f43e582eb825ec310356e'
+                    }
+                    'uc-scenario-53': {
+                        table: 'x_snc_wdf_advisory_use_case'
+                        id: '5266e64b6ac14ed19e7f3b5ec0de15be'
+                    }
+                    'uc-scenario-54': {
+                        table: 'x_snc_wdf_advisory_use_case'
+                        id: '28889f23a67444e4b5cbcbb73a00e55a'
+                    }
+                    'uc-scenario-55': {
+                        table: 'x_snc_wdf_advisory_use_case'
+                        id: '03866bb044924aa3817627664d46fe9e'
+                    }
+                    'uc-scenario-56': {
+                        table: 'x_snc_wdf_advisory_use_case'
+                        id: '7cbba58412cf4fbb84cf9f12266abed2'
+                    }
+                    'uc-scenario-57': {
+                        table: 'x_snc_wdf_advisory_use_case'
+                        id: '17ac7ff31c8745969f4df0bfb374ed27'
+                    }
+                    'uc-scenario-58': {
+                        table: 'x_snc_wdf_advisory_use_case'
+                        id: 'c8d48b33814042be8ca94071c6ed6a7e'
+                    }
+                    'uc-scenario-59': {
+                        table: 'x_snc_wdf_advisory_use_case'
+                        id: 'f4dd6c1b8dfb4425aeea977e4f0d939e'
+                    }
+                    'uc-scenario-60': {
+                        table: 'x_snc_wdf_advisory_use_case'
+                        id: '1e548f15207a4d3c9c084c5731fb9174'
+                    }
+                    'uc-scenario-61': {
+                        table: 'x_snc_wdf_advisory_use_case'
+                        id: '06705586c18a453993e61bd0171477a1'
+                    }
+                    'uc-scenario-62': {
+                        table: 'x_snc_wdf_advisory_use_case'
+                        id: 'd554f574843945f59d66e6e2a3ef88a2'
+                    }
+                    'uc-scenario-63': {
+                        table: 'x_snc_wdf_advisory_use_case'
+                        id: '8f3791375714466ca1d8b047f72b4a6b'
+                    }
+                    'uc-scenario-64': {
+                        table: 'x_snc_wdf_advisory_use_case'
+                        id: 'f44c70d76c96480b8c1e6f4896d53ebf'
+                    }
+                    'uc-scenario-65': {
+                        table: 'x_snc_wdf_advisory_use_case'
+                        id: '317da50ddf454360963719f8659f09fe'
+                    }
+                    'uc-scenario-66': {
+                        table: 'x_snc_wdf_advisory_use_case'
+                        id: '2ace15813f3c42e980a05aaed559e883'
+                    }
+                    'uc-scenario-67': {
+                        table: 'x_snc_wdf_advisory_use_case'
+                        id: '46b18214ccb647d5ad4c4474e984d129'
+                    }
+                    'uc-scenario-68': {
+                        table: 'x_snc_wdf_advisory_use_case'
+                        id: '9f8a7ea35a0943e7b97d7906f6f6284c'
                     }
                     'uc-security-events': {
                         table: 'x_snc_wdf_advisory_use_case'
@@ -1011,6 +1507,46 @@ declare global {
                         table: 'x_snc_wdf_advisory_vis_rule'
                         id: '1a79323f983a4cb4acd6d0f4c4a7227c'
                     }
+                    wdf_chat_advisor_access: {
+                        table: 'sys_security_acl'
+                        id: '8f3077ed30b643a2ac33b457565fe4b2'
+                    }
+                    wdf_chat_advisor_conversation_input: {
+                        table: 'sys_one_extend_definition_attribute'
+                        id: '779c67d810ec4571b18b19bef7b61379'
+                    }
+                    wdf_chat_advisor_prompt_v1: {
+                        table: 'sys_generative_ai_config'
+                        id: '206a4fc1160f4ef690d4492c92e664ca'
+                    }
+                    wdf_chat_advisor_skill: {
+                        table: 'sys_one_extend_capability'
+                        id: 'c07a96444b944e81a839164a54e962a7'
+                    }
+                    wdf_chat_advisor_skill__output_error: {
+                        table: 'sys_one_extend_definition_attribute'
+                        id: 'df3e055f33c84fada4c96d79c609ff1f'
+                    }
+                    wdf_chat_advisor_skill__output_errorcode: {
+                        table: 'sys_one_extend_definition_attribute'
+                        id: 'e76cd54222d04c31a6bc22ad97e9ebc5'
+                    }
+                    wdf_chat_advisor_skill__output_provider: {
+                        table: 'sys_one_extend_definition_attribute'
+                        id: '07424f324352449990b52e570a1f6b2c'
+                    }
+                    wdf_chat_advisor_skill__output_response: {
+                        table: 'sys_one_extend_definition_attribute'
+                        id: '51894ca15a194cbbb52ec179ae1e1f6a'
+                    }
+                    wdf_chat_advisor_skill__output_status: {
+                        table: 'sys_one_extend_definition_attribute'
+                        id: '2069274496df48558ced6449b233e57a'
+                    }
+                    wdf_chat_advisor_turn_input: {
+                        table: 'sys_one_extend_definition_attribute'
+                        id: 'fcddbef0d3374606aa6d106e3565b7a4'
+                    }
                     wdf_web_search_access: {
                         table: 'sys_security_acl'
                         id: 'ee263a2ae1eb436ab14cd7c4bf30db9c'
@@ -1063,6 +1599,10 @@ declare global {
                         table: 'sys_ws_operation'
                         id: 'd5abb1b18e85447f9099ec1fe8a44fa6'
                     }
+                    'wdf-ai-scenario-chat-route': {
+                        table: 'sys_ws_operation'
+                        id: 'da1f61dc607b4ccc96ecf3f03069fd8a'
+                    }
                     'wdf-ai-web-search-route': {
                         table: 'sys_ws_operation'
                         id: '8d2ad6c318d04127af2e2ef6aef88bb2'
@@ -1107,6 +1647,15 @@ declare global {
                                     name: 'x_snc_wdf_advisory.business_user'
                                 }
                             }
+                        }
+                    },
+                    {
+                        table: 'sys_documentation'
+                        id: '00eae22ca69c427ebe7cc026e09c0441'
+                        key: {
+                            name: 'x_snc_wdf_advisory_use_case'
+                            element: 'domain'
+                            language: 'en'
                         }
                     },
                     {
@@ -1181,7 +1730,7 @@ declare global {
                     {
                         table: 'sys_documentation'
                         id: '064124b8d96c4d6bb5c44f7a7735b2ac'
-                        deleted: true
+                        deleted: false
                         key: {
                             name: 'x_snc_wdf_advisory_use_case'
                             element: 'sources'
@@ -1203,6 +1752,15 @@ declare global {
                         key: {
                             name: 'x_snc_wdf_advisory_persona'
                             element: 'icon'
+                            language: 'en'
+                        }
+                    },
+                    {
+                        table: 'sys_documentation'
+                        id: '081e6669a360486a8a1a6e8ab8ff471e'
+                        key: {
+                            name: 'x_snc_wdf_advisory_chat_log'
+                            element: 'recommendation'
                             language: 'en'
                         }
                     },
@@ -1259,6 +1817,14 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_one_extend_capability_definition'
+                        id: '0fd0dbb0d9e748dd9152cad43580adde'
+                        key: {
+                            capability: 'c07a96444b944e81a839164a54e962a7'
+                            api: '936e514a53b3b110f028ddeeff7b128c'
+                        }
+                    },
+                    {
                         table: 'sys_generative_ai_prompt_config'
                         id: '0fe3648d2f3e4f50809dea3fafa4e31d'
                         key: {
@@ -1308,10 +1874,19 @@ declare global {
                     {
                         table: 'sys_dictionary'
                         id: '13a6f0d6a0b246cd9f05168e5ff540c6'
-                        deleted: true
+                        deleted: false
                         key: {
                             name: 'x_snc_wdf_advisory_use_case'
                             element: 'connector'
+                        }
+                    },
+                    {
+                        table: 'sys_documentation'
+                        id: '14791b91b0f343e48b5245a2066a6bf8'
+                        key: {
+                            name: 'x_snc_wdf_advisory_chat_log'
+                            element: 'NULL'
+                            language: 'en'
                         }
                     },
                     {
@@ -1363,6 +1938,19 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_security_acl_role'
+                        id: '1ae122c225474005a45a12069652e595'
+                        key: {
+                            sys_security_acl: '8f3077ed30b643a2ac33b457565fe4b2'
+                            sys_user_role: {
+                                id: '7fcaa702933002009c8579b4f47ffbde'
+                                key: {
+                                    name: 'snc_internal'
+                                }
+                            }
+                        }
+                    },
+                    {
                         table: 'sys_dictionary'
                         id: '1ae659c530b54df893d8c524ca102c00'
                         key: {
@@ -1398,6 +1986,15 @@ declare global {
                     },
                     {
                         table: 'sys_documentation'
+                        id: '1c8cc2e283a04f86aa614bed92cd9939'
+                        key: {
+                            name: 'x_snc_wdf_advisory_chat_log'
+                            element: 'duration_ms'
+                            language: 'en'
+                        }
+                    },
+                    {
+                        table: 'sys_documentation'
                         id: '1ca4b32c7ed84296a5593316ed5545f5'
                         key: {
                             name: 'x_snc_wdf_advisory_demo_step'
@@ -1410,6 +2007,23 @@ declare global {
                         id: '1cf845e25ae54158ba4bd44b89f837ae'
                         key: {
                             name: 'x_snc_wdf_advisory_vis_rule'
+                        }
+                    },
+                    {
+                        table: 'sys_documentation'
+                        id: '1e24ef3d41ce4f5b9a774b9559f22f8d'
+                        key: {
+                            name: 'x_snc_wdf_advisory_chat_log'
+                            element: 'four_c_pillars'
+                            language: 'en'
+                        }
+                    },
+                    {
+                        table: 'sys_one_extend_resource_mapping'
+                        id: '1e2e4762dd97472aaa30c2b2ff2056f1'
+                        key: {
+                            parent_capability: 'c07a96444b944e81a839164a54e962a7'
+                            resource_capability: 'c07a96444b944e81a839164a54e962a7'
                         }
                     },
                     {
@@ -1477,6 +2091,14 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_dictionary'
+                        id: '2181eb3085f84b63938e25c9b22c33a3'
+                        key: {
+                            name: 'x_snc_wdf_advisory_chat_log'
+                            element: 'four_c_pillars'
+                        }
+                    },
+                    {
                         table: 'sys_one_extend_resource_attribute_mapping'
                         id: '2243e4d6dc5443ffbe3abcd821914813'
                         key: {
@@ -1489,6 +2111,14 @@ declare global {
                                 }
                             }
                             resource_attribute_name: '9659ebef9f36121029ead63a6a0a1ce8'
+                        }
+                    },
+                    {
+                        table: 'sys_dictionary'
+                        id: '2483bb1ee69e4d5a9a9b7005e8d54991'
+                        key: {
+                            name: 'x_snc_wdf_advisory_chat_log'
+                            element: 'messages'
                         }
                     },
                     {
@@ -1548,6 +2178,34 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_documentation'
+                        id: '28d1723ceba9421da1607c79e64695e2'
+                        key: {
+                            name: 'x_snc_wdf_advisory_use_case'
+                            element: 'ui_surface'
+                            language: 'en'
+                        }
+                    },
+                    {
+                        table: 'sys_dictionary'
+                        id: '29e1a26220bf42f4b1ad0c762db647d3'
+                        key: {
+                            name: 'x_snc_wdf_advisory_use_case'
+                            element: 'latency'
+                        }
+                    },
+                    {
+                        table: 'sys_choice'
+                        id: '2b0eff98511d4107a86ecb55a8c908af'
+                        key: {
+                            name: 'x_snc_wdf_advisory_chat_log'
+                            element: 'path_used'
+                            value: 'mixed'
+                            language: 'en'
+                            dependent_value: 'NULL'
+                        }
+                    },
+                    {
                         table: 'sys_dictionary'
                         id: '2b46cfde69c24cb6bb3a9589942aeb28'
                         key: {
@@ -1558,7 +2216,7 @@ declare global {
                     {
                         table: 'sys_dictionary'
                         id: '2be656d3680345f298e13ab28c0ad27f'
-                        deleted: true
+                        deleted: false
                         key: {
                             name: 'x_snc_wdf_advisory_use_case'
                             element: 'sources'
@@ -1630,7 +2288,7 @@ declare global {
                     {
                         table: 'sys_documentation'
                         id: '3109256e1bc940c89e4b2df0459e305a'
-                        deleted: true
+                        deleted: false
                         key: {
                             name: 'x_snc_wdf_advisory_use_case'
                             element: 'build_notes'
@@ -1756,6 +2414,14 @@ declare global {
                     },
                     {
                         table: 'sys_dictionary'
+                        id: '3b1a6bbf45364eb3a2b0acf62a7257fa'
+                        key: {
+                            name: 'x_snc_wdf_advisory_chat_log'
+                            element: 'industry_detected'
+                        }
+                    },
+                    {
+                        table: 'sys_dictionary'
                         id: '3bdcdccd065544e68204b3a478722578'
                         key: {
                             name: 'x_snc_wdf_advisory_checklist'
@@ -1815,6 +2481,24 @@ declare global {
                         }
                     },
                     {
+                        table: 'ua_table_licensing_config'
+                        id: '40e2aef731f2411582c49c29e1043ce1'
+                        key: {
+                            name: 'x_snc_wdf_advisory_chat_log'
+                        }
+                    },
+                    {
+                        table: 'sys_choice'
+                        id: '42d78889fda543a898f05b641d64ca1a'
+                        key: {
+                            name: 'x_snc_wdf_advisory_chat_log'
+                            element: 'path_used'
+                            value: 'deterministic'
+                            language: 'en'
+                            dependent_value: 'NULL'
+                        }
+                    },
+                    {
                         table: 'sys_security_acl_role'
                         id: '4349bed00a7943fd8c3417d1c9a47f1f'
                         key: {
@@ -1825,6 +2509,14 @@ declare global {
                                     name: 'x_snc_wdf_advisory.admin'
                                 }
                             }
+                        }
+                    },
+                    {
+                        table: 'sys_dictionary'
+                        id: '435fd1fc0d8c4fa4b6c9f42c81752487'
+                        key: {
+                            name: 'x_snc_wdf_advisory_chat_log'
+                            element: 'turn_count'
                         }
                     },
                     {
@@ -1846,6 +2538,15 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_documentation'
+                        id: '44ae7de497c641eb8146057f8795bcbb'
+                        key: {
+                            name: 'x_snc_wdf_advisory_chat_log'
+                            element: 'messages'
+                            language: 'en'
+                        }
+                    },
+                    {
                         table: 'sn_nowassist_skill_config_var_set'
                         id: '44b12c8d2ffa4f50809dea3fafa4e3a3'
                         deleted: true
@@ -1861,6 +2562,14 @@ declare global {
                         key: {
                             name: 'x_snc_wdf_advisory_scn_demo'
                             element: 'connector'
+                        }
+                    },
+                    {
+                        table: 'sys_dictionary'
+                        id: '4948217064404efb8ee06b3df14be0c1'
+                        key: {
+                            name: 'x_snc_wdf_advisory_chat_log'
+                            element: 'systems_detected'
                         }
                     },
                     {
@@ -2002,6 +2711,15 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_documentation'
+                        id: '543c127c8001405fa2136d0993894844'
+                        key: {
+                            name: 'x_snc_wdf_advisory_chat_log'
+                            element: 'products_recommended'
+                            language: 'en'
+                        }
+                    },
+                    {
                         table: 'sys_choice_set'
                         id: '547351431dbc43d18ae66616850829bd'
                         key: {
@@ -2045,6 +2763,13 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_generative_ai_prompt_config'
+                        id: '59b3688b3aff4d31aae2a34a514b9056'
+                        key: {
+                            ai_config: '206a4fc1160f4ef690d4492c92e664ca'
+                        }
+                    },
+                    {
                         table: 'sys_documentation'
                         id: '5a22ea33a20e455590f18505778fe9cc'
                         key: {
@@ -2068,6 +2793,14 @@ declare global {
                             name: 'x_snc_wdf_advisory_connector'
                             element: 'mid_server_requirement'
                             language: 'en'
+                        }
+                    },
+                    {
+                        table: 'sys_dictionary'
+                        id: '5b52bf0c4acb4df58ad82d5bfcf90d5c'
+                        key: {
+                            name: 'x_snc_wdf_advisory_chat_log'
+                            element: 'path_used'
                         }
                     },
                     {
@@ -2194,6 +2927,30 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_index'
+                        id: '613792a32e02472ea753532bf8299711'
+                        key: {
+                            logical_table_name: 'x_snc_wdf_advisory_scn_demo'
+                            col_name_string: 'connector'
+                        }
+                    },
+                    {
+                        table: 'sys_dictionary'
+                        id: '6205a8fc3abf4a47adbd1515a0223f5f'
+                        key: {
+                            name: 'x_snc_wdf_advisory_chat_log'
+                            element: 'NULL'
+                        }
+                    },
+                    {
+                        table: 'sys_dictionary'
+                        id: '6393ecfe3a4348018f50e0eba8f09e83'
+                        key: {
+                            name: 'x_snc_wdf_advisory_use_case'
+                            element: 'ui_surface'
+                        }
+                    },
+                    {
                         table: 'sys_documentation'
                         id: '6455d1d059e8425fb50cfe070de21ac4'
                         key: {
@@ -2205,7 +2962,7 @@ declare global {
                     {
                         table: 'sys_documentation'
                         id: '645bf5f462b94c80921837999937f13d'
-                        deleted: true
+                        deleted: false
                         key: {
                             name: 'x_snc_wdf_advisory_use_case'
                             element: 'connector'
@@ -2239,6 +2996,14 @@ declare global {
                             name: 'x_snc_wdf_advisory_connector'
                             element: 'best_for'
                             language: 'en'
+                        }
+                    },
+                    {
+                        table: 'sys_dictionary'
+                        id: '6693b88c0e19403e97c291fe6dee3f50'
+                        key: {
+                            name: 'x_snc_wdf_advisory_chat_log'
+                            element: 'duration_ms'
                         }
                     },
                     {
@@ -2327,6 +3092,22 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_dictionary'
+                        id: '68c76d10621d4d568ccf56d3f87b6d71'
+                        key: {
+                            name: 'x_snc_wdf_advisory_chat_log'
+                            element: 'recommendation'
+                        }
+                    },
+                    {
+                        table: 'sys_dictionary'
+                        id: '699a1ddb625d44899ddccd53730dc819'
+                        key: {
+                            name: 'x_snc_wdf_advisory_chat_log'
+                            element: 'products_recommended'
+                        }
+                    },
+                    {
                         table: 'sys_user_role_contains'
                         id: '6a46e96db7a24a269f923f6f96ac3ed8'
                         key: {
@@ -2384,6 +3165,13 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_agent_access_role_configuration'
+                        id: '6fae14fc9e6a4a0bb158f5ad49a813f8'
+                        key: {
+                            agent: '8b4c1d2890b0428294bf83c35b909baf'
+                        }
+                    },
+                    {
                         table: 'sys_gen_ai_skill'
                         id: '6fe81ccd2ff64f50809dea3fafa4e3ae'
                         key: {
@@ -2401,6 +3189,14 @@ declare global {
                     },
                     {
                         table: 'sys_dictionary'
+                        id: '713c93a1309841acb6110301c10b5687'
+                        key: {
+                            name: 'x_snc_wdf_advisory_chat_log'
+                            element: 'user_query'
+                        }
+                    },
+                    {
+                        table: 'sys_dictionary'
                         id: '714641c65da14bb89400eda1e98e5eee'
                         key: {
                             name: 'x_snc_wdf_advisory_demo_step'
@@ -2413,6 +3209,18 @@ declare global {
                         key: {
                             name: 'x_snc_wdf_advisory_connector'
                             element: 'mid_server_requirement'
+                        }
+                    },
+                    {
+                        table: 'sn_nowassist_skill_config_status'
+                        id: '72c3be6a70444c498665d749d37fef4b'
+                        key: {
+                            skill_config: {
+                                id: '8b4c1d2890b0428294bf83c35b909baf'
+                                key: {
+                                    skill_id: 'c07a96444b944e81a839164a54e962a7'
+                                }
+                            }
                         }
                     },
                     {
@@ -2433,6 +3241,14 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_gen_ai_feature_mapping'
+                        id: '73180049a8e442ec8df9b81172e13bfa'
+                        key: {
+                            feature_name: 'WDF Chat Advisor'
+                            document: 'c07a96444b944e81a839164a54e962a7'
+                        }
+                    },
+                    {
                         table: 'sn_glider_source_artifact_m2m'
                         id: '73c9cd2405814ce8bee6d1c5bccf833f'
                         key: {
@@ -2443,7 +3259,7 @@ declare global {
                     {
                         table: 'sys_documentation'
                         id: '7732b4c92bd94ff1b5a6579cdab245a2'
-                        deleted: true
+                        deleted: false
                         key: {
                             name: 'x_snc_wdf_advisory_use_case'
                             element: 'deploy_time_estimate'
@@ -2479,8 +3295,17 @@ declare global {
                     },
                     {
                         table: 'sys_documentation'
+                        id: '77c94f8a770f47f0857a73725989ce35'
+                        key: {
+                            name: 'x_snc_wdf_advisory_use_case'
+                            element: 'latency'
+                            language: 'en'
+                        }
+                    },
+                    {
+                        table: 'sys_documentation'
                         id: '7834def303de43c3b8172d614e15475f'
-                        deleted: true
+                        deleted: false
                         key: {
                             name: 'x_snc_wdf_advisory_use_case'
                             element: 'linked_demo'
@@ -2513,12 +3338,35 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_documentation'
+                        id: '7ab8a99b44d94fdc82f08c3a593856cd'
+                        key: {
+                            name: 'x_snc_wdf_advisory_use_case'
+                            element: 'deployment_status'
+                            language: 'en'
+                        }
+                    },
+                    {
                         table: 'sys_dictionary'
                         id: '7b0fc4b0d31d40cda2460175758dbbb4'
-                        deleted: true
+                        deleted: false
                         key: {
                             name: 'x_snc_wdf_advisory_use_case'
                             element: 'build_notes'
+                        }
+                    },
+                    {
+                        table: 'sys_one_extend_definition_config'
+                        id: '7b2a2cc193df48a2a0591a9f295f70fa'
+                        key: {
+                            definition: {
+                                id: '0fd0dbb0d9e748dd9152cad43580adde'
+                                key: {
+                                    capability: 'c07a96444b944e81a839164a54e962a7'
+                                    api: '936e514a53b3b110f028ddeeff7b128c'
+                                }
+                            }
+                            capability: 'c07a96444b944e81a839164a54e962a7'
                         }
                     },
                     {
@@ -2576,6 +3424,25 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_dictionary'
+                        id: '7fe5b740ae9a4d48a92ae6caf7268f22'
+                        key: {
+                            name: 'x_snc_wdf_advisory_use_case'
+                            element: 'domain'
+                        }
+                    },
+                    {
+                        table: 'sys_choice'
+                        id: '814fd571fbd44ad3b3f40a73f67ad9bb'
+                        key: {
+                            name: 'x_snc_wdf_advisory_chat_log'
+                            element: 'path_used'
+                            value: 'ai'
+                            language: 'en'
+                            dependent_value: 'NULL'
+                        }
+                    },
+                    {
                         table: 'sys_ux_lib_asset'
                         id: '81d4fb23973a49daadcd6d57bb855908'
                         deleted: true
@@ -2594,6 +3461,15 @@ declare global {
                                     name: 'x_snc_wdf_advisory.admin'
                                 }
                             }
+                        }
+                    },
+                    {
+                        table: 'sys_documentation'
+                        id: '84455ed94e2e45d088113d20865a3c8b'
+                        key: {
+                            name: 'x_snc_wdf_advisory_chat_log'
+                            element: 'industry_detected'
+                            language: 'en'
                         }
                     },
                     {
@@ -2628,7 +3504,7 @@ declare global {
                     {
                         table: 'sys_dictionary'
                         id: '86e65839a7284dff8d5365fdbf0795e3'
-                        deleted: true
+                        deleted: false
                         key: {
                             name: 'x_snc_wdf_advisory_use_case'
                             element: 'keywords'
@@ -2702,6 +3578,13 @@ declare global {
                         }
                     },
                     {
+                        table: 'sn_nowassist_skill_config'
+                        id: '8b4c1d2890b0428294bf83c35b909baf'
+                        key: {
+                            skill_id: 'c07a96444b944e81a839164a54e962a7'
+                        }
+                    },
+                    {
                         table: 'sys_ux_lib_asset'
                         id: '8c47a341031c43c89a824348e9e60bb6'
                         key: {
@@ -2756,6 +3639,19 @@ declare global {
                         key: {
                             name: 'x_snc_wdf_advisory_arch_pat'
                             element: 'data_flow_steps'
+                        }
+                    },
+                    {
+                        table: 'sys_security_acl_role'
+                        id: '91ce8a842f3a4710809dea3fafa4e32c'
+                        key: {
+                            sys_security_acl: '8e2b76c305074214b0dabc894e01e901'
+                            sys_user_role: {
+                                id: '7fcaa702933002009c8579b4f47ffbde'
+                                key: {
+                                    name: 'snc_internal'
+                                }
+                            }
                         }
                     },
                     {
@@ -2853,6 +3749,19 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_security_acl_role'
+                        id: '95ce8a842f3a4710809dea3fafa4e352'
+                        key: {
+                            sys_security_acl: 'd70db3ea36d74ba29f1b33fbf3a85859'
+                            sys_user_role: {
+                                id: '7fcaa702933002009c8579b4f47ffbde'
+                                key: {
+                                    name: 'snc_internal'
+                                }
+                            }
+                        }
+                    },
+                    {
                         table: 'ua_table_licensing_config'
                         id: '95f54c6cfd8a48d980a713f0ad86d266'
                         key: {
@@ -2875,6 +3784,14 @@ declare global {
                             name: 'x_snc_wdf_advisory_demo_step'
                             element: 'step_number'
                             language: 'en'
+                        }
+                    },
+                    {
+                        table: 'sys_index'
+                        id: '976b86188f1f4383b4291a14b3fc1133'
+                        key: {
+                            logical_table_name: 'x_snc_wdf_advisory_demo_step'
+                            col_name_string: 'scenario'
                         }
                     },
                     {
@@ -2920,12 +3837,33 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_index'
+                        id: '9c0e4e231e1a40c5ac239503437141ac'
+                        key: {
+                            logical_table_name: 'x_snc_wdf_advisory_vis_rule'
+                            col_name_string: 'persona'
+                        }
+                    },
+                    {
                         table: 'sys_documentation'
                         id: '9d3c8060622e42dd9c78773fa132fe89'
                         key: {
                             name: 'x_snc_wdf_advisory_demo_step'
                             element: 'title'
                             language: 'en'
+                        }
+                    },
+                    {
+                        table: 'sys_security_acl_role'
+                        id: '9dce4a842f3a4710809dea3fafa4e3c3'
+                        key: {
+                            sys_security_acl: '7ecbd73409634068a2504f6341a43c51'
+                            sys_user_role: {
+                                id: '7fcaa702933002009c8579b4f47ffbde'
+                                key: {
+                                    name: 'snc_internal'
+                                }
+                            }
                         }
                     },
                     {
@@ -2975,6 +3913,14 @@ declare global {
                             value: 'healthcare'
                             language: 'en'
                             dependent_value: 'NULL'
+                        }
+                    },
+                    {
+                        table: 'sys_dictionary'
+                        id: 'a04be12e6da34dd0bae1fc9717ab9c8c'
+                        key: {
+                            name: 'x_snc_wdf_advisory_chat_log'
+                            element: 'session_id'
                         }
                     },
                     {
@@ -3045,7 +3991,7 @@ declare global {
                     {
                         table: 'sys_dictionary'
                         id: 'a63b0c184edb4ada88fa641d44cd806a'
-                        deleted: true
+                        deleted: false
                         key: {
                             name: 'x_snc_wdf_advisory_use_case'
                             element: 'deploy_time_estimate'
@@ -3123,6 +4069,14 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_index'
+                        id: 'b2d92b0cb48546279b3454c81a842541'
+                        key: {
+                            logical_table_name: 'x_snc_wdf_advisory_arch_pat'
+                            col_name_string: 'linked_demo'
+                        }
+                    },
+                    {
                         table: 'sys_dictionary'
                         id: 'b2ef80ee6dc741e5bebb25796a8ca1e7'
                         key: {
@@ -3140,6 +4094,15 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_documentation'
+                        id: 'b4899c58ba8a4d64a0ae23c06d8672bb'
+                        key: {
+                            name: 'x_snc_wdf_advisory_chat_log'
+                            element: 'turn_count'
+                            language: 'en'
+                        }
+                    },
+                    {
                         table: 'sys_choice'
                         id: 'b4d83ef4d3c4459899541916aa206479'
                         key: {
@@ -3153,10 +4116,19 @@ declare global {
                     {
                         table: 'sys_documentation'
                         id: 'b5bc53cea17c47ffaf7df31e2b56062d'
-                        deleted: true
+                        deleted: false
                         key: {
                             name: 'x_snc_wdf_advisory_use_case'
                             element: 'keywords'
+                            language: 'en'
+                        }
+                    },
+                    {
+                        table: 'sys_documentation'
+                        id: 'b796244c13f7499fb37e81b81ae81000'
+                        key: {
+                            name: 'x_snc_wdf_advisory_use_case'
+                            element: 'query_complexity'
                             language: 'en'
                         }
                     },
@@ -3166,6 +4138,15 @@ declare global {
                         key: {
                             name: 'x_snc_wdf_advisory_persona'
                             element: 'label'
+                        }
+                    },
+                    {
+                        table: 'sys_documentation'
+                        id: 'b9395f91aea44cf5b94fb0d056341875'
+                        key: {
+                            name: 'x_snc_wdf_advisory_chat_log'
+                            element: 'session_id'
+                            language: 'en'
                         }
                     },
                     {
@@ -3225,6 +4206,14 @@ declare global {
                         deleted: true
                         key: {
                             endpoint: 'x_snc_wdf_advisory_incident_manager.do'
+                        }
+                    },
+                    {
+                        table: 'sys_choice_set'
+                        id: 'c097990b88914322ade3770b33e7ec0f'
+                        key: {
+                            name: 'x_snc_wdf_advisory_chat_log'
+                            element: 'path_used'
                         }
                     },
                     {
@@ -3349,6 +4338,14 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_dictionary'
+                        id: 'cc36208303bd44c6a824d00828f835b1'
+                        key: {
+                            name: 'x_snc_wdf_advisory_use_case'
+                            element: 'deployment_status'
+                        }
+                    },
+                    {
                         table: 'sys_db_object'
                         id: 'cc365ccff9fc49d08834ddd7cb84683f'
                         key: {
@@ -3384,7 +4381,7 @@ declare global {
                     {
                         table: 'sys_dictionary'
                         id: 'd0384fd572a244ce8990bb1b6645a35a'
-                        deleted: true
+                        deleted: false
                         key: {
                             name: 'x_snc_wdf_advisory_use_case'
                             element: 'description'
@@ -3474,6 +4471,29 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_gen_ai_strategy_mapping'
+                        id: 'd74fe7898b7b4521a93e8f40250a2a22'
+                        key: {
+                            strategy: 'CAPABILITY_EXECUTION'
+                            feature: {
+                                id: '73180049a8e442ec8df9b81172e13bfa'
+                                key: {
+                                    feature_name: 'WDF Chat Advisor'
+                                    document: 'c07a96444b944e81a839164a54e962a7'
+                                }
+                            }
+                        }
+                    },
+                    {
+                        table: 'sys_documentation'
+                        id: 'd7fd31aa5ad148429514532d352179f2'
+                        key: {
+                            name: 'x_snc_wdf_advisory_chat_log'
+                            element: 'path_used'
+                            language: 'en'
+                        }
+                    },
+                    {
                         table: 'sys_variable_value'
                         id: 'd80910412f3a4f50809dea3fafa4e33b'
                         deleted: true
@@ -3483,9 +4503,17 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_index'
+                        id: 'd88d5c01d52a4a31a47839daf5298553'
+                        key: {
+                            logical_table_name: 'x_snc_wdf_advisory_persona'
+                            col_name_string: 'key'
+                        }
+                    },
+                    {
                         table: 'sys_dictionary'
                         id: 'd9767dde64fc415c927dbdb65c33bde9'
-                        deleted: true
+                        deleted: false
                         key: {
                             name: 'x_snc_wdf_advisory_use_case'
                             element: 'linked_demo'
@@ -3502,11 +4530,24 @@ declare global {
                     {
                         table: 'sys_documentation'
                         id: 'dd7e06f9b28b4876aae7a7a5d3d05ded'
-                        deleted: true
+                        deleted: false
                         key: {
                             name: 'x_snc_wdf_advisory_use_case'
                             element: 'description'
                             language: 'en'
+                        }
+                    },
+                    {
+                        table: 'sys_security_acl_role'
+                        id: 'ddce4a842f3a4710809dea3fafa4e3f1'
+                        key: {
+                            sys_security_acl: '8c64dd5a7e4f441ebd86aebf6e9a6365'
+                            sys_user_role: {
+                                id: '7fcaa702933002009c8579b4f47ffbde'
+                                key: {
+                                    name: 'snc_internal'
+                                }
+                            }
                         }
                     },
                     {
@@ -3520,7 +4561,7 @@ declare global {
                     {
                         table: 'sys_documentation'
                         id: 'e100988a6a1d4d6ebb1a22f4af58c75e'
-                        deleted: true
+                        deleted: false
                         key: {
                             name: 'x_snc_wdf_advisory_use_case'
                             element: 'tier'
@@ -3579,6 +4620,15 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_documentation'
+                        id: 'e60cdd5befdf4942ab8d3135a5080307'
+                        key: {
+                            name: 'x_snc_wdf_advisory_chat_log'
+                            element: 'user_query'
+                            language: 'en'
+                        }
+                    },
+                    {
                         table: 'sn_glider_source_artifact_m2m'
                         id: 'e6709cadfdc34915bdee9236f7bc6ee8'
                         key: {
@@ -3604,6 +4654,15 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_documentation'
+                        id: 'e9b2425f07964f5b9445f791469b2bac'
+                        key: {
+                            name: 'x_snc_wdf_advisory_chat_log'
+                            element: 'systems_detected'
+                            language: 'en'
+                        }
+                    },
+                    {
                         table: 'sys_choice'
                         id: 'ea32869a74c84107af93ace1ba6ae112'
                         key: {
@@ -3617,7 +4676,7 @@ declare global {
                     {
                         table: 'sys_dictionary'
                         id: 'ed2583420f4b4d6595e1a6f7eaa08abf'
-                        deleted: true
+                        deleted: false
                         key: {
                             name: 'x_snc_wdf_advisory_use_case'
                             element: 'tier'
@@ -3690,6 +4749,13 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_db_object'
+                        id: 'f3e101ead46449868630732769de6a92'
+                        key: {
+                            name: 'x_snc_wdf_advisory_chat_log'
+                        }
+                    },
+                    {
                         table: 'sys_dictionary'
                         id: 'f524d887fff346b1b97ceeb6bcf48ccc'
                         key: {
@@ -3747,6 +4813,14 @@ declare global {
                                     name: 'x_snc_wdf_advisory.admin'
                                 }
                             }
+                        }
+                    },
+                    {
+                        table: 'sys_dictionary'
+                        id: 'f9ca4f7321444306b97d768f7e34d618'
+                        key: {
+                            name: 'x_snc_wdf_advisory_use_case'
+                            element: 'query_complexity'
                         }
                     },
                     {

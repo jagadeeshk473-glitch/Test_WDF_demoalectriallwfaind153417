@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Answers, Recommendation as RecType, computeRecommendation } from "../services/decisionEngine";
 import { Recommendation } from "./Recommendation";
 import { navigate } from "../app";
+import { getChapterForAnswers, OutboundChapter } from "../services/outboundConcept";
 
 interface Props { initialQuery: string; onResultShown?: (shown: boolean) => void; }
 
@@ -31,11 +32,29 @@ const QUESTIONS = [
   },
 ];
 
+const TRIGGER_DIRECTION_QUESTION = {
+  id: "triggerDirection", question: "Who initiates the work?",
+  options: [
+    { value: "sn_calls_out", label: "ServiceNow triggers work in another system" },
+    { value: "external_calls_in", label: "An external system triggers work in ServiceNow" },
+    { value: "bidirectional", label: "Both directions" },
+  ],
+};
+
+const ERP_SYSTEM_QUESTION = {
+  id: "erpSystem", question: "Which ERP system do you need to connect to?",
+  options: [
+    { value: "SAP S/4HANA", label: "SAP (S/4HANA, ECC, RISE, Onprem)" },
+    { value: "Oracle EBS", label: "Oracle (EBS, Fusion, JD Edwards, PeopleSoft)" },
+    { value: "SuccessFactors OData v2", label: "SuccessFactors (OData v2)" },
+    { value: "Workday", label: "Workday (REST)" },
+    { value: "other", label: "Other / Not listed above" },
+  ],
+};
+
 function getFollowUp(answers: Answers) {
-  if (answers.systemType === "erp") return {
-    id: "writeBack", question: "Do you need write-back capabilities?",
-    options: [{ value: "yes", label: "Yes" }, { value: "no", label: "No" }],
-  };
+  if (answers.dataAction === "trigger_action") return TRIGGER_DIRECTION_QUESTION;
+  if (answers.systemType === "erp") return ERP_SYSTEM_QUESTION;
   if (answers.systemType === "database") return {
     id: "multiJoin", question: "Do you need to join data from multiple systems in one query?",
     options: [{ value: "yes", label: "Yes" }, { value: "no", label: "No" }],
@@ -52,11 +71,34 @@ function getFollowUp(answers: Answers) {
 }
 
 function getSecondFollowUp(answers: Answers) {
+  if (answers.systemType === "erp" && answers.erpSystem) return {
+    id: "writeBack", question: "Do you need write-back capabilities?",
+    options: [{ value: "yes", label: "Yes" }, { value: "no", label: "No" }],
+  };
   if (answers.systemType === "kafka" && answers.reactionSpeed) return {
     id: "aiAgent", question: "Is an AI agent involved?",
     options: [{ value: "yes", label: "Yes" }, { value: "no", label: "No" }],
   };
   return null;
+}
+
+function ChapterCard({ chapter }: { chapter: OutboundChapter }) {
+  return (
+    <div style={{
+      background: "#F8F0FF", border: "1px solid #E8D5F5", borderRadius: 8,
+      padding: "12px 16px", marginBottom: 16,
+    }}>
+      <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 6 }}>
+        <span style={{ fontSize: 14 }}>📖</span>
+        <span style={{
+          background: chapter.color, color: "#fff", fontSize: 11,
+          padding: "2px 8px", borderRadius: 10, fontWeight: 600,
+        }}>{chapter.quadrant}</span>
+      </div>
+      <div style={{ fontSize: 14, fontWeight: 600, color: "#0B2D4E", marginBottom: 4 }}>{chapter.title}</div>
+      <div style={{ fontSize: 13, color: "#5A6677", lineHeight: 1.5 }}>{chapter.summary}</div>
+    </div>
+  );
 }
 
 export function ClarifyFlow({ initialQuery, onResultShown }: Props) {
@@ -76,12 +118,16 @@ export function ClarifyFlow({ initialQuery, onResultShown }: Props) {
     : step === 2 && followUp ? followUp
     : secondFU ? secondFU : null;
 
-  if (result) return (
-    <div>
-      <a onClick={() => navigate({ view: "home" })} style={{ color: "#5A6677", cursor: "pointer", fontSize: 13, display: "inline-block", marginBottom: 16 }}>← Back to search</a>
-      <Recommendation recommendation={result} />
-    </div>
-  );
+  if (result) {
+    const chapter = getChapterForAnswers(answers.systemType, answers.dataAction);
+    return (
+      <div>
+        <a onClick={() => navigate({ view: "home" })} style={{ color: "#5A6677", cursor: "pointer", fontSize: 13, display: "inline-block", marginBottom: 16 }}>← Back to search</a>
+        {chapter && <ChapterCard chapter={chapter} />}
+        <Recommendation recommendation={result} />
+      </div>
+    );
+  }
 
   const handleNext = () => {
     if (!activeQ || !current) return;

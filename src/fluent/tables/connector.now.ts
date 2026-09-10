@@ -59,14 +59,38 @@ export const x_snc_wdf_advisory_connector = Table({
         status: ChoiceColumn({
             label: 'Status',
             choices: {
-                ga: 'GA',
-                in_development: 'In Development',
-                planning: 'Planning',
-                poc: 'POC',
-                community: 'Community',
-                in_backlog: 'In Backlog',
-                not_on_roadmap: 'Not on Roadmap',
-                blocked_regulated: 'Blocked - Regulated Market',
+                ga: {
+                    label: 'GA',
+                    sequence: 1,
+                },
+                in_development: {
+                    label: 'In Development',
+                    sequence: 2,
+                },
+                planning: {
+                    label: 'Planning',
+                    sequence: 3,
+                },
+                poc: {
+                    label: 'POC',
+                    sequence: 4,
+                },
+                community: {
+                    label: 'Community',
+                    sequence: 5,
+                },
+                in_backlog: {
+                    label: 'In Backlog',
+                    sequence: 6,
+                },
+                not_on_roadmap: {
+                    label: 'Not on Roadmap',
+                    sequence: 7,
+                },
+                blocked_regulated: {
+                    label: 'Blocked - Regulated Market',
+                    sequence: 8,
+                },
             },
         }),
         keywords: StringColumn({
@@ -93,7 +117,8 @@ export const connZcc = Record({
         short_name: 'ZCC',
         tagline: 'Query external databases in-place without ETL or replication',
         detail: 'Zero Copy Connectors let ServiceNow query external relational databases (SQL Server, PostgreSQL, Oracle, MySQL, Snowflake, Databricks) directly via a MID Server without copying data into the platform. Ideal for large-volume read patterns where data freshness and sovereignty matter.',
-        best_for: 'Large-volume reads, regulated data that must stay in-place, real-time dashboards, cross-system reporting',
+        best_for:
+            'Large-volume reads, regulated data that must stay in-place, real-time dashboards, cross-system reporting',
         not_for: 'High-frequency writes, sub-second latency requirements, non-relational sources',
         protocol: 'JDBC via MID Server',
         auth_method: 'Database credentials (stored in ServiceNow credential store)',
@@ -125,7 +150,7 @@ export const connZccErp = Record({
         latency: 'Seconds (cached metadata, live data queries)',
         supports_write_back: false,
         write_back_note: 'Read-only; transactional writes should go through ERP native APIs',
-        status: 'in_development',
+        status: 'ga',
         keywords: 'ERP, SAP, Oracle EBS, Workday, finance, procurement, business objects, ZCC',
         q2_roadmap: 'SAP S/4HANA object library expansion, Workday Financial Management',
         q4_roadmap: 'Oracle Fusion Cloud, Write-back exploration for non-transactional fields',
@@ -141,7 +166,8 @@ export const connIntegrationHub = Record({
         short_name: 'IH',
         tagline: 'No-code/low-code integration with 200+ spokes and flow actions',
         detail: 'Integration Hub is the primary ServiceNow integration automation platform. It provides a library of pre-built spokes (Slack, Jira, Azure, AWS, Salesforce, etc.) and a Flow Designer interface for building custom integrations without code. Supports REST, SOAP, JDBC, and event-driven patterns.',
-        best_for: 'Workflow automation, bi-directional integrations, event-driven triggers, citizen integrator use cases',
+        best_for:
+            'Workflow automation, bi-directional integrations, event-driven triggers, citizen integrator use cases',
         not_for: 'High-volume bulk data movement, sub-second streaming, read-only federated queries',
         protocol: 'REST, SOAP, JDBC, Messaging (via spokes)',
         auth_method: 'OAuth 2.0, Basic Auth, API Key, Mutual TLS (per spoke)',
@@ -197,10 +223,10 @@ export const connMcpClient = Record({
         latency: 'Milliseconds (per tool invocation)',
         supports_write_back: true,
         write_back_note: 'Tools can perform write operations on external systems',
-        status: 'poc',
+        status: 'ga',
         keywords: 'MCP, Model Context Protocol, AI agents, tools, LLM, Now Assist, agentic',
-        q2_roadmap: 'Public preview, Tool discovery catalog',
-        q4_roadmap: 'GA release, Marketplace for MCP tool packages',
+        q2_roadmap: 'Tool discovery catalog, Enhanced tool governance',
+        q4_roadmap: 'Marketplace for MCP tool packages, Multi-agent orchestration',
     },
 })
 
@@ -221,10 +247,10 @@ export const connMcpServer = Record({
         latency: 'Milliseconds (per tool call)',
         supports_write_back: true,
         write_back_note: 'External agents can invoke write operations (create incidents, approve requests, etc.)',
-        status: 'poc',
+        status: 'ga',
         keywords: 'MCP, Model Context Protocol, AI server, tools, expose, external agents, agentic',
-        q2_roadmap: 'Preview with limited tool set, Security sandbox model',
-        q4_roadmap: 'Expanded tool catalog, Rate limiting and governance',
+        q2_roadmap: 'Expanded tool catalog, Security sandbox model',
+        q4_roadmap: 'Rate limiting and governance, Multi-tenant isolation',
     },
 })
 
@@ -273,5 +299,101 @@ export const connLiveConnect = Record({
         keywords: 'Live Connect, CMDB, cloud, AWS, Azure, GCP, real-time, monitoring, CI enrichment',
         q2_roadmap: 'GCP expanded resource types, Kubernetes cluster visibility',
         q4_roadmap: 'Multi-cloud topology mapping, Historical state tracking',
+    },
+})
+
+export const connRaptorDbPro = Record({
+    $id: Now.ID['connector-raptordb-pro'],
+    $meta: { installMethod: 'demo' },
+    table: 'x_snc_wdf_advisory_connector',
+    data: {
+        name: 'RaptorDB Pro',
+        short_name: 'RDB',
+        tagline: 'HTAP engine with medallion architecture for analytics alongside operational workloads',
+        detail: 'RaptorDB Pro is the next-generation database engine for ServiceNow. It separates analytical queries from operational transactions using a medallion architecture (Bronze → Silver → Gold). Enables complex analytics, reporting, and ML pipelines without impacting platform performance. Includes HTAP engine, Live Archive for long-term retention, and columnar storage for analytics.',
+        best_for: 'Analytics, reporting, dashboarding, ML data pipelines, performance isolation, historical analysis',
+        not_for: 'Simple CRUD operations, small instances with no analytics needs',
+        protocol: 'ServiceNow platform-native engine',
+        auth_method: 'ServiceNow platform authentication',
+        mid_server_requirement: 'Not required — platform-native service',
+        latency: 'Milliseconds for operational, seconds for complex analytics',
+        supports_write_back: false,
+        write_back_note: 'Read-only analytics layer; operational writes go through standard platform',
+        status: 'ga',
+        keywords: 'RaptorDB, HTAP, medallion, analytics, columnar, performance, reporting, ML, archive, 4C, contextualize pillar',
+        q2_roadmap: 'Gold-layer custom table support, Enhanced ML feature store',
+        q4_roadmap: 'Cross-instance analytics federation, Real-time materialized views',
+    },
+})
+
+export const connDataCatalog = Record({
+    $id: Now.ID['connector-data-catalog'],
+    $meta: { installMethod: 'demo' },
+    table: 'x_snc_wdf_advisory_connector',
+    data: {
+        name: 'Data Catalog',
+        short_name: 'DC',
+        tagline: 'Central registry of all data assets with metadata, lineage, and business glossary',
+        detail: 'Data Catalog provides a unified registry for all data assets across the enterprise. Register data sources, tables, and fields with business context. Track data lineage from source to consumption. Maintain a business glossary that maps technical fields to business terms. Essential for data discovery and impact analysis.',
+        best_for: 'Data discovery, metadata management, business glossary, lineage tracking, impact analysis',
+        not_for: 'Data movement or transformation, real-time streaming, operational queries',
+        protocol: 'REST API, Metadata extraction',
+        auth_method: 'ServiceNow platform authentication',
+        mid_server_requirement: 'Not required — platform-native service',
+        latency: 'N/A — metadata registry, not data pipeline',
+        supports_write_back: true,
+        write_back_note: 'Create/update catalog entries, tags, and glossary terms',
+        status: 'ga',
+        keywords: 'data catalog, metadata, lineage, glossary, data discovery, business terms, impact analysis, registry, 4C, control pillar',
+        q2_roadmap: 'Auto-discovery of data assets from connectors',
+        q4_roadmap: 'AI-powered metadata enrichment and classification',
+    },
+})
+
+export const connDataGovernance = Record({
+    $id: Now.ID['connector-data-governance'],
+    $meta: { installMethod: 'demo' },
+    table: 'x_snc_wdf_advisory_connector',
+    data: {
+        name: 'Data Governance',
+        short_name: 'DG',
+        tagline: 'Enforce data quality, compliance, access control, and retention policies',
+        detail: 'Data Governance enforces policies across all data assets. Define and monitor data quality rules (completeness, accuracy, consistency). Apply data classification (PII, Confidential, Internal). Manage row-level security and field masking. Set retention policies per compliance framework (SOX, GDPR, HIPAA, PCI-DSS). Full audit trail for all data access.',
+        best_for: 'Compliance management, data quality monitoring, PII protection, access control, retention policies, audit trails',
+        not_for: 'Data movement, real-time streaming, operational automation',
+        protocol: 'Policy engine, Rule-based enforcement',
+        auth_method: 'ServiceNow platform authentication',
+        mid_server_requirement: 'Not required — platform-native service',
+        latency: 'N/A — policy enforcement layer',
+        supports_write_back: true,
+        write_back_note: 'Create/update governance policies, quality rules, and access controls',
+        status: 'ga',
+        keywords: 'data governance, compliance, quality, PII, masking, retention, access control, SOX, GDPR, HIPAA, audit, 4C, control pillar',
+        q2_roadmap: 'Automated compliance reporting dashboards',
+        q4_roadmap: 'AI-driven data quality remediation',
+    },
+})
+
+export const connAutomationEngine = Record({
+    $id: Now.ID['connector-automation-engine'],
+    $meta: { installMethod: 'demo' },
+    table: 'x_snc_wdf_advisory_connector',
+    data: {
+        name: 'Automation Engine',
+        short_name: 'AE',
+        tagline: 'Event-driven automation rules that trigger actions based on data patterns and thresholds',
+        detail: 'Automation Engine enables event-driven automation that triggers actions based on data patterns, thresholds, and business rules. Define rules like "when inventory drops below 5, create a purchase order" or "when fraud score exceeds 0.8, escalate to security team." Works with all Connect-pillar products to automate responses to data events.',
+        best_for: 'Threshold-based triggers, pattern detection automation, event-driven workflows, operational alerting',
+        not_for: 'Data movement, reporting, manual processes',
+        protocol: 'Event-driven rules engine',
+        auth_method: 'ServiceNow platform authentication',
+        mid_server_requirement: 'Not required — platform-native service',
+        latency: 'Sub-second for rule evaluation',
+        supports_write_back: true,
+        write_back_note: 'Creates records, triggers workflows, sends notifications, calls external APIs',
+        status: 'ga',
+        keywords: 'automation, rules engine, event-driven, triggers, thresholds, alerts, workflows, orchestration, 4C, converge pillar',
+        q2_roadmap: 'AI-powered rule suggestions based on data patterns',
+        q4_roadmap: 'Complex event processing with multi-condition rules',
     },
 })

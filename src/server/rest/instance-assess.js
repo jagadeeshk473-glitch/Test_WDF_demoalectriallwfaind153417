@@ -33,7 +33,7 @@
         'com.glide.service-portal': { node: 'service_portal', label: 'Service Portal', group: 'User Interface' },
         'com.sn_uni.workspace': { node: 'workspace', label: 'Agent Workspace', group: 'User Interface' },
         'com.snc.employee_center': { node: 'employee_center', label: 'Employee Center', group: 'User Interface' },
-        'com.snc.predictive_intelligence': { node: 'predictive_intel', label: 'Predictive Intelligence', group: 'AI/ML' },
+        'com.snc.predictive_intelligence': { node: 'predictive_intel', label: 'Predictive Intelligence', group: 'AI and ML' },
     };
 
     var EDGES = [
@@ -81,17 +81,114 @@
     var cmdbCiCount = 0;
     var cmdbNoClass = 0;
 
-    // 1. Active plugins
-    var pluginGR = new GlideRecord('sys_plugins');
-    pluginGR.addQuery('active', 'active');
-    pluginGR.query();
-    pluginsScanned = pluginGR.getRowCount();
-    while (pluginGR.next()) {
-        var pluginId = pluginGR.getValue('source') || '';
-        if (PLUGIN_MAP[pluginId]) {
-            var mapping = PLUGIN_MAP[pluginId];
-            activeNodes[mapping.node] = mapping;
-            activeNodeList.push(mapping.node);
+    // 1. Active plugins - try v_plugin first (accessible in scoped apps),
+    //    then fall back to sys_plugins, then sys_store_app as last resort
+    var pluginQuerySucceeded = false;
+
+    // Attempt 1: v_plugin (view accessible in scoped apps)
+    try {
+        var vpGR = new GlideRecord('v_plugin');
+        vpGR.addQuery('active', 'active');
+        vpGR.query();
+        var vpCount = vpGR.getRowCount();
+        if (vpCount > 0) {
+            pluginsScanned = vpCount;
+            pluginQuerySucceeded = true;
+            while (vpGR.next()) {
+                var vpId = vpGR.getValue('id') || '';
+                if (PLUGIN_MAP[vpId]) {
+                    var vpMapping = PLUGIN_MAP[vpId];
+                    activeNodes[vpMapping.node] = vpMapping;
+                    activeNodeList.push(vpMapping.node);
+                }
+            }
+        }
+    } catch (e1) {
+        // v_plugin not available, continue to fallback
+    }
+
+    // Attempt 2: sys_plugins with GlideAggregate for count + GlideRecord for mapping
+    if (!pluginQuerySucceeded) {
+        try {
+            var pluginAgg = new GlideAggregate('sys_plugins');
+            pluginAgg.addQuery('active', 'active');
+            pluginAgg.addAggregate('COUNT');
+            pluginAgg.query();
+            if (pluginAgg.next()) {
+                pluginsScanned = parseInt(pluginAgg.getAggregate('COUNT'), 10) || 0;
+            }
+
+            if (pluginsScanned > 0) {
+                pluginQuerySucceeded = true;
+                // Iterate with GlideRecord for PLUGIN_MAP matching
+                var pluginGR = new GlideRecord('sys_plugins');
+                pluginGR.addQuery('active', 'active');
+                pluginGR.query();
+                while (pluginGR.next()) {
+                    var pluginId = pluginGR.getValue('source') || '';
+                    if (PLUGIN_MAP[pluginId]) {
+                        var mapping = PLUGIN_MAP[pluginId];
+                        activeNodes[mapping.node] = mapping;
+                        activeNodeList.push(mapping.node);
+                    }
+                }
+            }
+        } catch (e2) {
+            // sys_plugins not accessible in this scope
+        }
+    }
+
+    // Attempt 3: Fallback to sys_store_app for installed app count (estimate)
+    if (!pluginQuerySucceeded) {
+        try {
+            var storeAgg = new GlideAggregate('sys_store_app');
+            storeAgg.addQuery('active', true);
+            storeAgg.addAggregate('COUNT');
+            storeAgg.query();
+            if (storeAgg.next()) {
+                pluginsScanned = parseInt(storeAgg.getAggregate('COUNT'), 10) || 0;
+            }
+            pluginQuerySucceeded = true;
+
+            // Try to match known plugins by checking if their tables exist
+            var knownPluginTables = {
+                'com.snc.incident': 'incident',
+                'com.snc.problem': 'problem',
+                'com.snc.change_management': 'change_request',
+                'com.glideapp.servicecatalog': 'sc_cat_item',
+                'com.snc.asset_management': 'alm_asset',
+                'com.snc.cmdb': 'cmdb_ci',
+                'com.glide.knowledge_management': 'kb_knowledge',
+                'com.snc.discovery': 'discovery_status',
+                'com.glide.hub.integration': 'sys_hub_action_type_definition',
+                'com.glide.hub.flow_designer': 'sys_hub_flow',
+                'com.snc.security_incident': 'sn_si_incident',
+                'com.snc.vulnerability': 'sn_vul_vulnerability',
+                'com.sn_grc': 'sn_grc_profile',
+                'com.snc.performance_analytics': 'pa_indicators',
+                'com.glide.service-portal': 'sp_portal',
+                'com.glide.cs.virtual_agent': 'sys_cs_topic',
+                'com.snc.predictive_intelligence': 'ml_capability',
+                'com.sn_hr_core': 'sn_hr_core_case',
+                'com.sn_customerservice': 'sn_customerservice_case',
+            };
+            for (var kpId in knownPluginTables) {
+                try {
+                    var testGR = new GlideRecord(knownPluginTables[kpId]);
+                    if (testGR.isValid()) {
+                        if (PLUGIN_MAP[kpId]) {
+                            var kpMapping = PLUGIN_MAP[kpId];
+                            activeNodes[kpMapping.node] = kpMapping;
+                            activeNodeList.push(kpMapping.node);
+                        }
+                    }
+                } catch (te) {
+                    // Table doesn't exist - plugin not installed
+                }
+            }
+        } catch (e3) {
+            // Last resort: just report 0
+            pluginsScanned = 0;
         }
     }
 
@@ -198,11 +295,17 @@
             if (!groups[g]) groups[g] = [];
             groups[g].push(info);
         }
+        // Only create subgraphs with at least one node
         for (var gn in groups) {
-            lines.push('  subgraph ' + gn);
+            if (groups[gn].length === 0) continue;
+            // Sanitize group name for Mermaid (no special chars)
+            var safeName = gn.replace(/[^a-zA-Z0-9 ]/g, ' ').trim();
+            lines.push('  subgraph ' + safeName);
             for (var gi = 0; gi < groups[gn].length; gi++) {
                 var nd = groups[gn][gi];
-                lines.push('    ' + nd.node + '["' + nd.label + '"]');
+                // Sanitize label - escape quotes
+                var safeLabel = nd.label.replace(/"/g, "'");
+                lines.push('    ' + nd.node + '["' + safeLabel + '"]');
             }
             lines.push('  end');
         }

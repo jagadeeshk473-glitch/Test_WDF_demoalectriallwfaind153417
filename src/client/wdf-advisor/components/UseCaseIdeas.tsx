@@ -2,13 +2,15 @@ import React, { useState, useEffect, useCallback } from "react";
 import { jsPDF } from "jspdf";
 import { generateUseCases, fetchCustomerUseCases, createCustomerUseCase, updateCustomerUseCase, deleteCustomerUseCase } from "../services/api";
 
-const INDUSTRIES = ["Healthcare", "Financial Services", "Manufacturing", "Retail", "Technology", "Government", "Education", "Energy", "Telecommunications", "Cross-Industry"];
+const INDUSTRIES = ["Agribusiness", "Automotive/Manufacturing", "Cross-Industry", "Education", "Energy", "Financial Services", "Food & Beverage", "Government", "Healthcare", "IT Services", "Logistics", "Manufacturing", "Pharma", "Retail", "Services", "Technology", "Telecommunications"];
+const DOMAINS = ["Agribusiness", "Change Management", "Configuration Management", "Consumer Goods / Manufacturing", "Customer Service Management", "FSC", "Field Service Management", "Finance", "Financial Services", "Financial Services (Banking)", "GRC", "HRSD", "Hardware Asset Management", "Healthcare", "Human Resources", "IT Operations", "IT Services", "ITAM", "ITOM", "Incident Management", "Industry Vertical", "Legal & Compliance", "Logistics", "Manufacturing / Industrial", "Now Platform", "OT", "Operations", "Pharma", "Problem Management", "Retail / E-Commerce", "SPM", "SNOW-DT", "SecOps", "Security Incident Response", "Services", "Software Asset Management", "Supply Chain", "Telecommunications", "Telecom", "Vulnerability Response"];
 const SYSTEMS = ["SAP", "Oracle", "Workday", "Salesforce", "Jira", "ServiceNow", "Snowflake", "AWS", "Azure", "GCP", "Kafka", "SharePoint", "Confluence", "Splunk", "Active Directory", "Custom APIs"];
 
 // --- GeneratorTab ---
 function GeneratorTab() {
   const [pain, setPain] = useState("");
   const [industry, setIndustry] = useState("");
+  const [domain, setDomain] = useState("");
   const [selectedSystems, setSelectedSystems] = useState<string[]>([]);
   const [results, setResults] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
@@ -57,12 +59,13 @@ function GeneratorTab() {
         <div style={{ display: "flex", gap: 8, flexWrap: "wrap", margin: "12px 0" }}>
           {pain && <span style={s.contextTag}>Pain: {pain.slice(0, 40)}{pain.length > 40 ? "…" : ""}</span>}
           {industry && <span style={s.contextTag}>{industry}</span>}
+          {domain && <span style={s.contextTag}>{domain}</span>}
           {selectedSystems.map(sys => <span key={sys} style={s.contextTag}>{sys}</span>)}
         </div>
         <div style={{ display: "flex", gap: 8, marginBottom: 16 }}>
           <button style={s.btnSecondary} onClick={() => setResults([])}>← Refine inputs</button>
           <button style={s.btnSecondary} onClick={handleGenerate}>↻ Regenerate</button>
-          <button style={s.btnSecondary} onClick={() => { setSelectMode(!selectMode); setSelected({}); }}>{selectMode ? "Cancel selection" : "Select & export PDF"}</button>
+          <button style={s.btnSecondary} onClick={() => { setSelectMode(!selectMode); setSelected({}); }}>{selectMode ? "Cancel Selection" : "Select & Export PDF"}</button>
           {selectMode && <button style={s.btnOrange} onClick={handleExportPDF}>Export PDF</button>}
         </div>
         <div style={s.grid}>
@@ -103,12 +106,21 @@ function GeneratorTab() {
         <label style={s.label}>Pain / Challenge</label>
         <textarea style={s.textarea} value={pain} onChange={e => setPain(e.target.value)} placeholder="Describe the customer's integration pain point..." rows={3} />
       </div>
-      <div style={{ marginBottom: 16 }}>
-        <label style={s.label}>Industry</label>
-        <select style={s.select} value={industry} onChange={e => setIndustry(e.target.value)}>
-          <option value="">-- Select --</option>
-          {INDUSTRIES.map(ind => <option key={ind} value={ind}>{ind}</option>)}
-        </select>
+      <div style={{ display: "flex", gap: 16, marginBottom: 16 }}>
+        <div style={{ flex: 1 }}>
+          <label style={s.label}>Industry</label>
+          <select style={{ ...s.select, width: "100%" }} value={industry} onChange={e => setIndustry(e.target.value)}>
+            <option value="">-- Select --</option>
+            {INDUSTRIES.map(ind => <option key={ind} value={ind}>{ind}</option>)}
+          </select>
+        </div>
+        <div style={{ flex: 1 }}>
+          <label style={s.label}>Domain</label>
+          <select style={{ ...s.select, width: "100%" }} value={domain} onChange={e => setDomain(e.target.value)}>
+            <option value="">-- Select --</option>
+            {DOMAINS.map(d => <option key={d} value={d}>{d}</option>)}
+          </select>
+        </div>
       </div>
       <div style={{ marginBottom: 16 }}>
         <label style={s.label}>External Systems</label>
@@ -129,11 +141,14 @@ function GeneratorTab() {
 }
 
 // --- CustomerTab ---
+const PAGE_SIZE = 10;
+
 function CustomerTab() {
   const [useCases, setUseCases] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
   const [filterIndustry, setFilterIndustry] = useState("");
+  const [filterDomain, setFilterDomain] = useState("");
   const [expanded, setExpanded] = useState<Record<string, boolean>>({});
   const [modalOpen, setModalOpen] = useState(false);
   const [editId, setEditId] = useState<string | null>(null);
@@ -141,7 +156,8 @@ function CustomerTab() {
   const [selectMode, setSelectMode] = useState(false);
   const [selected, setSelected] = useState<Record<string, boolean>>({});
   const [currentUser, setCurrentUser] = useState("");
-  const [form, setForm] = useState({ title: "", line_of_business: "", industry: "", persona: "", products: "", external_systems: "", business_problem: "", solution: "", outcome: "", links: "[]" });
+  const [form, setForm] = useState({ title: "", domain: "", line_of_business: "", industry: "", persona: "", products: "", external_systems: "", business_problem: "", solution: "", outcome: "", links: "[]" });
+  const [page, setPage] = useState(1);
 
   useEffect(() => {
     const uname = (window as any).NOW?.user_name || "admin";
@@ -156,19 +172,62 @@ function CustomerTab() {
     setLoading(false);
   };
 
+  // Build dynamic industry list: start with standard list, add any from data
+  const dataIndustries: string[] = [...INDUSTRIES];
+  useCases.forEach(uc => {
+    let ind = "";
+    if (typeof uc.industry === "object" && uc.industry !== null) {
+      ind = uc.industry.display_value || uc.industry.value || "";
+    } else if (typeof uc.industry === "string") {
+      ind = uc.industry;
+    }
+    if (ind && !dataIndustries.includes(ind)) {
+      dataIndustries.push(ind);
+    }
+  });
+  dataIndustries.sort();
+
+  // Build dynamic domain list: start with standard list, add any from data
+  const dataDomains: string[] = [...DOMAINS];
+  useCases.forEach(uc => {
+    let dom = "";
+    if (typeof uc.domain === "object" && uc.domain !== null) {
+      dom = uc.domain.display_value || uc.domain.value || "";
+    } else if (typeof uc.domain === "string") {
+      dom = uc.domain;
+    }
+    if (dom && !dataDomains.includes(dom)) {
+      dataDomains.push(dom);
+    }
+  });
+  dataDomains.sort();
+
   const filtered = useCases.filter(uc => {
     const q = search.toLowerCase();
     const matchSearch = !q || (uc.title?.value || uc.title || "").toLowerCase().includes(q) || (uc.products?.value || uc.products || "").toLowerCase().includes(q);
-    const matchInd = !filterIndustry || (uc.industry?.value || uc.industry || "") === filterIndustry;
-    return matchSearch && matchInd;
+    const indVal = typeof uc.industry === "object" && uc.industry !== null ? (uc.industry.display_value || uc.industry.value || "") : (uc.industry || "");
+    const domVal = typeof uc.domain === "object" && uc.domain !== null ? (uc.domain.display_value || uc.domain.value || "") : (uc.domain || "");
+    const matchInd = !filterIndustry || indVal === filterIndustry;
+    const matchDom = !filterDomain || domVal === filterDomain;
+    return matchSearch && matchInd && matchDom;
   });
 
   const val = (field: any) => typeof field === "object" && field !== null ? (field.display_value || field.value || "") : (field || "");
 
-  const openCreate = () => { setEditId(null); setForm({ title: "", line_of_business: "", industry: "", persona: "", products: "", external_systems: "", business_problem: "", solution: "", outcome: "", links: "[]" }); setModalOpen(true); };
+  // Pagination
+  const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
+  const safePage = Math.min(page, totalPages);
+  const startIdx = (safePage - 1) * PAGE_SIZE;
+  const endIdx = Math.min(startIdx + PAGE_SIZE, filtered.length);
+  const paginatedItems = filtered.slice(startIdx, endIdx);
+
+  const pageNums: number[] = [];
+  for (let i = 1; i <= totalPages; i++) pageNums.push(i);
+
+  const openCreate = () => { setEditId(null); setForm({ title: "", domain: "", line_of_business: "", industry: "", persona: "", products: "", external_systems: "", business_problem: "", solution: "", outcome: "", links: "[]" }); setModalOpen(true); };
   const openEdit = (uc: any) => {
     setEditId(uc.sys_id?.value || uc.sys_id);
-    setForm({ title: val(uc.title), line_of_business: val(uc.line_of_business), industry: val(uc.industry), persona: val(uc.persona), products: val(uc.products), external_systems: val(uc.external_systems), business_problem: val(uc.business_problem), solution: val(uc.solution), outcome: val(uc.outcome), links: val(uc.links) || "[]" });
+    setForm({ title: val(uc.title), domain: val(uc.domain), line_of_business: val(uc.line_of_business), industry: val(uc.industry), persona: val(uc.persona), products: val(uc.products), external_systems: val(uc.external_systems), business_problem: val(uc.business_problem), solution: val(uc.solution), outcome: val(uc.outcome), links: val(uc.links) || "[]" });
     setModalOpen(true);
   };
 
@@ -194,20 +253,137 @@ function CustomerTab() {
   const handlePDF = () => {
     const items = filtered.filter(uc => selected[uc.sys_id?.value || uc.sys_id]);
     if (!items.length) return;
-    const doc = new jsPDF(); let y = 20;
-    doc.setFontSize(16); doc.text("Customer Use Cases", 14, y); y += 12;
-    items.forEach((uc, idx) => {
-      if (y > 250) { doc.addPage(); y = 20; }
-      doc.setFontSize(12); doc.text(`${idx + 1}. ${val(uc.title)}`, 14, y); y += 7;
+    const doc = new jsPDF();
+    const pageW = doc.internal.pageSize.getWidth();
+    const pageH = doc.internal.pageSize.getHeight();
+    const margin = 20;
+    const contentW = pageW - margin * 2;
+
+    // Helper: add branded header to each page
+    const addHeader = () => {
+      // Dark navy header bar
+      doc.setFillColor(15, 23, 42);
+      doc.rect(0, 0, pageW, 40, "F");
+      // Teal accent line
+      doc.setFillColor(0, 198, 162);
+      doc.rect(0, 40, pageW, 2, "F");
+      // Title text in green
+      doc.setTextColor(0, 198, 162);
+      doc.setFontSize(14);
+      doc.setFont("helvetica", "bold");
+      doc.text("CUSTOMER USE CASES", margin, 26);
+      // Subtitle
       doc.setFontSize(9);
-      doc.text(`Products: ${val(uc.products)}`, 14, y); y += 5;
-      const prob = doc.splitTextToSize(`Problem: ${val(uc.business_problem)}`, 180);
-      doc.text(prob, 14, y); y += prob.length * 4 + 3;
-      const sol = doc.splitTextToSize(`Solution: ${val(uc.solution)}`, 180);
-      doc.text(sol, 14, y); y += sol.length * 4 + 3;
-      const out = doc.splitTextToSize(`Outcome: ${val(uc.outcome)}`, 180);
-      doc.text(out, 14, y); y += out.length * 4 + 8;
+      doc.setTextColor(148, 163, 184);
+      doc.text("WDF Advisor", pageW - margin - 30, 26);
+    };
+
+    // Helper: check if we need a new page
+    const checkPage = (y: number, needed: number) => {
+      if (y + needed > pageH - 30) {
+        doc.addPage();
+        addHeader();
+        return 56;
+      }
+      return y;
+    };
+
+    addHeader();
+    let y = 56;
+
+    items.forEach((uc, idx) => {
+      y = checkPage(y, 80);
+
+      // Products bar (dark background)
+      doc.setFillColor(30, 41, 59);
+      doc.roundedRect(margin, y, contentW, 14, 2, 2, "F");
+      // Green accent on left
+      doc.setFillColor(0, 198, 162);
+      doc.roundedRect(margin, y, 3, 14, 1, 1, "F");
+      doc.setTextColor(0, 198, 162);
+      doc.setFontSize(9);
+      doc.setFont("helvetica", "bold");
+      doc.text(val(uc.products) || "WDF Products", margin + 10, y + 9);
+      y += 20;
+
+      // Title
+      doc.setTextColor(15, 23, 42);
+      doc.setFontSize(14);
+      doc.setFont("helvetica", "bold");
+      const titleLines = doc.splitTextToSize(val(uc.title), contentW);
+      doc.text(titleLines, margin, y);
+      y += titleLines.length * 6 + 4;
+
+      // Author & Industry
+      doc.setTextColor(100, 116, 139);
+      doc.setFontSize(9);
+      doc.setFont("helvetica", "normal");
+      doc.text(val(uc.sys_created_by) + (val(uc.industry) ? " · " + val(uc.industry) : ""), margin, y);
+      y += 8;
+
+      // Green divider
+      doc.setDrawColor(0, 198, 162);
+      doc.setLineWidth(0.5);
+      doc.line(margin, y, pageW - margin, y);
+      y += 10;
+
+      // Business Problem
+      y = checkPage(y, 30);
+      doc.setTextColor(0, 198, 162);
+      doc.setFontSize(9);
+      doc.setFont("helvetica", "bold");
+      doc.text("BUSINESS PROBLEM", margin, y);
+      y += 6;
+      doc.setTextColor(30, 41, 59);
+      doc.setFontSize(10);
+      doc.setFont("helvetica", "normal");
+      const probLines = doc.splitTextToSize(val(uc.business_problem), contentW);
+      probLines.forEach((line: string) => { y = checkPage(y, 6); doc.text(line, margin, y); y += 5; });
+      y += 8;
+
+      // Solution
+      y = checkPage(y, 30);
+      doc.setTextColor(0, 198, 162);
+      doc.setFontSize(9);
+      doc.setFont("helvetica", "bold");
+      doc.text("SOLUTION", margin, y);
+      y += 6;
+      doc.setTextColor(30, 41, 59);
+      doc.setFontSize(10);
+      doc.setFont("helvetica", "normal");
+      const solLines = doc.splitTextToSize(val(uc.solution), contentW);
+      solLines.forEach((line: string) => { y = checkPage(y, 6); doc.text(line, margin, y); y += 5; });
+      y += 8;
+
+      // Outcome
+      y = checkPage(y, 30);
+      doc.setTextColor(0, 198, 162);
+      doc.setFontSize(9);
+      doc.setFont("helvetica", "bold");
+      doc.text("OUTCOME", margin, y);
+      y += 6;
+      doc.setTextColor(30, 41, 59);
+      doc.setFontSize(10);
+      doc.setFont("helvetica", "normal");
+      const outLines = doc.splitTextToSize(val(uc.outcome), contentW);
+      outLines.forEach((line: string) => { y = checkPage(y, 6); doc.text(line, margin, y); y += 5; });
+      y += 16;
+
+      // Separator between use cases
+      if (idx < items.length - 1) {
+        y = checkPage(y, 10);
+        doc.setDrawColor(226, 232, 240);
+        doc.setLineWidth(0.3);
+        doc.line(margin, y, pageW - margin, y);
+        y += 12;
+      }
     });
+
+    // Footer on last page
+    doc.setTextColor(148, 163, 184);
+    doc.setFontSize(8);
+    doc.text("Generated by WDF Advisor · " + new Date().toLocaleDateString(), margin, pageH - 10);
+
     doc.save("customer-use-cases.pdf");
   };
 
@@ -219,19 +395,23 @@ function CustomerTab() {
     <div>
       <p style={s.description}>Have a customer use case you want to share? Submit it here so others can learn from it and build on it.</p>
       <div style={{ display: "flex", gap: 8, marginBottom: 16, flexWrap: "wrap", alignItems: "center" }}>
-        <input style={s.searchInput} value={search} onChange={e => setSearch(e.target.value)} placeholder="Search use cases..." />
-        <select style={s.filterSelect} value={filterIndustry} onChange={e => setFilterIndustry(e.target.value)}>
+        <input style={s.searchInput} value={search} onChange={e => { setSearch(e.target.value); setPage(1); }} placeholder="Search use cases..." />
+        <select style={s.filterSelect} value={filterIndustry} onChange={e => { setFilterIndustry(e.target.value); setPage(1); }}>
           <option value="">All Industries</option>
-          {INDUSTRIES.map(ind => <option key={ind} value={ind}>{ind}</option>)}
+          {dataIndustries.map(ind => <option key={ind} value={ind}>{ind}</option>)}
+        </select>
+        <select style={s.filterSelect} value={filterDomain} onChange={e => { setFilterDomain(e.target.value); setPage(1); }}>
+          <option value="">All Domains</option>
+          {dataDomains.map(d => <option key={d} value={d}>{d}</option>)}
         </select>
         <button style={s.btnSecondary} onClick={handleCSV}>Export CSV</button>
-        <button style={s.btnSecondary} onClick={() => { setSelectMode(!selectMode); setSelected({}); }}>{selectMode ? "Cancel" : "Select & export PDF"}</button>
+        <button style={s.btnSecondary} onClick={() => { setSelectMode(!selectMode); setSelected({}); }}>{selectMode ? "Cancel Selection" : "Select & Export PDF"}</button>
         {selectMode && <button style={s.btnOrange} onClick={handlePDF}>Export PDF</button>}
         <button style={s.btnOrange} onClick={openCreate}>+ Submit use case</button>
       </div>
-      {loading ? <p style={s.muted}>Loading...</p> : filtered.length === 0 ? <p style={s.muted}>No use cases found.</p> : (
+      {loading ? <p style={s.muted}>Loading...</p> : filtered.length === 0 ? <p style={s.muted}>No use cases found.</p> : (<>
         <div style={s.grid}>
-          {filtered.map(uc => {
+          {paginatedItems.map(uc => {
             const id = uc.sys_id?.value || uc.sys_id;
             const isOwner = val(uc.sys_created_by) === currentUser;
             return (
@@ -241,7 +421,7 @@ function CustomerTab() {
                   {(val(uc.products)).split(",").filter(Boolean).slice(0, 3).map((p: string) => <span key={p} style={s.productPill}>{p.trim()}</span>)}
                 </div>
                 <h4 style={s.cardTitle}>{val(uc.title)}</h4>
-                <p style={s.muted}>{val(uc.sys_created_by)} · {val(uc.industry)}</p>
+                <p style={s.muted}>{val(uc.sys_created_by)} · {val(uc.industry)}{val(uc.domain) ? " · " + val(uc.domain) : ""}</p>
                 <button style={s.expandBtn} onClick={() => setExpanded(p => ({ ...p, [id]: !p[id] }))}>
                   {expanded[id] ? "▾ Collapse" : "▸ Details"}
                 </button>
@@ -272,7 +452,42 @@ function CustomerTab() {
             );
           })}
         </div>
-      )}
+        {totalPages > 1 && (
+          <div style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: 8, padding: "16px 0", flexWrap: "wrap" }}>
+            <span style={{ color: "#5A6677", fontSize: 12 }}>Showing {startIdx + 1}–{endIdx} of {filtered.length}</span>
+            <button
+              onClick={() => setPage(p => Math.max(1, p - 1))}
+              disabled={safePage <= 1}
+              style={{
+                padding: "4px 12px", fontSize: 12, border: "1px solid #00C6A2", borderRadius: 14,
+                background: "#fff", color: "#00C6A2", cursor: safePage <= 1 ? "not-allowed" : "pointer",
+                opacity: safePage <= 1 ? 0.4 : 1, fontWeight: 600
+              }}
+            >← Prev</button>
+            {pageNums.map(n => (
+              <button
+                key={n}
+                onClick={() => setPage(n)}
+                style={{
+                  padding: "4px 10px", fontSize: 12, border: "1px solid #00C6A2", borderRadius: 14,
+                  background: n === safePage ? "#00C6A2" : "#fff",
+                  color: n === safePage ? "#fff" : "#00C6A2",
+                  cursor: "pointer", fontWeight: 600, minWidth: 28
+                }}
+              >{n}</button>
+            ))}
+            <button
+              onClick={() => setPage(p => Math.min(totalPages, p + 1))}
+              disabled={safePage >= totalPages}
+              style={{
+                padding: "4px 12px", fontSize: 12, border: "1px solid #00C6A2", borderRadius: 14,
+                background: "#fff", color: "#00C6A2", cursor: safePage >= totalPages ? "not-allowed" : "pointer",
+                opacity: safePage >= totalPages ? 0.4 : 1, fontWeight: 600
+              }}
+            >Next →</button>
+          </div>
+        )}
+      </>)}
 
       {/* Submit/Edit Modal */}
       {modalOpen && (
@@ -286,6 +501,11 @@ function CustomerTab() {
               <div><label style={s.label}>Industry</label>
                 <select style={s.select} value={form.industry} onChange={e => setForm(f => ({ ...f, industry: e.target.value }))}>
                   <option value="">-- Select --</option>{INDUSTRIES.map(i => <option key={i} value={i}>{i}</option>)}
+                </select>
+              </div>
+              <div><label style={s.label}>Domain</label>
+                <select style={s.select} value={form.domain} onChange={e => setForm(f => ({ ...f, domain: e.target.value }))}>
+                  <option value="">-- Select --</option>{DOMAINS.map(d => <option key={d} value={d}>{d}</option>)}
                 </select>
               </div>
               <div><label style={s.label}>Persona</label><input style={s.input} value={form.persona} onChange={e => setForm(f => ({ ...f, persona: e.target.value }))} /></div>
