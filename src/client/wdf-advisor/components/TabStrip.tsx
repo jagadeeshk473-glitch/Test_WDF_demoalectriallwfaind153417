@@ -1,9 +1,9 @@
 import React from "react";
 import { ConnectorGrid } from "./ConnectorGrid";
-import { UseCaseLibrary } from "./UseCaseLibrary";
 import { ArchPatterns } from "./ArchPatterns";
 import { UseCaseIdeas } from "./UseCaseIdeas";
 import { AdminPanel } from "./AdminPanel";
+import { InstanceAssessment } from "./InstanceAssessment";
 
 interface Props {
   persona: string;
@@ -13,9 +13,9 @@ interface Props {
 
 const TABS = [
   { key: "connectors", label: "Connectors", badge: false },
-  { key: "scenarios", label: "Scenarios", badge: true },
-  { key: "patterns", label: "Arch patterns", badge: false },
-  { key: "ideas", label: "Use case ideas", badge: true },
+  { key: "patterns", label: "Arch Patterns", badge: false },
+  { key: "ideas", label: "Use Cases", badge: false },
+  { key: "insights", label: "Insights", badge: true },
   { key: "admin", label: "Admin", badge: false, adminOnly: true }
 ];
 
@@ -41,9 +41,9 @@ export function TabStrip({ persona, activeTab, setActiveTab }: Props) {
       </div>
       <div style={styles.content}>
         {activeTab === "connectors" && <ConnectorGrid persona={persona} />}
-        {activeTab === "scenarios" && <UseCaseLibrary persona={persona} />}
         {activeTab === "patterns" && <ArchPatterns />}
         {activeTab === "ideas" && <UseCaseIdeas />}
+        {activeTab === "insights" && <InstanceAssessment />}
         {activeTab === "admin" && <AdminPanel persona={persona} />}
       </div>
     </div>

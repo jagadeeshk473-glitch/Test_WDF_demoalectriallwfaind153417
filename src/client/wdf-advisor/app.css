@@ -53,3 +53,47 @@ body {
   color: var(--wdf-muted);
   font-size: 16px;
 }
+
+/* Clarify view: side-by-side layout (questionnaire left, web search right) */
+.clarify-layout {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 24px;
+  align-items: start;
+}
+
+.clarify-main {
+  min-width: 0;
+}
+
+.clarify-aside {
+  position: sticky;
+  top: 24px;
+  padding-top: 86px;
+}
+
+/* When recommendation is showing, switch to single column with WebSearch at bottom */
+.clarify-layout--full {
+  grid-template-columns: 1fr;
+}
+
+.clarify-layout--full .clarify-aside {
+  position: static;
+  padding-top: 0;
+  margin-top: 24px;
+}
+
+/* Responsive: collapse to single column on smaller screens */
+@media (max-width: 860px) {
+  .clarify-layout {
+    grid-template-columns: 1fr;
+  }
+  .clarify-aside {
+    position: static;
+    padding-top: 0;
+  }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}

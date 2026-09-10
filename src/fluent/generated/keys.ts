@@ -5,6 +5,55 @@ declare global {
         namespace Internal {
             interface Keys extends KeysRegistry {
                 explicit: {
+                    '140910412f3a4f50809dea3fafa4e360': {
+                        table: 'sys_cs_context_profile_skill'
+                        id: '140910412f3a4f50809dea3fafa4e360'
+                    }
+                    '41a477502f76cf10809dea3fafa4e31d': {
+                        table: 'sn_diagram_builder_instance'
+                        id: '41a477502f76cf10809dea3fafa4e31d'
+                    }
+                    '43e3648d2f3e4f50809dea3fafa4e31b': {
+                        table: 'sys_generative_ai_config'
+                        id: '43e3648d2f3e4f50809dea3fafa4e31b'
+                    }
+                    '4b138b102ffe4f10809dea3fafa4e32c': {
+                        table: 'sys_scope_privilege'
+                        id: '4b138b102ffe4f10809dea3fafa4e32c'
+                    }
+                    '73a12c8d2ffa4f50809dea3fafa4e368': {
+                        table: 'sys_generative_ai_config'
+                        id: '73a12c8d2ffa4f50809dea3fafa4e368'
+                    }
+                    '87138b102ffe4f10809dea3fafa4e324': {
+                        table: 'sys_scope_privilege'
+                        id: '87138b102ffe4f10809dea3fafa4e324'
+                    }
+                    '88815bf628d740a98699c384e65be35e': {
+                        table: 'sys_one_extend_definition_attribute'
+                        id: '88815bf628d740a98699c384e65be35e'
+                        deleted: true
+                    }
+                    '8b138b102ffe4f10809dea3fafa4e328': {
+                        table: 'sys_scope_privilege'
+                        id: '8b138b102ffe4f10809dea3fafa4e328'
+                    }
+                    '920c4dc12f7e8f50809dea3fafa4e371': {
+                        table: 'sys_scope_privilege'
+                        id: '920c4dc12f7e8f50809dea3fafa4e371'
+                    }
+                    '9c0534452f368f50809dea3fafa4e3f8': {
+                        table: 'sys_scope_privilege'
+                        id: '9c0534452f368f50809dea3fafa4e3f8'
+                    }
+                    a94ed1812f76cf50809dea3fafa4e3a2: {
+                        table: 'sn_diagram_builder_instance'
+                        id: 'a94ed1812f76cf50809dea3fafa4e3a2'
+                    }
+                    b95417d82fb68f10809dea3fafa4e318: {
+                        table: 'sys_scope_privilege'
+                        id: 'b95417d82fb68f10809dea3fafa4e318'
+                    }
                     bom_json: {
                         table: 'sys_module'
                         id: 'c16864aed60b45e4b28d81338a6659d5'
@@ -221,6 +270,15 @@ declare global {
                         table: 'x_snc_wdf_advisory_scn_demo'
                         id: '453c0f59608e43869ef966a07a624f1f'
                     }
+                    ee8228052f3e4f50809dea3fafa4e372: {
+                        table: 'sys_generative_ai_config'
+                        id: 'ee8228052f3e4f50809dea3fafa4e372'
+                        deleted: true
+                    }
+                    fe1383102ffe4f10809dea3fafa4e39f: {
+                        table: 'sys_scope_privilege'
+                        id: 'fe1383102ffe4f10809dea3fafa4e39f'
+                    }
                     package_json: {
                         table: 'sys_module'
                         id: 'e49478fc6fa54071a132960b6552fac1'
@@ -261,13 +319,73 @@ declare global {
                         table: 'sys_script_include'
                         id: 'df626f3758df485b98e843a17c1a9e2c'
                     }
+                    'src_server_rest_ai-generate-usecases_js': {
+                        table: 'sys_module'
+                        id: '28961388af2f46c897202c6e959072a7'
+                    }
                     'src_server_rest_ai-recommend_js': {
                         table: 'sys_module'
                         id: '26aab053fd02424db21ca3e81d823275'
                     }
+                    'src_server_rest_instance-assess_js': {
+                        table: 'sys_module'
+                        id: '500dac06dc6d4370987bd5813cf18930'
+                    }
+                    'src_server_rest_web-search_js': {
+                        table: 'sys_module'
+                        id: '7c815515afb8401da359fcde23a43137'
+                    }
                     'src_server_script-includes_persona-visibility_js': {
                         table: 'sys_module'
                         id: '8b91c853b3264e0d8a165b69f6adb898'
+                    }
+                    'step-ar-1': {
+                        table: 'x_snc_wdf_advisory_demo_step'
+                        id: 'bad08eb79083439b8f6fcffe4b1569b3'
+                    }
+                    'step-ar-2': {
+                        table: 'x_snc_wdf_advisory_demo_step'
+                        id: '7434c63aade749c28d24462fa3032eda'
+                    }
+                    'step-ar-3': {
+                        table: 'x_snc_wdf_advisory_demo_step'
+                        id: '2d38fd70c74c4b07a206a0ec89b4dc3d'
+                    }
+                    'step-ar-4': {
+                        table: 'x_snc_wdf_advisory_demo_step'
+                        id: '1ec13f2c29db4065a8379d61fe26ea81'
+                    }
+                    'step-fraud-1': {
+                        table: 'x_snc_wdf_advisory_demo_step'
+                        id: '79ef020539e94a21afe2c444c2f3bb8b'
+                    }
+                    'step-fraud-2': {
+                        table: 'x_snc_wdf_advisory_demo_step'
+                        id: 'b9be572f29d2414f94d44ca8ddf17203'
+                    }
+                    'step-fraud-3': {
+                        table: 'x_snc_wdf_advisory_demo_step'
+                        id: 'bfcf8afe8a324f63ab827d6423d672e2'
+                    }
+                    'step-fraud-4': {
+                        table: 'x_snc_wdf_advisory_demo_step'
+                        id: '1dad3d2051014b8ebd53aa87eafafe57'
+                    }
+                    'step-hrsd-1': {
+                        table: 'x_snc_wdf_advisory_demo_step'
+                        id: 'fa6f242eb67643bda3ef3a164c3d6765'
+                    }
+                    'step-hrsd-2': {
+                        table: 'x_snc_wdf_advisory_demo_step'
+                        id: 'f193782108b049aca61c33f4ef35be65'
+                    }
+                    'step-hrsd-3': {
+                        table: 'x_snc_wdf_advisory_demo_step'
+                        id: '437e211a4dd746a8b34bf319801fd42d'
+                    }
+                    'step-hrsd-4': {
+                        table: 'x_snc_wdf_advisory_demo_step'
+                        id: '82c1d740246944b19e7e56150cfeb098'
                     }
                     'step-ih-1': {
                         table: 'x_snc_wdf_advisory_demo_step'
@@ -320,82 +438,146 @@ declare global {
                     'uc-ar-aging': {
                         table: 'x_snc_wdf_advisory_use_case'
                         id: 'c472ebff3b8f44c6ac4a2c359a827c98'
+                        deleted: true
                     }
                     'uc-asset-inventory': {
                         table: 'x_snc_wdf_advisory_use_case'
                         id: '0ae5f95f7bd7493dac006634de96271a'
+                        deleted: true
                     }
                     'uc-cloud-cmdb': {
                         table: 'x_snc_wdf_advisory_use_case'
                         id: '9967799944d845378e1ad692736898cc'
+                        deleted: true
                     }
                     'uc-employee-onboard': {
                         table: 'x_snc_wdf_advisory_use_case'
                         id: '94fe82610d3b494ba425ca42ada11545'
+                        deleted: true
                     }
                     'uc-energy-grid': {
                         table: 'x_snc_wdf_advisory_use_case'
                         id: 'f6ce707c7f54477684c090ac0bbe95b3'
+                        deleted: true
                     }
                     'uc-fraud-detection': {
                         table: 'x_snc_wdf_advisory_use_case'
                         id: '1edc4d9c67ea46dfab46e4527dca48b1'
+                        deleted: true
                     }
                     'uc-gov-citizen': {
                         table: 'x_snc_wdf_advisory_use_case'
                         id: '6abf9c1c56fa4d3abdd1f57e3f0c168c'
+                        deleted: true
                     }
                     'uc-iot-telemetry': {
                         table: 'x_snc_wdf_advisory_use_case'
                         id: '9fe7afe864dd405fa944f8556c6621bc'
+                        deleted: true
                     }
                     'uc-jira-bi-sync': {
                         table: 'x_snc_wdf_advisory_use_case'
                         id: '7e89a1f5b48846c8b054cbd9f8cd022a'
+                        deleted: true
                     }
                     'uc-knowledge-unify': {
                         table: 'x_snc_wdf_advisory_use_case'
                         id: '0a8518f106444af59871bd4fb40d9b08'
+                        deleted: true
+                    }
+                    'uc-manufacturing-bottleneck': {
+                        table: 'x_snc_wdf_advisory_use_case'
+                        id: '755d8ffcc0634906894b5139bd489744'
                     }
                     'uc-mcp-agent-tools': {
                         table: 'x_snc_wdf_advisory_use_case'
                         id: '22626a9007e4476c92627e3b442f2426'
+                        deleted: true
                     }
                     'uc-patient-records': {
                         table: 'x_snc_wdf_advisory_use_case'
                         id: '5155cc8f672a4a1ba1392953442f9e25'
+                        deleted: true
                     }
                     'uc-payroll-visibility': {
                         table: 'x_snc_wdf_advisory_use_case'
                         id: 'ad96c16c701d4d6480378441a47e5f44'
+                        deleted: true
+                    }
+                    'uc-product-issue-repo': {
+                        table: 'x_snc_wdf_advisory_use_case'
+                        id: '69fd6f72bf8f4128baa4cfff242b40a1'
+                    }
+                    'uc-product-issue-tracking': {
+                        table: 'x_snc_wdf_advisory_use_case'
+                        id: '1b2081c63d8d4c3e99729a53b177238b'
                     }
                     'uc-regulatory-report': {
                         table: 'x_snc_wdf_advisory_use_case'
                         id: '41fcf8de4e264813a8d40bd35819a1c1'
+                        deleted: true
                     }
                     'uc-retail-inventory': {
                         table: 'x_snc_wdf_advisory_use_case'
                         id: '993e19f33b6f4ca18ccefdb7b5f6b033'
+                        deleted: true
+                    }
+                    'uc-sales-order-mgmt': {
+                        table: 'x_snc_wdf_advisory_use_case'
+                        id: '62034f4f48c1460e955efce04a7117b1'
                     }
                     'uc-security-events': {
                         table: 'x_snc_wdf_advisory_use_case'
                         id: '2deb5e59739f4c059e04ad46bad57f2b'
+                        deleted: true
+                    }
+                    'uc-shipment-anomaly': {
+                        table: 'x_snc_wdf_advisory_use_case'
+                        id: 'd8a111b3a1c54b419b5d81fa66304d10'
                     }
                     'uc-sox-audit': {
                         table: 'x_snc_wdf_advisory_use_case'
                         id: '3ea0417da0fc41b19a1ea76779cb77b7'
+                        deleted: true
                     }
                     'uc-supply-chain': {
                         table: 'x_snc_wdf_advisory_use_case'
                         id: '81fef3110d9743b68874263ba474af54'
+                        deleted: true
                     }
                     'uc-telecom-network': {
                         table: 'x_snc_wdf_advisory_use_case'
                         id: '91a103cd8bde4b29a1925adb8f10be68'
+                        deleted: true
+                    }
+                    'uc-three-sap-workflows': {
+                        table: 'x_snc_wdf_advisory_use_case'
+                        id: 'c5a62961d0e74c25b9214d4a606b3663'
+                    }
+                    'uc-vendor-onboarding': {
+                        table: 'x_snc_wdf_advisory_use_case'
+                        id: 'e269cc5fe713401e8cc2aa15aede939d'
                     }
                     'uc-vendor-risk': {
                         table: 'x_snc_wdf_advisory_use_case'
                         id: '9026c95dc7b44af8b068a9cb41481f66'
+                        deleted: true
+                    }
+                    'use-case-create-acl': {
+                        table: 'sys_security_acl'
+                        id: '8c64dd5a7e4f441ebd86aebf6e9a6365'
+                    }
+                    'use-case-delete-acl': {
+                        table: 'sys_security_acl'
+                        id: 'd70db3ea36d74ba29f1b33fbf3a85859'
+                    }
+                    'use-case-read-acl': {
+                        table: 'sys_security_acl'
+                        id: '8e2b76c305074214b0dabc894e01e901'
+                    }
+                    'use-case-write-acl': {
+                        table: 'sys_security_acl'
+                        id: '7ecbd73409634068a2504f6341a43c51'
                     }
                     'vis-admin_dashboard-blocker_count-admin': {
                         table: 'x_snc_wdf_advisory_vis_rule'
@@ -829,6 +1011,50 @@ declare global {
                         table: 'x_snc_wdf_advisory_vis_rule'
                         id: '1a79323f983a4cb4acd6d0f4c4a7227c'
                     }
+                    wdf_web_search_access: {
+                        table: 'sys_security_acl'
+                        id: 'ee263a2ae1eb436ab14cd7c4bf30db9c'
+                    }
+                    wdf_web_search_prompt_v1: {
+                        table: 'sys_generative_ai_config'
+                        id: 'bc9cbd28a8eb44cca496b5ea5ecbb748'
+                    }
+                    wdf_web_search_query_input: {
+                        table: 'sys_one_extend_definition_attribute'
+                        id: '88815bf628d740a98699c384e65be35e'
+                    }
+                    wdf_web_search_skill: {
+                        table: 'sys_one_extend_capability'
+                        id: '586e7276b2134fc9be7061b6a911defd'
+                    }
+                    wdf_web_search_skill__output_error: {
+                        table: 'sys_one_extend_definition_attribute'
+                        id: '3463e19571154f2eb9e8075f172953e4'
+                    }
+                    wdf_web_search_skill__output_errorcode: {
+                        table: 'sys_one_extend_definition_attribute'
+                        id: 'e10c26b7e3cb4c7c89001aa18e412ecd'
+                    }
+                    wdf_web_search_skill__output_provider: {
+                        table: 'sys_one_extend_definition_attribute'
+                        id: '1ce2360a4e3c401881c9235c7fee3f55'
+                    }
+                    wdf_web_search_skill__output_response: {
+                        table: 'sys_one_extend_definition_attribute'
+                        id: 'a6cf143199554c90befc462a9329d89c'
+                    }
+                    wdf_web_search_skill__output_status: {
+                        table: 'sys_one_extend_definition_attribute'
+                        id: '6ee04a6ad1b44c0189d6bbd5c32b5770'
+                    }
+                    'wdf-ai-generate-usecases-route': {
+                        table: 'sys_ws_operation'
+                        id: '51774440fae945bab86c7ceed45ca9fc'
+                    }
+                    'wdf-ai-instance-assess-route': {
+                        table: 'sys_ws_operation'
+                        id: 'a4f7e584a81c436d8531e0df2be4da1c'
+                    }
                     'wdf-ai-recommend-api': {
                         table: 'sys_ws_definition'
                         id: '90f9c46302f14ca0b231048b3f2bc8f3'
@@ -837,8 +1063,27 @@ declare global {
                         table: 'sys_ws_operation'
                         id: 'd5abb1b18e85447f9099ec1fe8a44fa6'
                     }
+                    'wdf-ai-web-search-route': {
+                        table: 'sys_ws_operation'
+                        id: '8d2ad6c318d04127af2e2ef6aef88bb2'
+                    }
                 }
                 composite: [
+                    {
+                        table: 'sys_one_extend_resource_attribute_mapping'
+                        id: '006168c997d649f682dcc6815c1405a5'
+                        key: {
+                            resource_mapping: {
+                                id: '97a230f6d014469fbc8e4149780f8072'
+                                key: {
+                                    parent_capability: '586e7276b2134fc9be7061b6a911defd'
+                                    resource_capability: '5817eb2b9f36121029ead63a6a0a1c7c'
+                                    resource_name: 'WebSearch'
+                                }
+                            }
+                            resource_attribute_name: 'ac17ef2b9f36121029ead63a6a0a1ce9'
+                        }
+                    },
                     {
                         table: 'sys_db_object'
                         id: '0064f26f976044d9b2181cff7cb81b0a'
@@ -902,6 +1147,22 @@ declare global {
                     },
                     {
                         table: 'sys_documentation'
+                        id: '0489dd2c32c44df4975fb62766ea0782'
+                        key: {
+                            name: 'x_snc_wdf_advisory_use_case'
+                            element: 'products'
+                            language: 'en'
+                        }
+                    },
+                    {
+                        table: 'sys_ux_lib_asset'
+                        id: '04ed384302854ebeb402abf026edc411'
+                        key: {
+                            name: 'x_snc_wdf_advisory/vendor-jspdf--b1b2c22a.js.map'
+                        }
+                    },
+                    {
+                        table: 'sys_documentation'
                         id: '050ef66238d847df827d4309177e1bc5'
                         key: {
                             name: 'x_snc_wdf_advisory_use_case'
@@ -920,6 +1181,7 @@ declare global {
                     {
                         table: 'sys_documentation'
                         id: '064124b8d96c4d6bb5c44f7a7735b2ac'
+                        deleted: true
                         key: {
                             name: 'x_snc_wdf_advisory_use_case'
                             element: 'sources'
@@ -963,6 +1225,14 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_one_extend_capability_definition'
+                        id: '0a1d6c6a70344b499fb628bb71dd1145'
+                        key: {
+                            capability: '586e7276b2134fc9be7061b6a911defd'
+                            api: '936e514a53b3b110f028ddeeff7b128c'
+                        }
+                    },
+                    {
                         table: 'sys_documentation'
                         id: '0aa0fbffe95846fa95aef3de725c66fc'
                         key: {
@@ -986,6 +1256,13 @@ declare global {
                         key: {
                             application_file: '179e1968c7c24dbca8fa5202fe64b07c'
                             source_artifact: '338558159419428d94d42cb863910bd3'
+                        }
+                    },
+                    {
+                        table: 'sys_generative_ai_prompt_config'
+                        id: '0fe3648d2f3e4f50809dea3fafa4e31d'
+                        key: {
+                            ai_config: '43e3648d2f3e4f50809dea3fafa4e31b'
                         }
                     },
                     {
@@ -1031,6 +1308,7 @@ declare global {
                     {
                         table: 'sys_dictionary'
                         id: '13a6f0d6a0b246cd9f05168e5ff540c6'
+                        deleted: true
                         key: {
                             name: 'x_snc_wdf_advisory_use_case'
                             element: 'connector'
@@ -1039,6 +1317,7 @@ declare global {
                     {
                         table: 'sys_choice'
                         id: '155411243ee4403787e5c65a91707730'
+                        deleted: true
                         key: {
                             name: 'x_snc_wdf_advisory_use_case'
                             element: 'tier'
@@ -1092,6 +1371,32 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_dictionary'
+                        id: '1b1c649d28044294aa3f34d696a556ba'
+                        key: {
+                            name: 'x_snc_wdf_advisory_use_case'
+                            element: 'outcome'
+                        }
+                    },
+                    {
+                        table: 'sys_variable_value'
+                        id: '1c0910412f3a4f50809dea3fafa4e33c'
+                        deleted: true
+                        key: {
+                            document_key: '500910412f3a4f50809dea3fafa4e339'
+                            variable: 'f09e3f9893b64210aa5730f16489189f'
+                        }
+                    },
+                    {
+                        table: 'sys_variable_value'
+                        id: '1c0910412f3a4f50809dea3fafa4e34a'
+                        deleted: true
+                        key: {
+                            document_key: '500910412f3a4f50809dea3fafa4e339'
+                            variable: '24c14b967fe85210e98d0b583d8665dd'
+                        }
+                    },
+                    {
                         table: 'sys_documentation'
                         id: '1ca4b32c7ed84296a5593316ed5545f5'
                         key: {
@@ -1105,6 +1410,21 @@ declare global {
                         id: '1cf845e25ae54158ba4bd44b89f837ae'
                         key: {
                             name: 'x_snc_wdf_advisory_vis_rule'
+                        }
+                    },
+                    {
+                        table: 'sys_one_extend_resource_attribute_mapping'
+                        id: '1e7d72c96c0a46ef9389a3370caece7a'
+                        key: {
+                            resource_mapping: {
+                                id: '97a230f6d014469fbc8e4149780f8072'
+                                key: {
+                                    parent_capability: '586e7276b2134fc9be7061b6a911defd'
+                                    resource_capability: '5817eb2b9f36121029ead63a6a0a1c7c'
+                                    resource_name: 'WebSearch'
+                                }
+                            }
+                            resource_attribute_name: 'a017ef2b9f36121029ead63a6a0a1cec'
                         }
                     },
                     {
@@ -1123,6 +1443,20 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_one_extend_definition_config'
+                        id: '2024ca7e5b684141b50348c776ee065e'
+                        key: {
+                            definition: {
+                                id: '0a1d6c6a70344b499fb628bb71dd1145'
+                                key: {
+                                    capability: '586e7276b2134fc9be7061b6a911defd'
+                                    api: '936e514a53b3b110f028ddeeff7b128c'
+                                }
+                            }
+                            capability: '586e7276b2134fc9be7061b6a911defd'
+                        }
+                    },
+                    {
                         table: 'sys_dictionary'
                         id: '21442efec2a74ff1aacedd6e1cc34da5'
                         key: {
@@ -1133,6 +1467,7 @@ declare global {
                     {
                         table: 'sys_choice'
                         id: '2155d28cde6a4544a722a2699a0600b9'
+                        deleted: true
                         key: {
                             name: 'x_snc_wdf_advisory_use_case'
                             element: 'industry'
@@ -1142,8 +1477,24 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_one_extend_resource_attribute_mapping'
+                        id: '2243e4d6dc5443ffbe3abcd821914813'
+                        key: {
+                            resource_mapping: {
+                                id: '97a230f6d014469fbc8e4149780f8072'
+                                key: {
+                                    parent_capability: '586e7276b2134fc9be7061b6a911defd'
+                                    resource_capability: '5817eb2b9f36121029ead63a6a0a1c7c'
+                                    resource_name: 'WebSearch'
+                                }
+                            }
+                            resource_attribute_name: '9659ebef9f36121029ead63a6a0a1ce8'
+                        }
+                    },
+                    {
                         table: 'sys_choice'
                         id: '248fddd2c83e4bf4ac8eae97ed879c65'
+                        deleted: true
                         key: {
                             name: 'x_snc_wdf_advisory_use_case'
                             element: 'tier'
@@ -1189,6 +1540,14 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_one_extend_resource_mapping'
+                        id: '28c88fb4b9c34ea38df44368a3cdc0d2'
+                        key: {
+                            parent_capability: '586e7276b2134fc9be7061b6a911defd'
+                            resource_capability: '586e7276b2134fc9be7061b6a911defd'
+                        }
+                    },
+                    {
                         table: 'sys_dictionary'
                         id: '2b46cfde69c24cb6bb3a9589942aeb28'
                         key: {
@@ -1199,9 +1558,17 @@ declare global {
                     {
                         table: 'sys_dictionary'
                         id: '2be656d3680345f298e13ab28c0ad27f'
+                        deleted: true
                         key: {
                             name: 'x_snc_wdf_advisory_use_case'
                             element: 'sources'
+                        }
+                    },
+                    {
+                        table: 'sys_ux_lib_asset'
+                        id: '2c38ee11dce044ed964713779fe16aaf'
+                        key: {
+                            name: 'x_snc_wdf_advisory/purify'
                         }
                     },
                     {
@@ -1263,6 +1630,7 @@ declare global {
                     {
                         table: 'sys_documentation'
                         id: '3109256e1bc940c89e4b2df0459e305a'
+                        deleted: true
                         key: {
                             name: 'x_snc_wdf_advisory_use_case'
                             element: 'build_notes'
@@ -1292,6 +1660,21 @@ declare global {
                         deleted: true
                         key: {
                             name: 'x_snc_wdf_advisory_incident_manager.do - BYOUI Files'
+                        }
+                    },
+                    {
+                        table: 'sys_one_extend_resource_attribute_mapping'
+                        id: '338a2081f5d344ba8f883237b9e6704b'
+                        key: {
+                            resource_mapping: {
+                                id: '97a230f6d014469fbc8e4149780f8072'
+                                key: {
+                                    parent_capability: '586e7276b2134fc9be7061b6a911defd'
+                                    resource_capability: '5817eb2b9f36121029ead63a6a0a1c7c'
+                                    resource_name: 'WebSearch'
+                                }
+                            }
+                            resource_attribute_name: 'a417ef2b9f36121029ead63a6a0a1cee'
                         }
                     },
                     {
@@ -1337,6 +1720,21 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_dictionary'
+                        id: '385c25eecbc4421da683d9443d8a9c26'
+                        key: {
+                            name: 'x_snc_wdf_advisory_use_case'
+                            element: 'external_systems'
+                        }
+                    },
+                    {
+                        table: 'sys_agent_access_role_configuration'
+                        id: '392d4bbb722b47c69760fa644589135c'
+                        key: {
+                            agent: '40a8a89f571246dd966d3473e0a2dba7'
+                        }
+                    },
+                    {
                         table: 'sys_choice'
                         id: '3a50b7db98b84647980b8397863e1681'
                         key: {
@@ -1345,6 +1743,15 @@ declare global {
                             value: 'community'
                             language: 'en'
                             dependent_value: 'NULL'
+                        }
+                    },
+                    {
+                        table: 'sys_documentation'
+                        id: '3ace3778e4c04aa0baf87599f9be2e23'
+                        key: {
+                            name: 'x_snc_wdf_advisory_use_case'
+                            element: 'line_of_business'
+                            language: 'en'
                         }
                     },
                     {
@@ -1394,6 +1801,20 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_ux_lib_asset'
+                        id: '402ce92402fd41f7a9226b9abda703fd'
+                        key: {
+                            name: 'x_snc_wdf_advisory/index.es.js.map'
+                        }
+                    },
+                    {
+                        table: 'sn_nowassist_skill_config'
+                        id: '40a8a89f571246dd966d3473e0a2dba7'
+                        key: {
+                            skill_id: '586e7276b2134fc9be7061b6a911defd'
+                        }
+                    },
+                    {
                         table: 'sys_security_acl_role'
                         id: '4349bed00a7943fd8c3417d1c9a47f1f'
                         key: {
@@ -1425,6 +1846,16 @@ declare global {
                         }
                     },
                     {
+                        table: 'sn_nowassist_skill_config_var_set'
+                        id: '44b12c8d2ffa4f50809dea3fafa4e3a3'
+                        deleted: true
+                        key: {
+                            name: 'Skill config prompts'
+                            skill_config: '40a8a89f571246dd966d3473e0a2dba7'
+                            config_type: '5a63045793dc1210aa5730f1648918a4'
+                        }
+                    },
+                    {
                         table: 'sys_dictionary'
                         id: '4538705c7b584c6a971de36515d70081'
                         key: {
@@ -1451,6 +1882,14 @@ declare global {
                         }
                     },
                     {
+                        table: 'sn_glider_source_artifact_m2m'
+                        id: '4aa65a4be2a54de4a30728c0dc6cc29d'
+                        key: {
+                            application_file: '94b14339e528432e901cc2d9ac0d4738'
+                            source_artifact: '49f15c1d38954923a55c6cf548c77af3'
+                        }
+                    },
+                    {
                         table: 'sys_dictionary'
                         id: '4af0540854e7402098bd1f4bfac6514a'
                         key: {
@@ -1468,6 +1907,7 @@ declare global {
                     {
                         table: 'sys_choice'
                         id: '4c1b88cec1cd4572aa01238ebdc64f67'
+                        deleted: true
                         key: {
                             name: 'x_snc_wdf_advisory_use_case'
                             element: 'industry'
@@ -1509,6 +1949,38 @@ declare global {
                             name: 'x_snc_wdf_advisory_vis_rule'
                             element: 'persona'
                             language: 'en'
+                        }
+                    },
+                    {
+                        table: 'sn_nowassist_skill_config_var_set'
+                        id: '500910412f3a4f50809dea3fafa4e339'
+                        key: {
+                            name: '__delivery_step__'
+                            skill_config: '40a8a89f571246dd966d3473e0a2dba7'
+                            config_type: '7dfdff5893b64210aa5730f164891837'
+                        }
+                    },
+                    {
+                        table: 'sys_variable_value'
+                        id: '500910412f3a4f50809dea3fafa4e33d'
+                        deleted: true
+                        key: {
+                            document_key: '500910412f3a4f50809dea3fafa4e339'
+                            variable: '27b274b97fde9610076726d6ac866550'
+                        }
+                    },
+                    {
+                        table: 'sys_ux_lib_asset'
+                        id: '502e7fdb80a046d3a35494812f117c93'
+                        key: {
+                            name: 'x_snc_wdf_advisory/vendor-jspdf--b1b2c22a'
+                        }
+                    },
+                    {
+                        table: 'sys_gen_ai_skill_config'
+                        id: '51f8d0012f3a4f50809dea3fafa4e327'
+                        key: {
+                            skill_id: '6fe81ccd2ff64f50809dea3fafa4e3ae'
                         }
                     },
                     {
@@ -1582,6 +2054,14 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_dictionary'
+                        id: '5a4a813ddd8e4bb393bfe1c6f6cbbe0d'
+                        key: {
+                            name: 'x_snc_wdf_advisory_use_case'
+                            element: 'business_problem'
+                        }
+                    },
+                    {
                         table: 'sys_documentation'
                         id: '5a773b25caa4491bb218215687141d0b'
                         key: {
@@ -1593,6 +2073,7 @@ declare global {
                     {
                         table: 'sys_choice'
                         id: '5b53077d11ea42d1b52cde44c3120854'
+                        deleted: true
                         key: {
                             name: 'x_snc_wdf_advisory_use_case'
                             element: 'industry'
@@ -1608,6 +2089,14 @@ declare global {
                             name: 'x_snc_wdf_advisory_connector'
                             element: 'q4_roadmap'
                             language: 'en'
+                        }
+                    },
+                    {
+                        table: 'sys_dictionary'
+                        id: '5c609b6b700740f088922d6d7bb3182a'
+                        key: {
+                            name: 'x_snc_wdf_advisory_use_case'
+                            element: 'persona'
                         }
                     },
                     {
@@ -1675,6 +2164,13 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_generative_ai_prompt_config'
+                        id: '5f281398d8844a97a3ada461271cf57e'
+                        key: {
+                            ai_config: 'bc9cbd28a8eb44cca496b5ea5ecbb748'
+                        }
+                    },
+                    {
                         table: 'sys_user_role'
                         id: '600d58c05beb4fc58527adae4c26db9e'
                         key: {
@@ -1709,6 +2205,7 @@ declare global {
                     {
                         table: 'sys_documentation'
                         id: '645bf5f462b94c80921837999937f13d'
+                        deleted: true
                         key: {
                             name: 'x_snc_wdf_advisory_use_case'
                             element: 'connector'
@@ -1746,6 +2243,30 @@ declare global {
                     },
                     {
                         table: 'sys_documentation'
+                        id: '66c31b4abe54489995513553f06ab54d'
+                        key: {
+                            name: 'x_snc_wdf_advisory_use_case'
+                            element: 'persona'
+                            language: 'en'
+                        }
+                    },
+                    {
+                        table: 'sys_one_extend_resource_attribute_mapping'
+                        id: '673adc7c744c4cda8dfd2d2434768d0b'
+                        key: {
+                            resource_mapping: {
+                                id: '97a230f6d014469fbc8e4149780f8072'
+                                key: {
+                                    parent_capability: '586e7276b2134fc9be7061b6a911defd'
+                                    resource_capability: '5817eb2b9f36121029ead63a6a0a1c7c'
+                                    resource_name: 'WebSearch'
+                                }
+                            }
+                            resource_attribute_name: '2c17ef2b9f36121029ead63a6a0a1cda'
+                        }
+                    },
+                    {
+                        table: 'sys_documentation'
                         id: '674ec855ff3a4124a43b0bbb04a6aad2'
                         key: {
                             name: 'x_snc_wdf_advisory_checklist'
@@ -1762,6 +2283,13 @@ declare global {
                             value: 'needs_review'
                             language: 'en'
                             dependent_value: 'NULL'
+                        }
+                    },
+                    {
+                        table: 'sys_ux_lib_asset'
+                        id: '67899d71ab8749ce9d887553e18b90d1'
+                        key: {
+                            name: 'x_snc_wdf_advisory/index.es'
                         }
                     },
                     {
@@ -1789,6 +2317,7 @@ declare global {
                     {
                         table: 'sys_choice'
                         id: '6885ffeea82047e7b8e15c383c339cf9'
+                        deleted: true
                         key: {
                             name: 'x_snc_wdf_advisory_use_case'
                             element: 'industry'
@@ -1832,6 +2361,45 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_one_extend_resource_attribute_mapping'
+                        id: '6df08df5e8dc491e8ffb011c881e388d'
+                        key: {
+                            resource_mapping: {
+                                id: '97a230f6d014469fbc8e4149780f8072'
+                                key: {
+                                    parent_capability: '586e7276b2134fc9be7061b6a911defd'
+                                    resource_capability: '5817eb2b9f36121029ead63a6a0a1c7c'
+                                    resource_name: 'WebSearch'
+                                }
+                            }
+                            resource_attribute_name: 'e017ef2b9f36121029ead63a6a0a1cf3'
+                        }
+                    },
+                    {
+                        table: 'sys_dictionary'
+                        id: '6f2788d31f26427e88d4d4e75cfff708'
+                        key: {
+                            name: 'x_snc_wdf_advisory_use_case'
+                            element: 'links'
+                        }
+                    },
+                    {
+                        table: 'sys_gen_ai_skill'
+                        id: '6fe81ccd2ff64f50809dea3fafa4e3ae'
+                        key: {
+                            skill_document: '586e7276b2134fc9be7061b6a911defd'
+                            skill_table: 'sys_one_extend_capability'
+                        }
+                    },
+                    {
+                        table: 'sys_dictionary'
+                        id: '7035719f0b0e43e9900ab4d53a84b59e'
+                        key: {
+                            name: 'x_snc_wdf_advisory_use_case'
+                            element: 'line_of_business'
+                        }
+                    },
+                    {
                         table: 'sys_dictionary'
                         id: '714641c65da14bb89400eda1e98e5eee'
                         key: {
@@ -1850,14 +2418,32 @@ declare global {
                     {
                         table: 'sys_choice_set'
                         id: '72ceedb4ded442f48cce1c68dcdb5f39'
+                        deleted: true
                         key: {
                             name: 'x_snc_wdf_advisory_use_case'
                             element: 'tier'
                         }
                     },
                     {
+                        table: 'sys_gen_ai_feature_mapping'
+                        id: '72f3b31f5fb848dfbfb391a51cc00ddc'
+                        key: {
+                            feature_name: 'WDF Web Search'
+                            document: '586e7276b2134fc9be7061b6a911defd'
+                        }
+                    },
+                    {
+                        table: 'sn_glider_source_artifact_m2m'
+                        id: '73c9cd2405814ce8bee6d1c5bccf833f'
+                        key: {
+                            application_file: '04ed384302854ebeb402abf026edc411'
+                            source_artifact: '49f15c1d38954923a55c6cf548c77af3'
+                        }
+                    },
+                    {
                         table: 'sys_documentation'
                         id: '7732b4c92bd94ff1b5a6579cdab245a2'
+                        deleted: true
                         key: {
                             name: 'x_snc_wdf_advisory_use_case'
                             element: 'deploy_time_estimate'
@@ -1894,6 +2480,7 @@ declare global {
                     {
                         table: 'sys_documentation'
                         id: '7834def303de43c3b8172d614e15475f'
+                        deleted: true
                         key: {
                             name: 'x_snc_wdf_advisory_use_case'
                             element: 'linked_demo'
@@ -1909,6 +2496,14 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_dictionary'
+                        id: '79fe7adf715546ee8783694279ea8f97'
+                        key: {
+                            name: 'x_snc_wdf_advisory_use_case'
+                            element: 'solution'
+                        }
+                    },
+                    {
                         table: 'sys_documentation'
                         id: '7a514855937b41379735929b4a8e631d'
                         key: {
@@ -1920,6 +2515,7 @@ declare global {
                     {
                         table: 'sys_dictionary'
                         id: '7b0fc4b0d31d40cda2460175758dbbb4'
+                        deleted: true
                         key: {
                             name: 'x_snc_wdf_advisory_use_case'
                             element: 'build_notes'
@@ -1963,6 +2559,13 @@ declare global {
                         key: {
                             name: 'x_snc_wdf_advisory_demo_step'
                             element: 'panel_type'
+                        }
+                    },
+                    {
+                        table: 'sys_one_extend_resource_edge'
+                        id: '7f955ac9d23a49f18f3ca76e52da03cd'
+                        key: {
+                            internal_name: 'WebSearch__WDF Web Search'
                         }
                     },
                     {
@@ -2013,6 +2616,7 @@ declare global {
                     {
                         table: 'sys_choice'
                         id: '85a2242d35db45c2a8b9457f9c302b82'
+                        deleted: true
                         key: {
                             name: 'x_snc_wdf_advisory_use_case'
                             element: 'tier'
@@ -2024,9 +2628,18 @@ declare global {
                     {
                         table: 'sys_dictionary'
                         id: '86e65839a7284dff8d5365fdbf0795e3'
+                        deleted: true
                         key: {
                             name: 'x_snc_wdf_advisory_use_case'
                             element: 'keywords'
+                        }
+                    },
+                    {
+                        table: 'sn_glider_source_artifact_m2m'
+                        id: '8733fb735d2e43f5b6a8ed7dc1e05e58'
+                        key: {
+                            application_file: 'c855fcae94324d438d4a97ad3b1df488'
+                            source_artifact: '49f15c1d38954923a55c6cf548c77af3'
                         }
                     },
                     {
@@ -2054,8 +2667,23 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_gen_ai_strategy_mapping'
+                        id: '89b25f76ce7a4a618b4fe3d78373cb98'
+                        key: {
+                            strategy: 'CAPABILITY_EXECUTION'
+                            feature: {
+                                id: '72f3b31f5fb848dfbfb391a51cc00ddc'
+                                key: {
+                                    feature_name: 'WDF Web Search'
+                                    document: '586e7276b2134fc9be7061b6a911defd'
+                                }
+                            }
+                        }
+                    },
+                    {
                         table: 'sys_choice'
                         id: '8a7c54d517c64521b7f58aded70314e8'
+                        deleted: true
                         key: {
                             name: 'x_snc_wdf_advisory_use_case'
                             element: 'industry'
@@ -2074,6 +2702,13 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_ux_lib_asset'
+                        id: '8c47a341031c43c89a824348e9e60bb6'
+                        key: {
+                            name: 'x_snc_wdf_advisory/purify.js.map'
+                        }
+                    },
+                    {
                         table: 'ua_table_licensing_config'
                         id: '8d1440d672fa496dbe2511b9454b59bf'
                         key: {
@@ -2083,9 +2718,19 @@ declare global {
                     {
                         table: 'sys_choice_set'
                         id: '8ddcdbba477f4777ae97d765eff078aa'
+                        deleted: true
                         key: {
                             name: 'x_snc_wdf_advisory_use_case'
                             element: 'industry'
+                        }
+                    },
+                    {
+                        table: 'sys_documentation'
+                        id: '8e44060911524abfa84e77347c73613d'
+                        key: {
+                            name: 'x_snc_wdf_advisory_use_case'
+                            element: 'outcome'
+                            language: 'en'
                         }
                     },
                     {
@@ -2094,6 +2739,15 @@ declare global {
                         key: {
                             name: 'x_snc_wdf_advisory_checklist'
                             element: 'status'
+                        }
+                    },
+                    {
+                        table: 'sys_variable_value'
+                        id: '900910412f3a4f50809dea3fafa4e34a'
+                        deleted: true
+                        key: {
+                            document_key: '500910412f3a4f50809dea3fafa4e339'
+                            variable: '14a8e8397f9e9610076726d6ac866591'
                         }
                     },
                     {
@@ -2148,6 +2802,15 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_variable_value'
+                        id: '940910412f3a4f50809dea3fafa4e33d'
+                        deleted: true
+                        key: {
+                            document_key: '500910412f3a4f50809dea3fafa4e339'
+                            variable: '4fee37d893b64210aa5730f164891896'
+                        }
+                    },
+                    {
                         table: 'sys_ux_lib_asset'
                         id: '941dd75d100248a8aa34400ce8e28146'
                         key: {
@@ -2157,12 +2820,20 @@ declare global {
                     {
                         table: 'sys_choice'
                         id: '9442ba765e514902b110f16309b75e9a'
+                        deleted: true
                         key: {
                             name: 'x_snc_wdf_advisory_use_case'
                             element: 'industry'
                             value: 'retail'
                             language: 'en'
                             dependent_value: 'NULL'
+                        }
+                    },
+                    {
+                        table: 'sys_ux_lib_asset'
+                        id: '94b14339e528432e901cc2d9ac0d4738'
+                        key: {
+                            name: 'x_snc_wdf_advisory/vendor-html2canvas--7e596869'
                         }
                     },
                     {
@@ -2207,11 +2878,28 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_one_extend_resource_mapping'
+                        id: '97a230f6d014469fbc8e4149780f8072'
+                        key: {
+                            parent_capability: '586e7276b2134fc9be7061b6a911defd'
+                            resource_capability: '5817eb2b9f36121029ead63a6a0a1c7c'
+                            resource_name: 'WebSearch'
+                        }
+                    },
+                    {
                         table: 'sys_dictionary'
                         id: '97bbb3adbaf046149110b4da3c7d2a2e'
                         key: {
                             name: 'x_snc_wdf_advisory_vis_rule'
                             element: 'screen'
+                        }
+                    },
+                    {
+                        table: 'sys_dictionary'
+                        id: '99e8fab9ed234e618cf82708bf752be3'
+                        key: {
+                            name: 'x_snc_wdf_advisory_use_case'
+                            element: 'products'
                         }
                     },
                     {
@@ -2243,6 +2931,7 @@ declare global {
                     {
                         table: 'sys_choice'
                         id: '9e10d1b7006d43eea79ad5211d7416fd'
+                        deleted: true
                         key: {
                             name: 'x_snc_wdf_advisory_use_case'
                             element: 'industry'
@@ -2279,6 +2968,7 @@ declare global {
                     {
                         table: 'sys_choice'
                         id: 'a026e62fe9d44360a721aec052f6ab17'
+                        deleted: true
                         key: {
                             name: 'x_snc_wdf_advisory_use_case'
                             element: 'industry'
@@ -2355,9 +3045,25 @@ declare global {
                     {
                         table: 'sys_dictionary'
                         id: 'a63b0c184edb4ada88fa641d44cd806a'
+                        deleted: true
                         key: {
                             name: 'x_snc_wdf_advisory_use_case'
                             element: 'deploy_time_estimate'
+                        }
+                    },
+                    {
+                        table: 'sys_one_extend_resource_attribute_mapping'
+                        id: 'a92ddb1d20184be09f9f6294bfab7c31'
+                        key: {
+                            resource_mapping: {
+                                id: '97a230f6d014469fbc8e4149780f8072'
+                                key: {
+                                    parent_capability: '586e7276b2134fc9be7061b6a911defd'
+                                    resource_capability: '5817eb2b9f36121029ead63a6a0a1c7c'
+                                    resource_name: 'WebSearch'
+                                }
+                            }
+                            resource_attribute_name: 'c11ece269fc3121029ead63a6a0a1cd2'
                         }
                     },
                     {
@@ -2393,6 +3099,18 @@ declare global {
                         deleted: true
                         key: {
                             name: 'x_snc_wdf_advisory/main'
+                        }
+                    },
+                    {
+                        table: 'sn_nowassist_skill_config_status'
+                        id: 'ae1b115d1b724dad98e800c0119c32fc'
+                        key: {
+                            skill_config: {
+                                id: '40a8a89f571246dd966d3473e0a2dba7'
+                                key: {
+                                    skill_id: '586e7276b2134fc9be7061b6a911defd'
+                                }
+                            }
                         }
                     },
                     {
@@ -2435,6 +3153,7 @@ declare global {
                     {
                         table: 'sys_documentation'
                         id: 'b5bc53cea17c47ffaf7df31e2b56062d'
+                        deleted: true
                         key: {
                             name: 'x_snc_wdf_advisory_use_case'
                             element: 'keywords'
@@ -2464,6 +3183,15 @@ declare global {
                         key: {
                             name: 'x_snc_wdf_advisory_persona'
                             element: 'description'
+                        }
+                    },
+                    {
+                        table: 'sys_documentation'
+                        id: 'bce9cf8cbf8e4d578251ee66494b73b8'
+                        key: {
+                            name: 'x_snc_wdf_advisory_use_case'
+                            element: 'business_problem'
+                            language: 'en'
                         }
                     },
                     {
@@ -2497,6 +3225,19 @@ declare global {
                         deleted: true
                         key: {
                             endpoint: 'x_snc_wdf_advisory_incident_manager.do'
+                        }
+                    },
+                    {
+                        table: 'sys_security_acl_role'
+                        id: 'c0e293102fb68f10809dea3fafa4e326'
+                        key: {
+                            sys_security_acl: 'ee263a2ae1eb436ab14cd7c4bf30db9c'
+                            sys_user_role: {
+                                id: '7fcaa702933002009c8579b4f47ffbde'
+                                key: {
+                                    name: 'snc_internal'
+                                }
+                            }
                         }
                     },
                     {
@@ -2542,12 +3283,21 @@ declare global {
                     {
                         table: 'sys_choice'
                         id: 'c4aa9d9dccde45668f64ae2b1c33c571'
+                        deleted: true
                         key: {
                             name: 'x_snc_wdf_advisory_use_case'
                             element: 'industry'
                             value: 'manufacturing'
                             language: 'en'
                             dependent_value: 'NULL'
+                        }
+                    },
+                    {
+                        table: 'sn_glider_source_artifact_m2m'
+                        id: 'c59efb9fa4844dc8b787854deecd6e4f'
+                        key: {
+                            application_file: '502e7fdb80a046d3a35494812f117c93'
+                            source_artifact: '49f15c1d38954923a55c6cf548c77af3'
                         }
                     },
                     {
@@ -2565,6 +3315,22 @@ declare global {
                             name: 'x_snc_wdf_advisory_connector'
                             element: 'latency'
                             language: 'en'
+                        }
+                    },
+                    {
+                        table: 'sys_ux_lib_asset'
+                        id: 'c855fcae94324d438d4a97ad3b1df488'
+                        key: {
+                            name: 'x_snc_wdf_advisory/vendor-html2canvas--7e596869.js.map'
+                        }
+                    },
+                    {
+                        table: 'sys_variable_value'
+                        id: 'c8b12c8d2ffa4f50809dea3fafa4e3a4'
+                        deleted: true
+                        key: {
+                            document_key: '44b12c8d2ffa4f50809dea3fafa4e3a3'
+                            variable: '9a24c09793dc1210aa5730f1648918c0'
                         }
                     },
                     {
@@ -2618,6 +3384,7 @@ declare global {
                     {
                         table: 'sys_dictionary'
                         id: 'd0384fd572a244ce8990bb1b6645a35a'
+                        deleted: true
                         key: {
                             name: 'x_snc_wdf_advisory_use_case'
                             element: 'description'
@@ -2672,6 +3439,14 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_variable_value'
+                        id: 'd40910412f3a4f50809dea3fafa4e34a'
+                        key: {
+                            document_key: '500910412f3a4f50809dea3fafa4e339'
+                            variable: 'ab5ef79893b64210aa5730f16489185a'
+                        }
+                    },
+                    {
                         table: 'sys_dictionary'
                         id: 'd512536fba954289ae18ec0f0d50cd49'
                         key: {
@@ -2699,8 +3474,18 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_variable_value'
+                        id: 'd80910412f3a4f50809dea3fafa4e33b'
+                        deleted: true
+                        key: {
+                            document_key: '500910412f3a4f50809dea3fafa4e339'
+                            variable: 'e3f313ddff6522103a2bffffffffff48'
+                        }
+                    },
+                    {
                         table: 'sys_dictionary'
                         id: 'd9767dde64fc415c927dbdb65c33bde9'
+                        deleted: true
                         key: {
                             name: 'x_snc_wdf_advisory_use_case'
                             element: 'linked_demo'
@@ -2717,6 +3502,7 @@ declare global {
                     {
                         table: 'sys_documentation'
                         id: 'dd7e06f9b28b4876aae7a7a5d3d05ded'
+                        deleted: true
                         key: {
                             name: 'x_snc_wdf_advisory_use_case'
                             element: 'description'
@@ -2734,6 +3520,7 @@ declare global {
                     {
                         table: 'sys_documentation'
                         id: 'e100988a6a1d4d6ebb1a22f4af58c75e'
+                        deleted: true
                         key: {
                             name: 'x_snc_wdf_advisory_use_case'
                             element: 'tier'
@@ -2746,6 +3533,23 @@ declare global {
                         key: {
                             name: 'x_snc_wdf_advisory_connector'
                             element: 'detail'
+                        }
+                    },
+                    {
+                        table: 'sys_generative_ai_prompt_config'
+                        id: 'e28268052f3e4f50809dea3fafa4e393'
+                        deleted: true
+                        key: {
+                            ai_config: 'ee8228052f3e4f50809dea3fafa4e372'
+                        }
+                    },
+                    {
+                        table: 'sys_documentation'
+                        id: 'e3ce88009e9e400e9611cbc5d4a8aa0f'
+                        key: {
+                            name: 'x_snc_wdf_advisory_use_case'
+                            element: 'links'
+                            language: 'en'
                         }
                     },
                     {
@@ -2813,6 +3617,7 @@ declare global {
                     {
                         table: 'sys_dictionary'
                         id: 'ed2583420f4b4d6595e1a6f7eaa08abf'
+                        deleted: true
                         key: {
                             name: 'x_snc_wdf_advisory_use_case'
                             element: 'tier'
@@ -2821,6 +3626,7 @@ declare global {
                     {
                         table: 'sys_choice'
                         id: 'ed54fa2240ea476ab3bbd1011a3a3d62'
+                        deleted: true
                         key: {
                             name: 'x_snc_wdf_advisory_use_case'
                             element: 'industry'
@@ -2872,6 +3678,15 @@ declare global {
                             value: 'rows'
                             language: 'en'
                             dependent_value: 'NULL'
+                        }
+                    },
+                    {
+                        table: 'sys_documentation'
+                        id: 'f266875718354a4cae6bfd9f987c82c7'
+                        key: {
+                            name: 'x_snc_wdf_advisory_use_case'
+                            element: 'external_systems'
+                            language: 'en'
                         }
                     },
                     {
@@ -2943,6 +3758,20 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_gen_ai_skill_applicability'
+                        id: 'faf818012f3a4f50809dea3fafa4e346'
+                        key: {
+                            skill_id: '6fe81ccd2ff64f50809dea3fafa4e3ae'
+                        }
+                    },
+                    {
+                        table: 'sys_generative_ai_prompt_config'
+                        id: 'fba12c8d2ffa4f50809dea3fafa4e36d'
+                        key: {
+                            ai_config: '73a12c8d2ffa4f50809dea3fafa4e368'
+                        }
+                    },
+                    {
                         table: 'sys_db_object'
                         id: 'fc1e26d3181a4fd8820ef84641adcdea'
                         key: {
@@ -2983,6 +3812,15 @@ declare global {
                             value: 'blocked_regulated'
                             language: 'en'
                             dependent_value: 'NULL'
+                        }
+                    },
+                    {
+                        table: 'sys_documentation'
+                        id: 'fede359473cf47b3b0c7e48749f5cdd2'
+                        key: {
+                            name: 'x_snc_wdf_advisory_use_case'
+                            element: 'solution'
+                            language: 'en'
                         }
                     },
                     {

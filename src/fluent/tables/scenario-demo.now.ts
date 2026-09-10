@@ -371,3 +371,213 @@ export const stepIh4 = Record({
         scenario: demoIh,
     },
 })
+
+// ─── Demo Steps: HRSD Payroll Integration ─────────────────────────────────────
+
+export const stepHrsd1 = Record({
+    $id: Now.ID['step-hrsd-1'],
+    $meta: { installMethod: 'demo' },
+    table: 'x_snc_wdf_advisory_demo_step',
+    data: {
+        step_number: 1,
+        tag_label: 'Config',
+        title: 'Define Workday connection profile',
+        description: 'Set up a ZCC connection to the Workday HCM API with OAuth 2.0 credentials and specify the payroll data endpoint.',
+        panel_type: 'pairs',
+        panel_data: JSON.stringify({ pairs: [{ label: 'Endpoint', value: 'https://wd3-impl.workday.com/ccx/service/acme/Payroll/v38.0' }, { label: 'Auth', value: 'OAuth 2.0 (JWT Bearer)' }, { label: 'MID Server', value: 'mid-hr-secure-01' }, { label: 'Data Scope', value: 'Pay stubs, deductions, tax withholdings' }] }),
+        is_final_step: false,
+        resilience_note: 'Use a dedicated MID Server for HR data — never route through a shared corporate MID.',
+        scenario: demoHrsdPay,
+    },
+})
+
+export const stepHrsd2 = Record({
+    $id: Now.ID['step-hrsd-2'],
+    $meta: { installMethod: 'demo' },
+    table: 'x_snc_wdf_advisory_demo_step',
+    data: {
+        step_number: 2,
+        tag_label: 'Filter',
+        title: 'Configure field-level security filters',
+        description: 'Define which payroll fields are accessible vs restricted, ensuring compensation amounts are excluded while allowing pay period dates and deduction categories.',
+        panel_type: 'rows',
+        panel_data: JSON.stringify({ rows: [{ text: '✓ Expose: pay_period_start, pay_period_end, deduction_type, tax_jurisdiction' }, { text: '✗ Block: gross_pay, net_pay, hourly_rate, bonus_amount, SSN' }, { text: '✓ Expose: employer_contribution_type (401k, HSA, dental)' }, { text: '✗ Block: bank_account, routing_number' }] }),
+        is_final_step: false,
+        resilience_note: 'Field filters are enforced at the connector level — even admin users cannot bypass them via API.',
+        scenario: demoHrsdPay,
+    },
+})
+
+export const stepHrsd3 = Record({
+    $id: Now.ID['step-hrsd-3'],
+    $meta: { installMethod: 'demo' },
+    table: 'x_snc_wdf_advisory_demo_step',
+    data: {
+        step_number: 3,
+        tag_label: 'Map',
+        title: 'Map payroll fields to HRSD case variables',
+        description: 'Map exposed Workday payroll fields to HR Service Delivery case variables so agents can view relevant payroll context without seeing sensitive compensation data.',
+        panel_type: 'connectors',
+        panel_data: JSON.stringify({ connectors: [{ source: 'workday.pay_period_start', target: 'hr_case.u_pay_period' }, { source: 'workday.deduction_type', target: 'hr_case.u_deduction_category' }, { source: 'workday.tax_jurisdiction', target: 'hr_case.u_tax_state' }, { source: 'workday.employer_contrib_type', target: 'hr_case.u_benefit_type' }] }),
+        is_final_step: false,
+        resilience_note: '',
+        scenario: demoHrsdPay,
+    },
+})
+
+export const stepHrsd4 = Record({
+    $id: Now.ID['step-hrsd-4'],
+    $meta: { installMethod: 'demo' },
+    table: 'x_snc_wdf_advisory_demo_step',
+    data: {
+        step_number: 4,
+        tag_label: 'Verify',
+        title: 'Validate data access and audit trail',
+        description: 'Test the integration end-to-end, confirming agents see only permitted fields, verifying audit logs capture every data access event.',
+        panel_type: 'sources',
+        panel_data: JSON.stringify({ sources: [{ name: 'Field masking', status: 'pass', detail: "Compensation fields return '***RESTRICTED***' in all queries" }, { name: 'Audit logging', status: 'pass', detail: 'Every read logged with user, timestamp, and fields accessed' }, { name: 'Agent view', status: 'pass', detail: 'HR agents see deduction types but not dollar amounts' }] }),
+        is_final_step: true,
+        resilience_note: '',
+        scenario: demoHrsdPay,
+    },
+})
+
+// ─── Demo Steps: Fraud Detection Pipeline ─────────────────────────────────────
+
+export const stepFraud1 = Record({
+    $id: Now.ID['step-fraud-1'],
+    $meta: { installMethod: 'demo' },
+    table: 'x_snc_wdf_advisory_demo_step',
+    data: {
+        step_number: 1,
+        tag_label: 'Ingest',
+        title: 'Configure Stream Connect for fraud alerts',
+        description: "Set up Stream Connect to subscribe to the fraud detection engine's event bus, specifying the topic for transaction anomaly alerts.",
+        panel_type: 'pairs',
+        panel_data: JSON.stringify({ pairs: [{ label: 'Source', value: 'fraud-engine.anomaly-alerts (Kafka)' }, { label: 'Broker', value: 'kafka-fraud-01.corp:9093' }, { label: 'Format', value: 'Avro (Schema Registry v2)' }, { label: 'Volume', value: '~2,000 events/hour (peak: 8,000)' }] }),
+        is_final_step: false,
+        resilience_note: 'Enable exactly-once semantics — duplicate fraud alerts create confusion for investigators.',
+        scenario: demoFraud,
+    },
+})
+
+export const stepFraud2 = Record({
+    $id: Now.ID['step-fraud-2'],
+    $meta: { installMethod: 'demo' },
+    table: 'x_snc_wdf_advisory_demo_step',
+    data: {
+        step_number: 2,
+        tag_label: 'Enrich',
+        title: 'Correlate alerts with customer records',
+        description: 'Enrich incoming fraud alerts with customer CMDB data and transaction history, looking up the account holder and attaching risk score context.',
+        panel_type: 'connectors',
+        panel_data: JSON.stringify({ connectors: [{ source: 'alert.account_id', target: 'customer_account.sys_id (lookup)' }, { source: 'alert.risk_score', target: 'sn_si_incident.severity' }, { source: 'alert.transaction_amount', target: 'sn_si_incident.u_disputed_amount' }, { source: 'alert.merchant_category', target: 'sn_si_incident.category' }] }),
+        is_final_step: false,
+        resilience_note: '',
+        scenario: demoFraud,
+    },
+})
+
+export const stepFraud3 = Record({
+    $id: Now.ID['step-fraud-3'],
+    $meta: { installMethod: 'demo' },
+    table: 'x_snc_wdf_advisory_demo_step',
+    data: {
+        step_number: 3,
+        tag_label: 'Route',
+        title: 'Apply triage rules and assignment',
+        description: 'Configure automated triage rules that assign fraud cases based on risk score thresholds and transaction amounts.',
+        panel_type: 'rows',
+        panel_data: JSON.stringify({ rows: [{ text: 'Risk score ≥ 90 → P1 Security Incident (immediate page to fraud team)' }, { text: 'Risk score 70-89 → P2 Investigation (auto-assign to fraud analyst queue)' }, { text: 'Risk score 50-69 → P3 Review (batch assignment, 4-hour SLA)' }, { text: 'Risk score < 50 → Log only (no case created, retained 30 days)' }] }),
+        is_final_step: false,
+        resilience_note: 'Set up a circuit breaker — if fraud alert volume spikes 10x, pause auto-creation and alert the SOC manager.',
+        scenario: demoFraud,
+    },
+})
+
+export const stepFraud4 = Record({
+    $id: Now.ID['step-fraud-4'],
+    $meta: { installMethod: 'demo' },
+    table: 'x_snc_wdf_advisory_demo_step',
+    data: {
+        step_number: 4,
+        tag_label: 'Validate',
+        title: 'End-to-end fraud pipeline test',
+        description: 'Inject synthetic fraud events at various risk levels and confirm correct case creation, assignment, and SLA timers.',
+        panel_type: 'sources',
+        panel_data: JSON.stringify({ sources: [{ name: 'P1 creation', status: 'pass', detail: 'Risk 95 alert → Security Incident in 1.8s' }, { name: 'Assignment', status: 'pass', detail: 'Fraud analyst queue received case with full context' }, { name: 'Suppression', status: 'pass', detail: 'Risk 40 alert → logged, no case created' }, { name: 'Dedup', status: 'pass', detail: 'Same transaction ID within 5min → single case' }] }),
+        is_final_step: true,
+        resilience_note: '',
+        scenario: demoFraud,
+    },
+})
+
+// ─── Demo Steps: Accounts Receivable Visibility ───────────────────────────────
+
+export const stepAr1 = Record({
+    $id: Now.ID['step-ar-1'],
+    $meta: { installMethod: 'demo' },
+    table: 'x_snc_wdf_advisory_demo_step',
+    data: {
+        step_number: 1,
+        tag_label: 'Connect',
+        title: 'Establish SAP ERP connection via ZCC',
+        description: "Configure ZCC-ERP connector to access SAP's BAPI for accounts receivable aging data, authenticating via SAP RFC credentials through the MID Server.",
+        panel_type: 'pairs',
+        panel_data: JSON.stringify({ pairs: [{ label: 'SAP System', value: 'PRD (ECC 6.0 EHP8)' }, { label: 'BAPI', value: 'BAPI_AR_ACC_GETOPENITEMS' }, { label: 'Auth', value: 'RFC User (Type: Communication)' }, { label: 'MID Server', value: 'mid-erp-gateway-01' }] }),
+        is_final_step: false,
+        resilience_note: 'Use a dedicated RFC user with read-only authorization — never reuse a dialog user credential.',
+        scenario: demoAr,
+    },
+})
+
+export const stepAr2 = Record({
+    $id: Now.ID['step-ar-2'],
+    $meta: { installMethod: 'demo' },
+    table: 'x_snc_wdf_advisory_demo_step',
+    data: {
+        step_number: 2,
+        tag_label: 'Model',
+        title: 'Define virtual table for AR aging',
+        description: 'Create a ZCC virtual table that exposes AR aging buckets (current, 30, 60, 90, 120+ days) without replicating financial data into ServiceNow.',
+        panel_type: 'connectors',
+        panel_data: JSON.stringify({ connectors: [{ source: 'SAP.KUNNR (Customer)', target: 'ar_virtual.customer_id' }, { source: 'SAP.BUKRS (Company Code)', target: 'ar_virtual.company_code' }, { source: 'SAP.DMBTR (Amount LC)', target: 'ar_virtual.amount_local' }, { source: 'SAP.ZFBDT (Baseline Date)', target: 'ar_virtual.aging_bucket (computed)' }] }),
+        is_final_step: false,
+        resilience_note: '',
+        scenario: demoAr,
+    },
+})
+
+export const stepAr3 = Record({
+    $id: Now.ID['step-ar-3'],
+    $meta: { installMethod: 'demo' },
+    table: 'x_snc_wdf_advisory_demo_step',
+    data: {
+        step_number: 3,
+        tag_label: 'Display',
+        title: 'Surface AR data in Finance workspace',
+        description: 'Embed the virtual table as a related list on the Finance Service Management workspace, showing AR aging summaries filterable by customer and company code.',
+        panel_type: 'rows',
+        panel_data: JSON.stringify({ rows: [{ text: 'Widget: AR Aging Summary — grouped by customer, colored by bucket' }, { text: 'Filter: Company code, date range, amount threshold (>$10K)' }, { text: 'Drill-down: Click customer → full open items list' }, { text: 'Refresh: On-demand (no scheduled sync needed)' }] }),
+        is_final_step: false,
+        resilience_note: "Set query result caching to 5 minutes — AR data doesn't change frequently enough to justify real-time calls.",
+        scenario: demoAr,
+    },
+})
+
+export const stepAr4 = Record({
+    $id: Now.ID['step-ar-4'],
+    $meta: { installMethod: 'demo' },
+    table: 'x_snc_wdf_advisory_demo_step',
+    data: {
+        step_number: 4,
+        tag_label: 'Verify',
+        title: 'Validate AR data accuracy',
+        description: 'Compare virtual table results against SAP FBL5N report to confirm aging calculations match and no data is stored in ServiceNow.',
+        panel_type: 'sources',
+        panel_data: JSON.stringify({ sources: [{ name: 'Data accuracy', status: 'pass', detail: 'Virtual table totals match SAP FBL5N within $0.01' }, { name: 'No replication', status: 'pass', detail: 'Zero records in cmdb_ci or any SN table — pure virtual' }, { name: 'Performance', status: 'pass', detail: 'Full AR aging for 3,200 customers in 1.4s' }] }),
+        is_final_step: true,
+        resilience_note: '',
+        scenario: demoAr,
+    },
+})

@@ -5,7 +5,15 @@ import { StepPanel } from "./StepPanel";
 
 interface Props { demoId: string; persona: string; }
 
-const v = (f: any) => f?.display_value || f?.value || f || "";
+// Safe value extractor - handles {display_value, value} objects from sysparm_display_value=all
+// CRITICAL: must always return a string, never an object (React cannot render objects)
+const v = (f: any): string => {
+  if (f == null) return "";
+  if (typeof f === "string") return f;
+  if (typeof f === "number" || typeof f === "boolean") return String(f);
+  if (typeof f === "object") return f.display_value || f.value || "";
+  return "";
+};
 
 const TAG_COLORS: Record<string, string> = {
   Otto: "#7C3AED", ZCC: "#00C6A2", MCP: "#F59E0B",
@@ -27,7 +35,7 @@ export function ScenarioStepper({ demoId, persona }: Props) {
       const sc = await fetchScenarioDemo(demoId);
       setScenario(sc);
       if (sc) {
-        const scenarioSysId = sc.sys_id?.value || sc.sys_id || demoId;
+        const scenarioSysId = v(sc.sys_id) || demoId;
         const st = await fetchDemoSteps(scenarioSysId);
         setSteps(st);
       }
@@ -50,13 +58,20 @@ export function ScenarioStepper({ demoId, persona }: Props) {
   if (loading) return <div className="page-container"><div style={s.loading}>Loading scenario...</div></div>;
   if (!scenario || !steps.length) return <div className="page-container"><div style={s.loading}>Scenario not found.</div></div>;
 
-  const step = steps[current];
   const total = steps.length;
+  const safeIndex = Math.min(Math.max(current, 0), total - 1);
+  const step = steps[safeIndex];
+  if (!step) return <div className="page-container"><div style={s.loading}>Step not available.</div></div>;
+
   const isFinal = v(step.is_final_step) === "true" || v(step.is_final_step) === "1";
   const tagLabel = v(step.tag_label);
   const color = tagColor(tagLabel);
   const tags = v(scenario.tags).split(",").map((t: string) => t.trim()).filter(Boolean);
-  const panelData = step.panel_data ? (typeof v(step.panel_data) === "string" ? v(step.panel_data) : step.panel_data) : null;
+  const panelData = step.panel_data ? v(step.panel_data) || null : null;
+  const resilienceNote = v(step.resilience_note);
+
+  const isAtStart = safeIndex === 0;
+  const isAtEnd = safeIndex >= total - 1;
 
   return (
     <div>
@@ -71,29 +86,47 @@ export function ScenarioStepper({ demoId, persona }: Props) {
       <div style={s.card}>
         <div style={s.cardHeader}>
           {tagLabel && <span style={{ ...s.stepTag, background: color + "26", color }}>{tagLabel}</span>}
-          <span style={s.stepTitle}>Step {current + 1}/{total} — {v(step.title)}</span>
+          <span style={s.stepTitle}>Step {safeIndex + 1}/{total} — {v(step.title)}</span>
         </div>
         {v(step.description) && <p style={s.desc}>{v(step.description)}</p>}
         <StepPanel panelType={v(step.panel_type)} panelData={panelData} persona={persona} />
-        {isFinal && v(step.resilience_note) && (
-          <div style={s.resilience}>{v(step.resilience_note)}</div>
+        {isFinal && resilienceNote && (
+          <div style={s.resilience}>{resilienceNote}</div>
         )}
       </div>
       <div style={s.nav}>
-        <button style={s.navBtn} disabled={current === 0} onClick={() => setCurrent(current - 1)}>← Back</button>
-        <div style={s.dots}>
+        <button
+          style={{ ...s.navBtn, ...(isAtStart ? s.navBtnDisabled : {}) }}
+          disabled={isAtStart}
+          aria-disabled={isAtStart}
+          aria-label="Previous step"
+          onClick={() => { if (!isAtStart) setCurrent(safeIndex - 1); }}
+        >← Back</button>
+        <div style={s.dots} role="tablist" aria-label="Step navigation">
           {steps.map((_, i) => (
             <span key={i} onClick={() => setCurrent(i)}
-              style={{ ...s.dot, ...(i === current ? s.dotActive : {}) }} />
+              role="tab"
+              aria-selected={i === safeIndex}
+              aria-label={`Step ${i + 1}`}
+              tabIndex={0}
+              onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") setCurrent(i); }}
+              style={{ ...s.dot, ...(i === safeIndex ? s.dotActive : {}) }} />
           ))}
         </div>
-        <button style={s.navBtn} disabled={current >= total - 1} onClick={() => setCurrent(current + 1)}>Next →</button>
+        <button
+          style={{ ...s.navBtn, ...(isAtEnd ? s.navBtnDisabled : {}) }}
+          disabled={isAtEnd}
+          aria-disabled={isAtEnd}
+          aria-label="Next step"
+          onClick={() => { if (!isAtEnd) setCurrent(safeIndex + 1); }}
+        >Next →</button>
         <button style={{ ...s.autoBtn, color: autoRun ? "#00C6A2" : "#5A6677" }}
+          aria-label={autoRun ? "Stop auto-run" : "Start auto-run"}
           onClick={() => setAutoRun(!autoRun)}>
           <span style={{ ...s.autoDot, background: autoRun ? "#00C6A2" : "#94A3B8" }} /> Auto-run
         </button>
         {isFinal && (
-          <button style={s.replayBtn} onClick={() => { setCurrent(0); setAutoRun(true); }}>↺ Replay</button>
+          <button style={s.replayBtn} aria-label="Replay scenario" onClick={() => { setCurrent(0); setAutoRun(true); }}>↺ Replay</button>
         )}
       </div>
     </div>
@@ -114,7 +147,8 @@ const s: Record<string, React.CSSProperties> = {
   desc: { fontSize: 13, color: "#5A6677", lineHeight: 1.6, margin: "0 0 8px" },
   resilience: { background: "#FEF3C7", borderLeft: "3px solid #F59E0B", borderRadius: 4, padding: "10px 14px", fontSize: 13, color: "#92400E", marginTop: 14 },
   nav: { display: "flex", alignItems: "center", gap: 12, flexWrap: "wrap" },
-  navBtn: { background: "none", border: "1px solid #E0E5EC", borderRadius: 6, padding: "6px 14px", fontSize: 13, cursor: "pointer", color: "#1A1A1A" },
+  navBtn: { background: "none", border: "1px solid #E0E5EC", borderRadius: 6, padding: "6px 14px", fontSize: 13, cursor: "pointer", color: "#1A1A1A", transition: "opacity 0.15s" },
+  navBtnDisabled: { opacity: 0.4, cursor: "not-allowed", pointerEvents: "none" as any, color: "#94A3B8", borderColor: "#E0E5EC" },
   dots: { display: "flex", gap: 6, alignItems: "center" },
   dot: { width: 8, height: 8, borderRadius: "50%", border: "1px solid #94A3B8", background: "#fff", cursor: "pointer", display: "inline-block" },
   dotActive: { background: "#10B981", borderColor: "#10B981" },
